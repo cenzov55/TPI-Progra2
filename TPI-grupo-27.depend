@@ -292,3 +292,10 @@
 1746055567 c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\archivos\archivo.h
 	<string>
 
+1749041276 source:c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\entidades\pago.cpp
+	<iostream>
+	"Pago.h"
+
+1749041198 c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\entidades\pago.h
+	"Fecha.h"
+
