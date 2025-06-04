@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="TPI-grupo-27" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/TPI-grupo-27" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/TPI-grupo-27" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add option="-fexceptions" />
+		</Compiler>
+		<Unit filename="Entidades/Actividad.cpp" />
+		<Unit filename="Entidades/Actividad.h" />
+		<Unit filename="Entidades/Fecha.cpp" />
+		<Unit filename="Entidades/Fecha.h" />
+		<Unit filename="Entidades/Inscripcion.cpp" />
+		<Unit filename="Entidades/Inscripcion.h" />
+		<Unit filename="Entidades/Socio.cpp" />
+		<Unit filename="Entidades/Socio.h" />
+		<Unit filename="Menues/Menu.cpp" />
+		<Unit filename="Menues/Menu.h" />
+		<Unit filename="Menues/MenuActividades.cpp" />
+		<Unit filename="Menues/MenuActividades.h" />
+		<Unit filename="Menues/MenuInscripciones.cpp" />
+		<Unit filename="Menues/MenuInscripciones.h" />
+		<Unit filename="Menues/MenuPrincipal.cpp" />
+		<Unit filename="Menues/MenuPrincipal.h" />
+		<Unit filename="Menues/MenuSocios.cpp" />
+		<Unit filename="Menues/MenuSocios.h" />
+		<Unit filename="main.cpp" />
+		<Extensions>
+			<lib_finder disable_auto="1" />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
