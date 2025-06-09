@@ -4,15 +4,17 @@
 
 class Socio {
 private:
-    int idSocio;
-    char dni[12];
-    char nombre[50];
-    char apellido[50];
-    char email[50];
-    Fecha fechaNacimiento;
-    bool eliminado;
+    int _idSocio;
+    char _dni[12];
+    char _nombre[50];
+    char _apellido[50];
+    char _email[50];
+    Fecha _fechaNacimiento;
+    bool _eliminado;
 
 public:
+    Socio();
+    Socio(int idSocio, std::string dni, std::string nombre, std::string apellido, std::string email, Fecha fechaNacimiento, bool eliminado);
     int getIdSocio();
     std::string getDni();
     std::string getNombre();
@@ -21,12 +23,14 @@ public:
     Fecha getFechaNacimiento();
     bool getEliminado();
 
-    void setIdSocio(int id);
-    void setDni(std::string dni);
-    void setNombre(std::string nombre);
-    void setApellido(std::string apellido);
-    void setEmail(std::string email);
-    void setFechaNacimiento(Fecha fechaNacimiento);
-    void setEliminado(bool eliminado);
+    bool setIdSocio(int id);
+    bool setDni(std::string dni);
+    bool setNombre(std::string nombre);
+    bool setApellido(std::string apellido);
+    bool setEmail(std::string email);
+    bool setFechaNacimiento(Fecha fechaNacimiento);
+    bool setEliminado(bool eliminado);
+
+    std::string toCSV();
 
 };

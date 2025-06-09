@@ -15,6 +15,7 @@ Menu::~Menu(){
 }
 
 int Menu::seleccion(){
+    system("cls");
 
     char tecla;
     int opcion = 0;

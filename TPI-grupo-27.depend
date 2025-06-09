@@ -195,13 +195,13 @@
 1748437447 source:c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\entidades\actividad.cpp
 	<iostream>
 
-1748198988 source:c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\entidades\fecha.cpp
+1749434755 source:c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\entidades\fecha.cpp
 	<iostream>
 	"Fecha.h"
 	<cstring>
 	<ctime>
 
-1748198448 c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\entidades\fecha.h
+1749434108 c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\entidades\fecha.h
 
 1748437200 source:c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\entidades\inscripcion.cpp
 	<iostream>
@@ -210,18 +210,22 @@
 1748437263 c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\entidades\inscripcion.h
 	"Fecha.h"
 
-1748437771 source:c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\entidades\socio.cpp
+1749427608 source:c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\entidades\socio.cpp
 	<iostream>
 	<cstring>
+	<string>
 	"Socio.h"
 
-1748437808 c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\entidades\socio.h
+1749427630 c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\entidades\socio.h
 	<string>
 	"Fecha.h"
 
-1748439200 source:c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\main.cpp
+1749424178 source:c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\main.cpp
 	<iostream>
 	"Menues/MenuPrincipal.h"
+	"Entidades/Socio.h"
+	"Archivos/ArchivoSocios.h"
+	"funcionesConsola.h"
 
 1748444488 c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\menues\menuprincipal.h
 	"Menu.h"
@@ -232,8 +236,9 @@
 1748060904 c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\menues\menu.h
 	<string>
 
-1748439812 c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\menues\menusocios.h
+1749424269 c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\menues\menusocios.h
 	"Menu.h"
+	"../Managers/ManagerSocios.h"
 
 1749041124 c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\menues\menuactividades.h
 	"Menu.h"
@@ -241,7 +246,7 @@
 1748444377 c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\menues\menuinscripciones.h
 	"Menu.h"
 
-1748438514 source:c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\menues\menu.cpp
+1749435632 source:c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\menues\menu.cpp
 	<iostream>
 	<string>
 	"Menu.h"
@@ -279,11 +284,12 @@
 	"MenuPrincipal.h"
 	"Menu.h"
 
-1748440054 source:c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\menues\menusocios.cpp
+1749467489 source:c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\menues\menusocios.cpp
 	<string>
 	<iostream>
 	"MenuSocios.h"
 	"Menu.h"
+	"../Entidades/Socio.h"
 
 1746055573 source:c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\archivos\archivo.cpp
 	<string>
@@ -298,4 +304,38 @@
 
 1749041198 c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\entidades\pago.h
 	"Fecha.h"
+
+1749416214 c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\archivos\archivosocios.h
+	"Archivo.h"
+	"../Entidades/Socio.h"
+
+1749039438 source:c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\archivos\archivoactividades.cpp
+
+1748470892 source:c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\archivos\archivoinscripciones.cpp
+	"ArchivoInscripciones.h"
+
+1748470892 c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\archivos\archivoinscripciones.h
+
+1749039462 source:c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\archivos\archivopagos.cpp
+
+1749468057 source:c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\archivos\archivosocios.cpp
+	<iostream>
+	"ArchivoSocios.h"
+
+1749467353 source:c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\funcionesconsola.cpp
+	<iostream>
+	"rlutil.h"
+
+1749476404 source:c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\managers\managersocios.cpp
+	<iostream>
+	<string>
+	<iomanip>
+	"ManagerSocios.h"
+	"../funcionesConsola.h"
+	"../rlutil.h"
+
+1749466367 c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\managers\managersocios.h
+	"../Archivos/ArchivoSocios.h"
+
+1749436958 c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\funcionesconsola.h
 

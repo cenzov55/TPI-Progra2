@@ -27,7 +27,7 @@ Fecha::Fecha(bool fechaHoy) {
     if (fechaHoy) {
         time_t tiempoActual = time(nullptr);
         tm *tiempoLocal = localtime(&tiempoActual);
-        
+
         _anio = tiempoLocal->tm_year + 1900;  // tm_year cuenta desde 1900
         _mes = tiempoLocal->tm_mon + 1;       // tm_mon va de 0 a 11
         _dia = tiempoLocal->tm_mday;
@@ -162,28 +162,34 @@ bool Fecha::esBisiesto(int anio){
 
 ///SETTERS
 
-void Fecha::setDia(int dia){
+bool Fecha::setDia(int dia){
 
-    if (dia > getDiasDelMes(_mes) && !esBisiesto()){
-        return;
+    int maxDias = getDiasDelMes(_mes); ///Devuelve 0 si el mes es invalido
+
+    if (dia > maxDias || dia < 1 || dia > maxDias){
+        return false;
     }
+
     _dia = dia;
+    return true;
 }
 
-void Fecha::setMes(int mes){
+bool Fecha::setMes(int mes){
 
     if (mes < 1 || mes > 12){
-        return;
+        return false;
     }
     _mes = mes;
+    return true;
 }
 
-void Fecha::setAnio(int anio){
+bool Fecha::setAnio(int anio){
 
     if(anio < 0 ){
-        return;
+        return false;
     }
     _anio = anio;
+    return true;
 }
 
 
@@ -201,30 +207,34 @@ int Fecha::getAnio(){
 int Fecha::getDiasDelMes(int mes){
     const int diasMeses[12] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
 
-    if (esBisiesto() && mes == 2){
-        return diasMeses[mes] + 1;
+    if (mes < 1 || mes > 12) {
+        return 0;  ///Mes invalido
     }
-    
+
+    if (esBisiesto() && mes == 2){
+        return 29; ///Febrero con 29 dias
+    }
+
     return diasMeses[mes-1];
 }
 
 bool Fecha::operator>(const Fecha& otra) {
     if (_anio > otra._anio) return true;
     if (_anio < otra._anio) return false;
-    
+
     if (_mes > otra._mes) return true;
     if (_mes < otra._mes) return false;
-    
+
     return _dia > otra._dia;
 }
 
 bool Fecha::operator<(const Fecha& otra){
     if (_anio < otra._anio) return true;
     if (_anio > otra._anio) return false;
-    
+
     if (_mes < otra._mes) return true;
     if (_mes > otra._mes) return false;
-    
+
     return _dia < otra._dia;
 }
 
@@ -232,14 +242,4 @@ bool Fecha::operator==(const Fecha& otra){
     return (_anio == otra._anio && _mes == otra._mes && _dia == otra._dia);
 }
 
-
-string Fecha::toStringConHoraHoy(){
-    time_t t = time(nullptr);             // Obtener tiempo actual
-    tm *pTm = localtime(&t);            // Convertir a hora local
-
-    char texto[100];
-    strftime(texto, sizeof(texto), "%Y-%m-%d_%H-%M-%S", pTm);
-
-    return texto;
-}
 

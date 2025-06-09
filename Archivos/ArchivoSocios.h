@@ -9,11 +9,10 @@ public:
     int getCantidadRegistros();
     bool guardar(Socio socio);
     bool modificar(Socio socio, int posicion);
-    int buscar(int idSocio);
+    int buscar(int idSocio); ///Devuelve la posicion, devuelve -1 si no lo encontro
     bool eliminar(int id);
     Socio leer(int posicion);
-    void leerTodos(int cantidadRegistros, int *Socio);
+    void leerTodos(int cantidadRegistros, Socio *vec);
     int getNuevoId();
-    void toCSV();
-
+    void exportarCSV();
 };

@@ -34,6 +34,14 @@
 		</Compiler>
 		<Unit filename="Archivos/Archivo.cpp" />
 		<Unit filename="Archivos/Archivo.h" />
+		<Unit filename="Archivos/ArchivoActividades.cpp" />
+		<Unit filename="Archivos/ArchivoActividades.h" />
+		<Unit filename="Archivos/ArchivoInscripciones.cpp" />
+		<Unit filename="Archivos/ArchivoInscripciones.h" />
+		<Unit filename="Archivos/ArchivoPagos.cpp" />
+		<Unit filename="Archivos/ArchivoPagos.h" />
+		<Unit filename="Archivos/ArchivoSocios.cpp" />
+		<Unit filename="Archivos/ArchivoSocios.h" />
 		<Unit filename="Entidades/Actividad.cpp" />
 		<Unit filename="Entidades/Actividad.h" />
 		<Unit filename="Entidades/Fecha.cpp" />
@@ -44,6 +52,8 @@
 		<Unit filename="Entidades/Pago.h" />
 		<Unit filename="Entidades/Socio.cpp" />
 		<Unit filename="Entidades/Socio.h" />
+		<Unit filename="Managers/ManagerSocios.cpp" />
+		<Unit filename="Managers/ManagerSocios.h" />
 		<Unit filename="Menues/Menu.cpp" />
 		<Unit filename="Menues/Menu.h" />
 		<Unit filename="Menues/MenuActividades.cpp" />
@@ -54,6 +64,8 @@
 		<Unit filename="Menues/MenuPrincipal.h" />
 		<Unit filename="Menues/MenuSocios.cpp" />
 		<Unit filename="Menues/MenuSocios.h" />
+		<Unit filename="funcionesConsola.cpp" />
+		<Unit filename="funcionesConsola.h" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<lib_finder disable_auto="1" />

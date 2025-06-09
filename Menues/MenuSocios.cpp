@@ -2,10 +2,11 @@
 #include <iostream>
 #include "MenuSocios.h"
 #include "Menu.h"
+#include "../Entidades/Socio.h"
 
 using namespace std;
 
-MenuSocios::MenuSocios(){
+MenuSocios::MenuSocios() {
     const int CANT_OPCIONES = 5;
     setCantidadOpciones(CANT_OPCIONES);
 
@@ -30,17 +31,19 @@ void MenuSocios::aparecer(){
         int opcion = seleccion();
         switch (opcion) {
             case 1:
-
+                _managerSocios.agregar();
                 break;
             case 2:
-
+                _managerSocios.borrar();
                 break;
             case 3:
 
                 break;
             case 4:
+                _managerSocios.listar();
                 break;
             case 5:
+
                 return;
             default:
                 cout << "Opción no válida. Intente nuevamente." << endl;

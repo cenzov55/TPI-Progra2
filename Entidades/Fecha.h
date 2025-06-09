@@ -1,7 +1,7 @@
 #pragma once
 
 class Fecha{
- 
+
     public:
 
         Fecha();  ///Se genera en 0/0/0
@@ -20,16 +20,16 @@ class Fecha{
         void agregarDias(int dias);
         std::string toString();
         std::string toStringConHoraHoy();
-        
+
         ///GETTERS
         int getDia();
         int getMes();
         int getAnio();
 
         ///SETTERS
-        void setDia(int dia);
-        void setMes(int mes);
-        void setAnio(int anio);
+        bool setDia(int dia);
+        bool setMes(int mes);
+        bool setAnio(int anio);
 
     private:
         int _dia;
