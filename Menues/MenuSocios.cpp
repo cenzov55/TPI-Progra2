@@ -37,13 +37,12 @@ void MenuSocios::aparecer(){
                 _managerSocios.borrar();
                 break;
             case 3:
-
+                _managerSocios.modificar();
                 break;
             case 4:
                 _managerSocios.listar();
                 break;
             case 5:
-
                 return;
             default:
                 cout << "Opción no válida. Intente nuevamente." << endl;

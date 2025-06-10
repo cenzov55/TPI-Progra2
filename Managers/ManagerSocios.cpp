@@ -119,9 +119,7 @@ void ManagerSocios::agregar(){
 
 
     _archivoSocios.guardar(socio);
-
-    rlutil::resetColor();
-    rlutil::setBackgroundColor(rlutil::BLACK);
+    system("pause>nul");
 }
 
 void ManagerSocios::borrar() {
@@ -131,17 +129,26 @@ void ManagerSocios::borrar() {
     int idSocio;
     mensajeFormulario(1, "Ingresa el numero de socio a eliminar: ");
     cin >> idSocio;
-    cin.ignore(); // Para limpiar el salto de línea pendiente
+    cin.ignore(); /// Para limpiar el salto de línea pendiente
 
     int posicion = _archivoSocios.buscar(idSocio);
     if (posicion == -1){
         mensajeError("El socio ingresado no existe");
+        system("pause>nul");
+        return;
     }
+
+    Socio socio = _archivoSocios.leer(posicion);
+    if (socio.getEliminado()){
+        mensajeFormulario(3, "El socio ingresado ya se encuentra eliminado.");
+        system("pause>nul");
+        return;
+    }
+
 
     mensajeFormulario(3, "Datos del socio seleccionado:");
     cout << endl;
 
-    Socio socio = _archivoSocios.leer(posicion);
     mostrarEncabezadoTabla();
     mostrarSocio(socio);
 
@@ -166,7 +173,7 @@ void ManagerSocios::borrar() {
         }
 
         else {
-            mensajeError("Respuesta inválida. Ingrese 's' o 'n'.");
+            mensajeError("Respuesta invalida. Ingrese 's' o 'n'.");
         }
 
     } while (true);
@@ -174,24 +181,190 @@ void ManagerSocios::borrar() {
     if (eliminar) {
         socio.setEliminado(true);
         _archivoSocios.modificar(socio, posicion);
-        mensajeFormulario(9, "Socio eliminado correctamente.");
+        mensajeExito("Socio eliminado correctamente.");
+
     } else {
         mensajeFormulario(9, "Operacion cancelada.");
     }
 
-    rlutil::setBackgroundColor(rlutil::BLACK);
     system("pause>nul");
 }
 
 void ManagerSocios::modificar(){
+    system("cls");
+    imprimirFormulario("Modificar Socio");
+
+    int idSocio;
+    mensajeFormulario(1, "Ingresa el numero de socio a modificar: ");
+    cin >> idSocio;
+    cin.ignore(); /// Para limpiar el salto de línea pendiente
+
+    int posicion = _archivoSocios.buscar(idSocio);
+    if (posicion == -1){
+        mensajeError("El socio ingresado no existe");
+        system("pause>nul");
+        return;
+    }
+
+    Socio socio = _archivoSocios.leer(posicion);
+    if (socio.getEliminado()){
+        mensajeFormulario(3, "El socio ingresado se encuentra eliminado.");
+        system("pause>nul");
+        return;
+    }
+
+
+    mensajeFormulario(3, "Datos del socio seleccionado: ");
+    cout << endl;
+
+    mostrarEncabezadoTabla();
+    mostrarSocio(socio);
+
+    string respuesta;
+    bool modificar = false;
+
+    do {
+
+        limpiarError();
+        limpiarLinea(7);
+        mensajeFormulario(7, "Quieres modificar el socio? (s/n): ");
+        getline(cin, respuesta);
+
+        if (respuesta == "s" || respuesta == "S") {
+            modificar = true;
+            break;
+        }
+
+        else if (respuesta == "n" || respuesta == "N") {
+            modificar = false;
+            break;
+        }
+
+        else {
+            mensajeError("Respuesta invalida. Ingrese 's' o 'n'.");
+        }
+
+    } while (true);
+
+    if (!modificar){
+        mensajeFormulario(9, "Operacion cancelada.");
+        system("pause>nul");
+        return;
+    }
+
+    ///Similar a agregar
+
+    imprimirFormulario("Modificar Socio");
+    int id = socio.getIdSocio();
+    mensajeFormulario(1, "ID: " + to_string(id));
+
+    string dni;
+    do{
+        limpiarError();
+        limpiarLinea(2);
+        mensajeFormulario(2, "DNI: ");
+        getline(cin, dni);
+
+        if (!socio.setDni(dni)) {
+            mensajeError("DNI invalido");
+        }
+
+    }while(!socio.setDni(dni));
+
+    string nombre;
+    do{
+        limpiarError();
+        limpiarLinea(3);
+        mensajeFormulario(3, "Nombre: ");
+        getline(cin, nombre);
+
+        if (!socio.setNombre(nombre)) {
+            mensajeError("Nombre invalido");
+        }
+
+    }while(!socio.setNombre(nombre));
+
+    string apellido;
+    do{
+        limpiarError();
+        limpiarLinea(4);
+        mensajeFormulario(4, "Apellido: ");
+        getline(cin, apellido);
+
+        if (!socio.setApellido(apellido)) {
+            mensajeError("Apellido invalido");
+        }
+
+    }while(!socio.setApellido(apellido));
+
+    string email;
+    do{
+        limpiarError();
+        limpiarLinea(5);
+        mensajeFormulario(5, "Email: ");
+        getline(cin, email);
+
+        if (!socio.setEmail(email)) {
+            mensajeError("Nombre invalido");
+        }
+
+    }while(!socio.setEmail(email));
+
+    mensajeFormulario(6, "Fecha Nacimiento:");
+    Fecha fecha;
+
+    int anio;
+    do{
+        limpiarError();
+        limpiarLinea(7);
+        mensajeFormulario(7, "Anio: ");
+        cin >> anio;
+
+        if (!fecha.setAnio(anio)) {
+            mensajeError("Anio invalido");
+        }
+
+    }while(!fecha.setAnio(anio));
+
+    int mes;
+    do{
+        limpiarError();
+        limpiarLinea(8);
+        mensajeFormulario(8, "Mes: ");
+        cin >> mes;
+
+        if (!fecha.setMes(mes)) {
+            mensajeError("Mes invalido");
+        }
+
+    }while(!fecha.setMes(mes));
+
+    int dia;
+    do{
+        limpiarError();
+        limpiarLinea(9);
+        mensajeFormulario(9, "Dia: ");
+        cin >> dia;
+
+        if (!fecha.setDia(dia)) {
+            mensajeError("Dia invalido");
+        }
+
+    }while(!fecha.setDia(dia));
+    socio.setFechaNacimiento(fecha);
+
+
+    _archivoSocios.modificar(socio, posicion);
+    mensajeExito("Socio modificado correctamente");
+    system("pause>nul");
 
 }
 
 void ManagerSocios::listar(){
     system("cls");
     int cantidadRegistros = _archivoSocios.getCantidadRegistros();
-    if (cantidadRegistros <= 0) {
-        cout << "No hay socios registrados." << endl;
+    if (cantidadRegistros <= 0) { /// si es 0 no hay socios, pero puede ser -1 que significa error
+        mensajeError("No hay socios registrados.");
         system("pause>nul");
         return;
     }
@@ -204,6 +377,7 @@ void ManagerSocios::listar(){
 
     /// Listado
     for (int i = 0; i < cantidadRegistros; i++) {
+        ///Intercalar colores, solo estetico.
         if (i % 2 == 0) {
             rlutil::setBackgroundColor(rlutil::GREY);
         } else {

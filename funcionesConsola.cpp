@@ -43,8 +43,20 @@ void mensajeFormulario(int posicion, string mensaje){
     rlutil::setBackgroundColor(rlutil::WHITE);
     rlutil::setColor(rlutil::BLACK);
 
-    rlutil::locate(5, posicion+9);
-    cout << posicion << ") " << mensaje;
+    rlutil::locate(7, posicion+9);
+    cout << mensaje;
+}
+
+void mensajeExito(string mensaje){
+
+    rlutil::setBackgroundColor(rlutil::BLACK);
+    rlutil::setColor(rlutil::GREEN);
+
+    rlutil::locate(1, 25);
+    cout << mensaje;
+    system("pause>nul");
+    rlutil::resetColor();
+    rlutil::setBackgroundColor(rlutil::WHITE);
 }
 
 void limpiarLinea(int posicion){

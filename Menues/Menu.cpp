@@ -15,6 +15,7 @@ Menu::~Menu(){
 }
 
 int Menu::seleccion(){
+    rlutil::setBackgroundColor(rlutil::BLACK);
     system("cls");
 
     char tecla;

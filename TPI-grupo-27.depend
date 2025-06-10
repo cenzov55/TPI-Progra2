@@ -246,7 +246,7 @@
 1748444377 c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\menues\menuinscripciones.h
 	"Menu.h"
 
-1749435632 source:c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\menues\menu.cpp
+1749519655 source:c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\menues\menu.cpp
 	<iostream>
 	<string>
 	"Menu.h"
@@ -284,7 +284,7 @@
 	"MenuPrincipal.h"
 	"Menu.h"
 
-1749467489 source:c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\menues\menusocios.cpp
+1749521514 source:c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\menues\menusocios.cpp
 	<string>
 	<iostream>
 	"MenuSocios.h"
@@ -322,11 +322,11 @@
 	<iostream>
 	"ArchivoSocios.h"
 
-1749467353 source:c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\funcionesconsola.cpp
+1749519953 source:c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\funcionesconsola.cpp
 	<iostream>
 	"rlutil.h"
 
-1749476404 source:c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\managers\managersocios.cpp
+1749521411 source:c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\managers\managersocios.cpp
 	<iostream>
 	<string>
 	<iomanip>
@@ -337,5 +337,5 @@
 1749466367 c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\managers\managersocios.h
 	"../Archivos/ArchivoSocios.h"
 
-1749436958 c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\funcionesconsola.h
+1749519996 c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\funcionesconsola.h
 
