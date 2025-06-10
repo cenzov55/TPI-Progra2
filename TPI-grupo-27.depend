@@ -322,11 +322,11 @@
 	<iostream>
 	"ArchivoSocios.h"
 
-1749519953 source:c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\funcionesconsola.cpp
+1749567563 source:c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\funcionesconsola.cpp
 	<iostream>
 	"rlutil.h"
 
-1749521411 source:c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\managers\managersocios.cpp
+1749567563 source:c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\managers\managersocios.cpp
 	<iostream>
 	<string>
 	<iomanip>
@@ -334,7 +334,7 @@
 	"../funcionesConsola.h"
 	"../rlutil.h"
 
-1749466367 c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\managers\managersocios.h
+1749567562 c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\managers\managersocios.h
 	"../Archivos/ArchivoSocios.h"
 
 1749519996 c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\funcionesconsola.h

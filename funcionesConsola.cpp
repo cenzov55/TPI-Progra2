@@ -2,6 +2,9 @@
 #include "rlutil.h"
 using namespace std;
 
+
+///Muestra todo el recuadro del formulario,
+///Se le puede agregar un titulo al encabezado
 void imprimirFormulario(string titulo){
 
     rlutil::setBackgroundColor(rlutil::CYAN);
@@ -26,6 +29,9 @@ void imprimirFormulario(string titulo){
     rlutil::setBackgroundColor(rlutil::BLACK);
 }
 
+///Muestra un mensaje de error abajo en color rojo
+///al momento de usarlo, no olvidar despues borrarlo
+///con limpiarError()
 void mensajeError(string mensaje){
 
     rlutil::setBackgroundColor(rlutil::BLACK);
@@ -38,6 +44,8 @@ void mensajeError(string mensaje){
     rlutil::setBackgroundColor(rlutil::WHITE);
 }
 
+///Agrega el mensaje que quieras, en una posicion dentro del formulario
+///las posiciones van de 1 a 9, si se pasan del rango va a quedar mal.
 void mensajeFormulario(int posicion, string mensaje){
 
     rlutil::setBackgroundColor(rlutil::WHITE);
@@ -47,6 +55,8 @@ void mensajeFormulario(int posicion, string mensaje){
     cout << mensaje;
 }
 
+///Pone un mensaje en verde si la operacion fue exitosa,
+///su posicion es la misma que el mensaje de error
 void mensajeExito(string mensaje){
 
     rlutil::setBackgroundColor(rlutil::BLACK);
@@ -59,6 +69,8 @@ void mensajeExito(string mensaje){
     rlutil::setBackgroundColor(rlutil::WHITE);
 }
 
+///limpia la linea en la posicion que le indiques dentro del formulario
+///por si se necesita borrar algo.
 void limpiarLinea(int posicion){
 
     for (int x=1; x < 121; x++){
@@ -67,6 +79,7 @@ void limpiarLinea(int posicion){
     }
 }
 
+///limpia el mensaje de error.
 void limpiarError(){
     rlutil::setBackgroundColor(rlutil::BLACK);
     for (int x=1; x < 121; x++){
@@ -76,7 +89,11 @@ void limpiarError(){
     rlutil::setBackgroundColor(rlutil::WHITE);
 }
 
+///le envias un texto y te devuelve uno truncado/formateado
+///con el maximo de caracteres que le indiques.
+///es decir los caracteres que se pasen de la cantidad maxima se sacan.
 string truncar(const string &str, int maximo) {
+
     if (str.length() > maximo) {
         return str.substr(0, maximo - 3) + "...";
         /// substr devuelve un string dependiendo el minimo y maximo de caracteres indicados

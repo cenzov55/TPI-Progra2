@@ -6,9 +6,18 @@
 #include "../rlutil.h"
 using namespace std;
 
+///Revisar archivo funcionesConsola para entender mejor ciertas cosas esteticas.
+
 ManagerSocios::ManagerSocios()
 : _archivoSocios("Socios.dat"){ }
 
+
+///A la hora de agregar, se hace un do while
+///que revisa con el set si lo que ingreso pasa las
+///validaciones del set.
+///Si no lo hace, borra y se repite el ingreso de datos.
+///Para eso tuve que cambiar los sets y en vez de void
+///devuelven un bool, dependiendo si salio bien o no.
 void ManagerSocios::agregar(){
     ///Estetico
     imprimirFormulario("Agregar Socio");
@@ -190,6 +199,7 @@ void ManagerSocios::borrar() {
     system("pause>nul");
 }
 
+///Es similar a agregar() en ciertos puntos.
 void ManagerSocios::modificar(){
     system("cls");
     imprimirFormulario("Modificar Socio");
@@ -394,6 +404,10 @@ void ManagerSocios::listar(){
 
 }
 
+///Esto es similar al encabezado pero con todos los datos del socio.
+///ademas se le agrega un metodo truncar(string texto), este lo que hace
+///es limitar el texto a la cantidad de caracteres establecidos en el setw(),
+///si se pasa de esa cantidad de caracteres, lo corta y le pone "..."
 void ManagerSocios::mostrarSocio(Socio socio) {
     cout << (char)179 << left << setw(6) << socio.getIdSocio() << (char)179;
     cout << left << setw(12) << socio.getDni() << (char)179;
@@ -403,7 +417,14 @@ void ManagerSocios::mostrarSocio(Socio socio) {
     cout << left << setw(12) << socio.getFechaNacimiento().toString() << (char)179;
     cout << left << setw(10) << (socio.getEliminado() ? "Si" : "No") << (char)179;
 }
+/// ? "si" :"no", es un operador ternario, se usa para como un if pero en una sola linea
 
+
+///Muestra el encabezado de la tabla con todos sus atributos,
+///con setw(n) especifico la cantidad de caracteres que va a ocupar el texto
+///no importa si lo llena o no, son como las tablas de excel, especifico su largo
+///y left es para que arranquen desde la izquierda.
+///el char 179 es la barrita | en ASCII
 void ManagerSocios::mostrarEncabezadoTabla() {
     rlutil::setBackgroundColor(rlutil::CYAN);
     rlutil::setColor(rlutil::BLACK);
