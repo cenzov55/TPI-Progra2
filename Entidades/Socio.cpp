@@ -123,11 +123,10 @@ bool Socio::setEliminado(bool eliminado)
 
 string Socio::toCSV()
 {
-    return to_string(_idSocio) + "," +
-           _dni + "," +
-           _nombre + "," +
-           _apellido + "," +
-           _email + "," +
-           _fechaNacimiento.toString() + "," +
-           (_eliminado ? "Si" : "No");
+    return to_string(_idSocio) + ";" +
+           _dni + ";" +
+           _nombre + ";" +
+           _apellido + ";" +
+           _email + ";" +
+           _fechaNacimiento.toString() + ";";
 }

@@ -7,7 +7,7 @@
 using namespace std;
 
 MenuSocios::MenuSocios() {
-    const int CANT_OPCIONES = 5;
+    const int CANT_OPCIONES = 7;
     setCantidadOpciones(CANT_OPCIONES);
 
     const string opciones[CANT_OPCIONES] = {
@@ -15,7 +15,9 @@ MenuSocios::MenuSocios() {
         "2. Borrar",
         "3. Modificar",
         "4. Listar",
-        "5. Salir"
+        "5. Listar por apellido",
+        "6. Buscar por ID",
+        "7. Salir"
     };
 
     setOpciones(opciones);
@@ -43,6 +45,12 @@ void MenuSocios::aparecer(){
                 _managerSocios.listar();
                 break;
             case 5:
+                _managerSocios.listarPorApellido();
+                break;
+            case 6:
+                _managerSocios.buscarPorId();
+                break;
+            case 7:
                 return;
             default:
                 cout << "Opción no válida. Intente nuevamente." << endl;

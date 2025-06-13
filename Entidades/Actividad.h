@@ -1,10 +1,9 @@
 #pragma once
-#include "Entidades/Fecha.h"
+#include "Fecha.h"
 #include <string>
 
 class Actividad {
 private:
-
     int _idActividad;
     char _nombre[50];
     char _responsable[50];
@@ -13,7 +12,9 @@ private:
     bool _eliminado;
 
 public:
-
+    // Constructores
+    Actividad();
+    Actividad(int idActividad, std::string nombre, std::string responsable, Fecha fechaInicio, float arancel, bool eliminado);
 
     // Getters
     int getIdActividad();
@@ -24,15 +25,17 @@ public:
     bool getEliminado();
 
     // Setters
-    void setIdActividad(int idActividad);
-    void setNombre(const std::string& nombre);
-    void setResponsable(const std::string& responsable);
-    void setFechaInicio(Fecha fechaInicio);
-    void setArancel(float arancel);
-    void setEliminado(bool eliminado);
+    bool setIdActividad(int idActividad);
+    bool setNombre(const std::string& nombre);
+    bool setResponsable(const std::string& responsable);
+    bool setFechaInicio(Fecha fechaInicio);
+    bool setArancel(float arancel);
+    bool setEliminado(bool eliminado);
+
+    // Exportar a CSV
+    std::string toCSV();
 };
 
-#endif
 
 
 

@@ -84,28 +84,30 @@ int ArchivoSocios::getNuevoId(){
     return getCantidadRegistros() + 1;
 }
 
-void ArchivoSocios::exportarCSV(){
+bool ArchivoSocios::exportarCSV(){
 
     FILE *csv;
     csv = fopen("Socios.csv", "w");
     if (csv == nullptr){
-        return;
+        return false;
     }
 
     int cantRegistros = getCantidadRegistros();
     Socio *socios = new Socio[cantRegistros];
     leerTodos(cantRegistros, socios);
 
-    fprintf(csv, "ID Socio,DNI,Nombre,Apellido,Email,FechaNacimiento,Eliminado\n");
+    fprintf(csv, "ID Socio;DNI;Nombre;Apellido;Email;FechaNacimiento\n");
 
     for (int i=0; i < cantRegistros; i++){
-        fprintf(csv, "%s\n", socios[i].toCSV().c_str());
+        if (!socios[i].getEliminado()){
+            fprintf(csv, "%s\n", socios[i].toCSV().c_str());
+        }
     }
+
     fclose(csv);
 
-    cout << "Se exporto el archivo correctamente" << endl;
-    system("pause");
     delete[] socios;
+    return true;
 }
 
 

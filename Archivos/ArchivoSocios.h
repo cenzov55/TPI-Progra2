@@ -14,5 +14,5 @@ public:
     Socio leer(int posicion);
     void leerTodos(int cantidadRegistros, Socio *vec);
     int getNuevoId();
-    void exportarCSV();
+    bool exportarCSV();
 };

@@ -9,6 +9,8 @@ public:
     void borrar();
     void modificar();
     void listar();
+    void listarPorApellido();
+    void buscarPorId();
 
 
 private:

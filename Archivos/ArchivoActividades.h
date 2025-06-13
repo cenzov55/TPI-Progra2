@@ -1,6 +1,18 @@
-#ifndef ARCHIVOACTIVIDADES_H_INCLUDED
-#define ARCHIVOACTIVIDADES_H_INCLUDED
+#pragma once
+#include "Archivo.h"
+#include "../Entidades/Actividad.h"
 
+class ArchivoActividades : public Archivo {
+public:
+    ArchivoActividades(std::string nombre);
 
-
-#endif // ARCHIVOACTIVIDADES_H_INCLUDED
+    int getCantidadRegistros();
+    bool guardar(Actividad actividad);
+    bool modificar(Actividad actividad, int posicion);
+    int buscar(int idActividad); ///Devuelve la posicion, devuelve -1 si no lo encontro
+    bool eliminar(int id);
+    Actividad leer(int posicion);
+    void leerTodos(int cantidadRegistros, Actividad *vec);
+    int getNuevoId();
+    bool exportarCSV();
+};

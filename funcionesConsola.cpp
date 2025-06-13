@@ -7,6 +7,7 @@ using namespace std;
 ///Se le puede agregar un titulo al encabezado
 void imprimirFormulario(string titulo){
 
+    ///Encabezado cyan
     rlutil::setBackgroundColor(rlutil::CYAN);
     rlutil::setColor(rlutil::BLACK);
     for (int x=1; x < 121; x++){

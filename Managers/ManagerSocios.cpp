@@ -128,6 +128,7 @@ void ManagerSocios::agregar(){
 
 
     _archivoSocios.guardar(socio);
+    mensajeExito("Socio ingresado correctamente");
     system("pause>nul");
 }
 
@@ -393,8 +394,11 @@ void ManagerSocios::listar(){
         } else {
             rlutil::setBackgroundColor(rlutil::WHITE);
         }
-        mostrarSocio(socios[i]);
-        cout << endl;
+
+        if (!socios[i].getEliminado()){
+            mostrarSocio(socios[i]);
+            cout << endl;
+        }
     }
 
     system("pause>nul");
@@ -404,18 +408,99 @@ void ManagerSocios::listar(){
 
 }
 
+void ManagerSocios::listarPorApellido(){
+    system("cls");
+    int cantRegistros = _archivoSocios.getCantidadRegistros();
+    if (cantRegistros <= 0){
+        mensajeError("No hay registros de socios");
+        system("pause>nul");
+        return;
+    }
+
+    Socio *socios;
+    socios = new Socio[cantRegistros];
+    _archivoSocios.leerTodos(cantRegistros, socios);
+
+    ///Ordenamiento burbuja
+    for (int i = 0; i < cantRegistros - 1; i++) {
+        for (int j = 0; j < cantRegistros - i - 1; j++) {
+            ///strcmp compara 2 cadenas de caracteres (uso c_str() porque son strings y los convierto
+            ///a vector de caracteres), strcpm devuelve 0 si son iguales, -1 si es un string mas chico
+            ///alfabeticamente y 1 si es mas grande, por eso en este caso comparo el resultado con > 0
+            if (strcmp(socios[j].getApellido().c_str(), socios[j + 1].getApellido().c_str()) > 0) {
+                Socio aux = socios[j];
+                socios[j] = socios[j + 1];
+                socios[j + 1] = aux;
+            }
+        }
+    }
+
+    ///Encabezado con los nombres de los atributos
+    mostrarEncabezadoTabla();
+
+    /// Listado
+    for (int i = 0; i < cantRegistros; i++) {
+        ///Intercalar colores, solo estetico.
+        if (i % 2 == 0) {
+            rlutil::setBackgroundColor(rlutil::GREY);
+        } else {
+            rlutil::setBackgroundColor(rlutil::WHITE);
+        }
+
+        if (!socios[i].getEliminado()){
+            mostrarSocio(socios[i]);
+            cout << endl;
+        }
+    }
+
+    system("pause>nul");
+    delete[] socios;
+}
+
+void ManagerSocios::buscarPorId(){
+
+    imprimirFormulario("Buscar Socio por Id");
+    int idSocio;
+    mensajeFormulario(3, "Ingrese el id de socio a buscar: ");
+    cin >> idSocio;
+
+    int posicion = _archivoSocios.buscar(idSocio);
+
+    if (posicion == -1){
+        mensajeError("El socio ingresado no existe");
+        system("pause>nul");
+        return;
+    }
+
+    Socio socio;
+    socio = _archivoSocios.leer(posicion);
+
+    ///Lo vuelvo a imprimir para borrar el texto anterior
+    ///y asi tener espacio para mostrar el socio entero.
+    imprimirFormulario("Buscar Socio por Id");
+
+    mensajeFormulario(1,"ID: " + to_string(socio.getIdSocio()));
+    mensajeFormulario(2,"DNI: " + socio.getDni());
+    mensajeFormulario(3,"Nombre: " + socio.getNombre());
+    mensajeFormulario(4,"Apellido: " + socio.getApellido());
+    mensajeFormulario(5,"Email: " + socio.getEmail());
+    mensajeFormulario(6,"Fecha Nacimiento: " + socio.getFechaNacimiento().toString());
+
+    mensajeExito("Operacion Exitosa");
+    system("pause>nul");
+}
+
 ///Esto es similar al encabezado pero con todos los datos del socio.
 ///ademas se le agrega un metodo truncar(string texto), este lo que hace
 ///es limitar el texto a la cantidad de caracteres establecidos en el setw(),
 ///si se pasa de esa cantidad de caracteres, lo corta y le pone "..."
 void ManagerSocios::mostrarSocio(Socio socio) {
-    cout << (char)179 << left << setw(6) << socio.getIdSocio() << (char)179;
+    cout << (char)179 << left << setw(7) << socio.getIdSocio() << (char)179;
     cout << left << setw(12) << socio.getDni() << (char)179;
-    cout << left << setw(19) << truncar(socio.getNombre(), 19) << (char)179;
-    cout << left << setw(19) << truncar(socio.getApellido(), 19) << (char)179;
+    cout << left << setw(24) << truncar(socio.getNombre(), 24) << (char)179;
+    cout << left << setw(24) << truncar(socio.getApellido(), 24) << (char)179;
     cout << left << setw(34) << truncar(socio.getEmail(), 34) << (char)179;
     cout << left << setw(12) << socio.getFechaNacimiento().toString() << (char)179;
-    cout << left << setw(10) << (socio.getEliminado() ? "Si" : "No") << (char)179;
 }
 /// ? "si" :"no", es un operador ternario, se usa para como un if pero en una sola linea
 
@@ -428,13 +513,12 @@ void ManagerSocios::mostrarSocio(Socio socio) {
 void ManagerSocios::mostrarEncabezadoTabla() {
     rlutil::setBackgroundColor(rlutil::CYAN);
     rlutil::setColor(rlutil::BLACK);
-    cout << (char)179 << left << setw(6) << "ID" << (char)179;
+    cout << (char)179 << left << setw(7) << "ID" << (char)179;
     cout << left << setw(12) << "DNI" << (char)179;
-    cout << left << setw(19) << "Nombre" << (char)179;
-    cout << left << setw(19) << "Apellido" << (char)179;
+    cout << left << setw(24) << "Nombre" << (char)179;
+    cout << left << setw(24) << "Apellido" << (char)179;
     cout << left << setw(34) << "Email" << (char)179;
     cout << left << setw(12) << "Nacimiento" << (char)179;
-    cout << left << setw(10) << "Eliminado" << (char)179;
     cout << endl;
 }
 
