@@ -11,13 +11,11 @@ MenuSocios::MenuSocios() {
     setCantidadOpciones(CANT_OPCIONES);
 
     const string opciones[CANT_OPCIONES] = {
-        "1. Agregar",
-        "2. Borrar",
-        "3. Modificar",
-        "4. Listar",
-        "5. Listar por apellido",
-        "6. Buscar por ID",
-        "7. Salir"
+        "Agregar",
+        "Borrar",
+        "Modificar",
+        "Listar",
+        "Salir"
     };
 
     setOpciones(opciones);
@@ -53,7 +51,7 @@ void MenuSocios::aparecer(){
             case 7:
                 return;
             default:
-                cout << "Opción no válida. Intente nuevamente." << endl;
+                cout << "Opciï¿½n no vï¿½lida. Intente nuevamente." << endl;
                 system("pause>nul");
         }
     }

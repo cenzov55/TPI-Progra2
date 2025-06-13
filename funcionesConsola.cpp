@@ -52,6 +52,12 @@ void mensajeFormulario(int posicion, string mensaje){
     rlutil::setBackgroundColor(rlutil::WHITE);
     rlutil::setColor(rlutil::BLACK);
 
+    ///Limpia la linea por si se vuelve a usar
+    for (int x=1; x < 121; x++){
+        rlutil::locate(x,posicion+9);
+        cout << " ";
+    }
+
     rlutil::locate(7, posicion+9);
     cout << mensaje;
 }

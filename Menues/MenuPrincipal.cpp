@@ -10,13 +10,13 @@ MenuPrincipal::MenuPrincipal(){
     setCantidadOpciones(CANT_OPCIONES);
 
     const string opciones[CANT_OPCIONES] = {
-        "1. Socios ABML",
-        "2. Actividades ABML",
-        "3. Inscripciones ABML",
-        "4. Informes",
-        "5. Exportar datos",
-        "6. Configuracion",
-        "7. Salir"
+        "Socios ABML",
+        "Actividades ABML",
+        "Inscripciones ABML",
+        "Informes",
+        "Exportar datos",
+        "Configuracion",
+        "Salir"
     };
 
     setOpciones(opciones);
