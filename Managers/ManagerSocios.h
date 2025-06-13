@@ -9,10 +9,18 @@ public:
     void borrar();
     void modificar();
     void listar();
+    void pedirDni(Socio &socio);
+    void pedirNombre(Socio &socio);
+    void pedirApellido(Socio &socio);
+    void pedirEmail(Socio &socio);
+    void pedirMes(Fecha &fecha);
+    void pedirDia(Fecha &fecha);
+    void pedirAnio(Fecha &fecha);
+
 
 
 private:
-    void mostrarSocio(Socio socio);
+    void mostrarSocio(Socio &socio);
     void mostrarEncabezadoTabla();
 
     ArchivoSocios _archivoSocios;

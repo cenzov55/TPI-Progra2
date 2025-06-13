@@ -184,8 +184,7 @@ bool Fecha::setMes(int mes){
 }
 
 bool Fecha::setAnio(int anio){
-
-    if(anio < 0 ){
+    if(anio < 0 || anio > 9999){
         return false;
     }
     _anio = anio;
