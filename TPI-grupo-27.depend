@@ -486,3 +486,146 @@
 	"../funcionesConsola.h"
 	"../rlutil.h"
 
+1749773616 source:c:\users\estudiante\desktop\tpi-progra2\archivos\archivo.cpp
+	<string>
+	"Archivo.h"
+
+1749773616 c:\users\estudiante\desktop\tpi-progra2\archivos\archivo.h
+	<string>
+
+1749773616 source:c:\users\estudiante\desktop\tpi-progra2\archivos\archivoactividades.cpp
+
+1749773616 source:c:\users\estudiante\desktop\tpi-progra2\archivos\archivoinscripciones.cpp
+	"ArchivoInscripciones.h"
+
+1749773616 c:\users\estudiante\desktop\tpi-progra2\archivos\archivoinscripciones.h
+
+1749773616 source:c:\users\estudiante\desktop\tpi-progra2\archivos\archivopagos.cpp
+
+1749773616 source:c:\users\estudiante\desktop\tpi-progra2\archivos\archivosocios.cpp
+	<iostream>
+	"ArchivoSocios.h"
+
+1749773616 c:\users\estudiante\desktop\tpi-progra2\archivos\archivosocios.h
+	"Archivo.h"
+	"../Entidades/Socio.h"
+
+1749773616 c:\users\estudiante\desktop\tpi-progra2\entidades\socio.h
+	<string>
+	"Fecha.h"
+
+1749773616 c:\users\estudiante\desktop\tpi-progra2\entidades\fecha.h
+
+1749773616 source:c:\users\estudiante\desktop\tpi-progra2\entidades\actividad.cpp
+	<iostream>
+
+1749773616 source:c:\users\estudiante\desktop\tpi-progra2\entidades\fecha.cpp
+	<iostream>
+	"Fecha.h"
+	<cstring>
+	<ctime>
+
+1749773616 source:c:\users\estudiante\desktop\tpi-progra2\entidades\inscripcion.cpp
+	<iostream>
+	"Inscripcion.h"
+
+1749773616 c:\users\estudiante\desktop\tpi-progra2\entidades\inscripcion.h
+	"Fecha.h"
+
+1749773616 source:c:\users\estudiante\desktop\tpi-progra2\entidades\pago.cpp
+	<iostream>
+	"Pago.h"
+
+1749773616 c:\users\estudiante\desktop\tpi-progra2\entidades\pago.h
+	"Fecha.h"
+
+1749773616 source:c:\users\estudiante\desktop\tpi-progra2\entidades\socio.cpp
+	<iostream>
+	<cstring>
+	<string>
+	"Socio.h"
+
+1749773616 source:c:\users\estudiante\desktop\tpi-progra2\main.cpp
+	<iostream>
+	"Menues/MenuPrincipal.h"
+	"Entidades/Socio.h"
+	"Archivos/ArchivoSocios.h"
+	"funcionesConsola.h"
+
+1749773616 c:\users\estudiante\desktop\tpi-progra2\menues\menuprincipal.h
+	"Menu.h"
+	"MenuSocios.h"
+	"MenuActividades.h"
+	"MenuInscripciones.h"
+
+1749773616 c:\users\estudiante\desktop\tpi-progra2\menues\menu.h
+	<string>
+
+1749773616 c:\users\estudiante\desktop\tpi-progra2\menues\menusocios.h
+	"Menu.h"
+	"../Managers/ManagerSocios.h"
+
+1749773616 c:\users\estudiante\desktop\tpi-progra2\managers\managersocios.h
+	"../Archivos/ArchivoSocios.h"
+
+1749773616 c:\users\estudiante\desktop\tpi-progra2\menues\menuactividades.h
+	"Menu.h"
+
+1749773616 c:\users\estudiante\desktop\tpi-progra2\menues\menuinscripciones.h
+	"Menu.h"
+
+1749773616 c:\users\estudiante\desktop\tpi-progra2\funcionesconsola.h
+
+1749773616 source:c:\users\estudiante\desktop\tpi-progra2\managers\managersocios.cpp
+	<iostream>
+	<string>
+	<iomanip>
+	"ManagerSocios.h"
+	"../funcionesConsola.h"
+	"../rlutil.h"
+
+1749773616 c:\users\estudiante\desktop\tpi-progra2\rlutil.h
+	<iostream>
+	<string>
+	<cstdio>
+	<stdio.h>
+	<string.h>
+	<windows.h>
+	<conio.h>
+	<termios.h>
+	<unistd.h>
+	<sys/ioctl.h>
+	<sys/types.h>
+	<sys/time.h>
+
+1749773616 source:c:\users\estudiante\desktop\tpi-progra2\menues\menu.cpp
+	<iostream>
+	<string>
+	"Menu.h"
+	"../rlutil.h"
+
+1749773616 source:c:\users\estudiante\desktop\tpi-progra2\menues\menuactividades.cpp
+	<string>
+	<iostream>
+	"MenuActividades.h"
+	"Menu.h"
+
+1749773616 source:c:\users\estudiante\desktop\tpi-progra2\menues\menuinscripciones.cpp
+	<string>
+	<iostream>
+	"MenuInscripciones.h"
+	"Menu.h"
+
+1749773616 source:c:\users\estudiante\desktop\tpi-progra2\menues\menuprincipal.cpp
+	<string>
+	<iostream>
+	"MenuPrincipal.h"
+	"Menu.h"
+
+1749773616 source:c:\users\estudiante\desktop\tpi-progra2\menues\menusocios.cpp
+	<string>
+	<iostream>
+	"MenuSocios.h"
+	"Menu.h"
+	"../Entidades/Socio.h"
+
