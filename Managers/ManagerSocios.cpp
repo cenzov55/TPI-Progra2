@@ -45,9 +45,16 @@ void ManagerSocios::agregar()
     socio.setFechaNacimiento(fecha);
 
 
-    _archivoSocios.guardar(socio);
-    mensajeExito("Socio ingresado correctamente");
+    bool ok = _archivoSocios.guardar(socio);
+    if (!ok)
+    {
+        mensajeError("Error al guardar el socio.");
+        system("pause>nul");
+        return;
+    }
+    mensajeExito("Socio agregado correctamente.");
     system("pause>nul");
+
 }
 
 void ManagerSocios::borrar()
@@ -215,7 +222,14 @@ void ManagerSocios::modificar()
     pedirMes(nuevaFecha);
     pedirDia(nuevaFecha);
 
-    _archivoSocios.modificar(socio, posicion);
+    bool ok = _archivoSocios.modificar(socio, posicion);
+    if (!ok)
+    {
+        mensajeError("Error al modificar el socio.");
+        system("pause>nul");
+        return;
+    }
+
     mensajeExito("Socio modificado correctamente");
     system("pause>nul");
 }
@@ -293,56 +307,6 @@ void ManagerSocios::listarPorApellido(){
     mostrarEncabezadoTabla();
 
     /// Listado
-    for (int i = 0; i < cantidadRegistros; i++) {
-        ///Intercalar colores, solo estetico.
-        if (i % 2 == 0) {
-            rlutil::setBackgroundColor(rlutil::GREY);
-        } else {
-            rlutil::setBackgroundColor(rlutil::WHITE);
-        }
-
-        if (!socios[i].getEliminado()){
-            mostrarSocio(socios[i]);
-            cout << endl;
-        }
-    }
-
-    system("pause>nul");
-    delete[] socios;
-
-}
-
-void ManagerSocios::listarPorApellido(){
-    system("cls");
-    int cantRegistros = _archivoSocios.getCantidadRegistros();
-    if (cantRegistros <= 0){
-        mensajeError("No hay registros de socios");
-        system("pause>nul");
-        return;
-    }
-
-    Socio *socios;
-    socios = new Socio[cantRegistros];
-    _archivoSocios.leerTodos(cantRegistros, socios);
-
-    ///Ordenamiento burbuja
-    for (int i = 0; i < cantRegistros - 1; i++) {
-        for (int j = 0; j < cantRegistros - i - 1; j++) {
-            ///strcmp compara 2 cadenas de caracteres (uso c_str() porque son strings y los convierto
-            ///a vector de caracteres), strcpm devuelve 0 si son iguales, -1 si es un string mas chico
-            ///alfabeticamente y 1 si es mas grande, por eso en este caso comparo el resultado con > 0
-            if (strcmp(socios[j].getApellido().c_str(), socios[j + 1].getApellido().c_str()) > 0) {
-                Socio aux = socios[j];
-                socios[j] = socios[j + 1];
-                socios[j + 1] = aux;
-            }
-        }
-    }
-
-    ///Encabezado con los nombres de los atributos
-    mostrarEncabezadoTabla();
-
-    /// Listado
     for (int i = 0; i < cantRegistros; i++) {
         ///Intercalar colores, solo estetico.
         if (i % 2 == 0) {
@@ -359,6 +323,7 @@ void ManagerSocios::listarPorApellido(){
 
     system("pause>nul");
     delete[] socios;
+
 }
 
 void ManagerSocios::buscarPorId(){
@@ -398,7 +363,7 @@ void ManagerSocios::buscarPorId(){
 ///ademas se le agrega un metodo truncar(string texto), este lo que hace
 ///es limitar el texto a la cantidad de caracteres establecidos en el setw(),
 ///si se pasa de esa cantidad de caracteres, lo corta y le pone "..."
-void ManagerSocios::mostrarSocio(Socio socio) {
+void ManagerSocios::mostrarSocio(Socio &socio) {
     cout << (char)179 << left << setw(7) << socio.getIdSocio() << (char)179;
     cout << left << setw(12) << socio.getDni() << (char)179;
     cout << left << setw(24) << truncar(socio.getNombre(), 24) << (char)179;

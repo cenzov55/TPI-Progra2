@@ -15,6 +15,8 @@ MenuSocios::MenuSocios() {
         "Borrar",
         "Modificar",
         "Listar",
+        "Listar por apellido",
+        "Buscar por id",
         "Salir"
     };
 
@@ -51,7 +53,7 @@ void MenuSocios::aparecer(){
             case 7:
                 return;
             default:
-                cout << "Opci�n no v�lida. Intente nuevamente." << endl;
+                cout << "Opcion no valida. Intente nuevamente." << endl;
                 system("pause>nul");
         }
     }

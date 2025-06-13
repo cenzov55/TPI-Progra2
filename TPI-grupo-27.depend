@@ -192,10 +192,13 @@
 	"MenuInscripciones.h"
 	"Menu.h"
 
-1748437447 source:c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\entidades\actividad.cpp
+1749785168 source:c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\entidades\actividad.cpp
 	<iostream>
+	<cstring>
+	<string>
+	"Actividad.h"
 
-1749434755 source:c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\entidades\fecha.cpp
+1749785485 source:c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\entidades\fecha.cpp
 	<iostream>
 	"Fecha.h"
 	<cstring>
@@ -278,13 +281,13 @@
 	"MenuInscripciones.h"
 	"Menu.h"
 
-1749643881 source:c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\menues\menuprincipal.cpp
+1749785485 source:c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\menues\menuprincipal.cpp
 	<string>
 	<iostream>
 	"MenuPrincipal.h"
 	"Menu.h"
 
-1749647643 source:c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\menues\menusocios.cpp
+1749785968 source:c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\menues\menusocios.cpp
 	<string>
 	<iostream>
 	"MenuSocios.h"
@@ -324,7 +327,7 @@
 	<iostream>
 	"ArchivoSocios.h"
 
-1749646139 source:c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\funcionesconsola.cpp
+1749785485 source:c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\funcionesconsola.cpp
 	<iostream>
 	"rlutil.h"
 
@@ -336,8 +339,16 @@
 	"../funcionesConsola.h"
 	"../rlutil.h"
 
-1749642998 c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\managers\managersocios.h
+1749785749 c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\managers\managersocios.h
 	"../Archivos/ArchivoSocios.h"
 
 1749519996 c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\funcionesconsola.h
+
+1749651451 c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\archivos\archivoactividades.h
+	"Archivo.h"
+	"../Entidades/Actividad.h"
+
+1749785276 c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\entidades\actividad.h
+	"Fecha.h"
+	<string>
 
