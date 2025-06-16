@@ -36,7 +36,6 @@ bool ArchivoSocios::guardar(Socio socio)
 
 int ArchivoSocios::buscar(int idSocio)
 {
-
     if(!abrirLectura()) return false;
     int posicion = 0;
     Socio socio;

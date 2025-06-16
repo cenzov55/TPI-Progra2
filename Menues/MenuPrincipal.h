@@ -3,6 +3,7 @@
 #include "MenuSocios.h"
 #include "MenuActividades.h"
 #include "MenuInscripciones.h"
+#include "MenuPagos.h"
 
 class MenuPrincipal : public Menu
 {
@@ -13,11 +14,9 @@ class MenuPrincipal : public Menu
 
     private:
         MenuSocios _menuSocios;
-
         MenuActividades _menuActividades;
-
         MenuInscripciones _menuInscripciones;
+        MenuPagos _menuPagos;
 
-
-
+        bool salir();
 };

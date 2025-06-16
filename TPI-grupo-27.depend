@@ -1,0 +1,192 @@
+# depslib dependency file v1.0
+1749858512 source:c:\users\evinellacuello\desktop\proyecto repo tomi\tpi-progra2\archivos\archivo.cpp
+	<string>
+	"Archivo.h"
+
+1749858512 c:\users\evinellacuello\desktop\proyecto repo tomi\tpi-progra2\archivos\archivo.h
+	<string>
+
+1749858512 source:c:\users\evinellacuello\desktop\proyecto repo tomi\tpi-progra2\archivos\archivoactividades.cpp
+	<iostream>
+	"ArchivoActividades.h"
+
+1749858512 c:\users\evinellacuello\desktop\proyecto repo tomi\tpi-progra2\archivos\archivoactividades.h
+	"Archivo.h"
+	"../Entidades/Actividad.h"
+
+1749858513 c:\users\evinellacuello\desktop\proyecto repo tomi\tpi-progra2\entidades\actividad.h
+	"Fecha.h"
+	<string>
+
+1749858513 c:\users\evinellacuello\desktop\proyecto repo tomi\tpi-progra2\entidades\fecha.h
+
+1749858513 source:c:\users\evinellacuello\desktop\proyecto repo tomi\tpi-progra2\archivos\archivoinscripciones.cpp
+	"ArchivoInscripciones.h"
+
+1749858513 c:\users\evinellacuello\desktop\proyecto repo tomi\tpi-progra2\archivos\archivoinscripciones.h
+
+1750024776 source:c:\users\evinellacuello\desktop\proyecto repo tomi\tpi-progra2\archivos\archivosocios.cpp
+	<iostream>
+	"ArchivoSocios.h"
+
+1749858513 c:\users\evinellacuello\desktop\proyecto repo tomi\tpi-progra2\archivos\archivosocios.h
+	"Archivo.h"
+	"../Entidades/Socio.h"
+
+1749858513 c:\users\evinellacuello\desktop\proyecto repo tomi\tpi-progra2\entidades\socio.h
+	<string>
+	"Fecha.h"
+
+1749858513 source:c:\users\evinellacuello\desktop\proyecto repo tomi\tpi-progra2\entidades\actividad.cpp
+	<iostream>
+	<cstring>
+	<string>
+	"Actividad.h"
+
+1749858513 source:c:\users\evinellacuello\desktop\proyecto repo tomi\tpi-progra2\entidades\fecha.cpp
+	<iostream>
+	"Fecha.h"
+	<cstring>
+	<ctime>
+
+1749858513 source:c:\users\evinellacuello\desktop\proyecto repo tomi\tpi-progra2\entidades\inscripcion.cpp
+	<iostream>
+	"Inscripcion.h"
+
+1749858513 c:\users\evinellacuello\desktop\proyecto repo tomi\tpi-progra2\entidades\inscripcion.h
+	"Fecha.h"
+
+1750068825 source:c:\users\evinellacuello\desktop\proyecto repo tomi\tpi-progra2\entidades\pago.cpp
+	<iostream>
+	"Pago.h"
+
+1750068849 c:\users\evinellacuello\desktop\proyecto repo tomi\tpi-progra2\entidades\pago.h
+	"Fecha.h"
+
+1750070116 source:c:\users\evinellacuello\desktop\proyecto repo tomi\tpi-progra2\entidades\socio.cpp
+	<iostream>
+	<cstring>
+	<string>
+	"Socio.h"
+
+1749858513 source:c:\users\evinellacuello\desktop\proyecto repo tomi\tpi-progra2\funcionesconsola.cpp
+	<iostream>
+	"rlutil.h"
+
+1749858513 c:\users\evinellacuello\desktop\proyecto repo tomi\tpi-progra2\rlutil.h
+	<iostream>
+	<string>
+	<cstdio>
+	<stdio.h>
+	<string.h>
+	<windows.h>
+	<conio.h>
+	<termios.h>
+	<unistd.h>
+	<sys/ioctl.h>
+	<sys/types.h>
+	<sys/time.h>
+
+1749858513 source:c:\users\evinellacuello\desktop\proyecto repo tomi\tpi-progra2\main.cpp
+	<iostream>
+	"Menues/MenuPrincipal.h"
+	"Entidades/Socio.h"
+	"Archivos/ArchivoSocios.h"
+	"funcionesConsola.h"
+
+1750023304 c:\users\evinellacuello\desktop\proyecto repo tomi\tpi-progra2\menues\menuprincipal.h
+	"Menu.h"
+	"MenuSocios.h"
+	"MenuActividades.h"
+	"MenuInscripciones.h"
+	"MenuPagos.h"
+
+1749858513 c:\users\evinellacuello\desktop\proyecto repo tomi\tpi-progra2\menues\menu.h
+	<string>
+
+1749930943 c:\users\evinellacuello\desktop\proyecto repo tomi\tpi-progra2\menues\menusocios.h
+	"Menu.h"
+	"../Managers/ManagerSocios.h"
+
+1749858513 c:\users\evinellacuello\desktop\proyecto repo tomi\tpi-progra2\managers\managersocios.h
+	"../Archivos/ArchivoSocios.h"
+
+1749943320 c:\users\evinellacuello\desktop\proyecto repo tomi\tpi-progra2\menues\menuactividades.h
+	"Menu.h"
+
+1749858513 c:\users\evinellacuello\desktop\proyecto repo tomi\tpi-progra2\menues\menuinscripciones.h
+	"Menu.h"
+
+1749858513 c:\users\evinellacuello\desktop\proyecto repo tomi\tpi-progra2\funcionesconsola.h
+
+1750025272 source:c:\users\evinellacuello\desktop\proyecto repo tomi\tpi-progra2\managers\managersocios.cpp
+	<iostream>
+	<string>
+	<iomanip>
+	"ManagerSocios.h"
+	"../funcionesConsola.h"
+	"../rlutil.h"
+
+1749858513 source:c:\users\evinellacuello\desktop\proyecto repo tomi\tpi-progra2\menues\menu.cpp
+	<iostream>
+	<string>
+	"Menu.h"
+	"../rlutil.h"
+
+1749939113 source:c:\users\evinellacuello\desktop\proyecto repo tomi\tpi-progra2\menues\menuactividades.cpp
+	<string>
+	<iostream>
+	"MenuActividades.h"
+	"Menu.h"
+
+1749939129 source:c:\users\evinellacuello\desktop\proyecto repo tomi\tpi-progra2\menues\menuinscripciones.cpp
+	<string>
+	<iostream>
+	"MenuInscripciones.h"
+	"Menu.h"
+
+1750023540 source:c:\users\evinellacuello\desktop\proyecto repo tomi\tpi-progra2\menues\menuprincipal.cpp
+	<iostream>
+	"MenuPrincipal.h"
+	"Menu.h"
+	<string>
+	"../funcionesConsola.h"
+
+1749939135 source:c:\users\evinellacuello\desktop\proyecto repo tomi\tpi-progra2\menues\menusocios.cpp
+	<string>
+	<iostream>
+	"MenuSocios.h"
+	"Menu.h"
+	"../Entidades/Socio.h"
+
+1750071198 source:c:\users\evinellacuello\desktop\proyecto repo tomi\tpi-progra2\archivos\archivopagos.cpp
+	<iostream>
+	"ArchivoPagos.h"
+
+1750070722 c:\users\evinellacuello\desktop\proyecto repo tomi\tpi-progra2\archivos\archivopagos.h
+	"Archivo.h"
+	"../Entidades/Pago.h"
+
+1749958181 c:\users\evinellacuello\desktop\proyecto repo tomi\tpi-progra2\menues\menupagos.h
+	"Menu.h"
+	"../Managers/ManagerPagos.h"
+
+1750072105 c:\users\evinellacuello\desktop\proyecto repo tomi\tpi-progra2\managers\managerpagos.h
+	"../Archivos/ArchivoPagos.h"
+	"../Archivos/ArchivoSocios.h"
+	"../Archivos/ArchivoActividades.h"
+
+1750072245 source:c:\users\evinellacuello\desktop\proyecto repo tomi\tpi-progra2\menues\menupagos.cpp
+	<iostream>
+	"Menu.h"
+	"MenuPagos.h"
+
+1750072103 source:c:\users\evinellacuello\desktop\proyecto repo tomi\tpi-progra2\managers\managerpagos.cpp
+	<iostream>
+	<cstring>
+	<string>
+	<iomanip>
+	"ManagerPagos.h"
+	"../funcionesConsola.h"
+	"../rlutil.h"
+

@@ -17,7 +17,7 @@ MenuSocios::MenuSocios() {
         "Listar",
         "Listar por apellido",
         "Buscar por id",
-        "Salir"
+        "Volver"
     };
 
     setOpciones(opciones);
