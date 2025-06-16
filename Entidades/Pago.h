@@ -3,21 +3,25 @@
 
 class Pago {
 private:
-    int IdActividad;
-    int IdSocio;
-    int metodoDePago;
-    float importe;
-    Fecha fechaDePago;
+    int _idActividad;
+    int _idSocio;
+    int _metodoDePago;  //  1: Efectivo, 2: Tarjeta, 3: Transferencia
+    float _importe;
+    Fecha _fechaDePago;
 
 public:
-
-    int getIdSocio();
-    int getIdActividad();
-    float getImporte();
-    Fecha getFechaDePago();
-
+    Pago();
+    // Getters
+    int getIdSocio() const;
+    int getIdActividad() const;
+    float getImporte() const;
+    Fecha getFechaDePago() const;
+    int getMetodoDePago() const;
+    // Setters
     void setIdSocio(int idSocio);
+    bool setMetodoDePago(int metodoDePago);
     void setIdActividad(int idActividad);
     void setImporte(float importe);
     void setFechaDePago(Fecha fechaDePago);
+    std::string toCSV();
 };
