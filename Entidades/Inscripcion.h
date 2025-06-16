@@ -1,6 +1,6 @@
 #pragma once
 #include "Fecha.h"
-
+#include <string>
 
 class Inscripcion {
 private:
@@ -22,4 +22,7 @@ public:
     void setIdSocio(int idSocio);
     void setFechaInscripcion(Fecha fechaInscripcion);
     void setEliminado(bool eliminado);
+
+    // Exportar a CSV
+    std::string toCSV();
 };

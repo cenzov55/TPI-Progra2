@@ -85,15 +85,19 @@ int ArchivoActividades::getNuevoId(){
     return getCantidadRegistros() + 1;
 }
 
-bool ArchivoActividades::exportarCSV(){
+int ArchivoActividades::exportarCSV(){
 
     FILE *csv;
     csv = fopen("Actividades.csv", "w");
     if (csv == nullptr){
-        return false;
+        return -1; /// -1 error al crear el archivo
     }
 
     int cantRegistros = getCantidadRegistros();
+
+    if (cantRegistros == -1){
+        return -2; ///-2 no hay registros
+    }
     Actividad *actividades = new Actividad[cantRegistros];
     leerTodos(cantRegistros, actividades);
 
@@ -108,5 +112,5 @@ bool ArchivoActividades::exportarCSV(){
     fclose(csv);
 
     delete[] actividades;
-    return true;
+    return 0; ///codigo exitoso
 }

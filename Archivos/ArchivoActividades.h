@@ -14,5 +14,5 @@ public:
     Actividad leer(int posicion);
     void leerTodos(int cantidadRegistros, Actividad *vec);
     int getNuevoId();
-    bool exportarCSV();
+    int exportarCSV();
 };

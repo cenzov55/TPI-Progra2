@@ -65,7 +65,7 @@ void ManagerSocios::borrar()
     int idSocio;
     mensajeFormulario(1, "Ingresa el numero de socio a eliminar: ");
     cin >> idSocio;
-    cin.ignore(); /// Para limpiar el salto de l�nea pendiente
+    cin.ignore(); /// Para limpiar el salto de linea pendiente
 
     int posicion = _archivoSocios.buscar(idSocio);
     if (posicion == -1)
@@ -142,7 +142,7 @@ void ManagerSocios::modificar()
     int idSocio;
     mensajeFormulario(1, "Ingresa el numero de socio a modificar: ");
     cin >> idSocio;
-    cin.ignore(); /// Para limpiar el salto de l�nea pendiente
+    cin.ignore(); /// Para limpiar el salto de linea pendiente
 
     int posicion = _archivoSocios.buscar(idSocio);
     if (posicion == -1)
@@ -344,6 +344,12 @@ void ManagerSocios::buscarPorId(){
     Socio socio;
     socio = _archivoSocios.leer(posicion);
 
+    if (socio.getEliminado()){
+        mensajeFormulario(5, "El socio ingresado se encuentra eliminado.");
+        system("pause");
+        return;
+    }
+
     ///Lo vuelvo a imprimir para borrar el texto anterior
     ///y asi tener espacio para mostrar el socio entero.
     imprimirFormulario("Buscar Socio por Id");
@@ -359,6 +365,33 @@ void ManagerSocios::buscarPorId(){
     system("pause>nul");
 }
 
+void ManagerSocios::exportarCSV(){
+
+    system("cls");
+    imprimirFormulario("Socios CSV");
+    mensajeFormulario(3, "Se exportaran los datos de los socios en un archivo .csv");
+    mensajeFormulario(4, "en la carpeta donde se encuentra el programa");
+
+    int codigo = _archivoSocios.exportarCSV();
+
+    if (codigo == -1)
+    {
+        mensajeError("Error al exportar en csv.");
+        system("pause>nul");
+        return;
+    }
+
+    if (codigo == -2)
+    {
+        mensajeError("No hay registros para poder exportar en csv");
+        system("pause>nul");
+        return;
+    }
+
+    mensajeExito("Socios exportados correctamente");
+    system("pause>nul");
+}
+
 ///Esto es similar al encabezado pero con todos los datos del socio.
 ///ademas se le agrega un metodo truncar(string texto), este lo que hace
 ///es limitar el texto a la cantidad de caracteres establecidos en el setw(),
@@ -371,7 +404,6 @@ void ManagerSocios::mostrarSocio(Socio &socio) {
     cout << left << setw(34) << truncar(socio.getEmail(), 34) << (char)179;
     cout << left << setw(12) << socio.getFechaNacimiento().toString() << (char)179;
 }
-/// ? "si" :"no", es un operador ternario, se usa para como un if pero en una sola linea
 
 /// Muestra el encabezado de la tabla con todos sus atributos,
 /// con setw(n) especifico la cantidad de caracteres que va a ocupar el texto

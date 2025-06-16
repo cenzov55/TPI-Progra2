@@ -32,24 +32,22 @@ void MenuPrincipal::aparecer(){
         int opcion = seleccion();
         switch (opcion) {
             case 1:
-                system("cls");
                 _menuSocios.aparecer();
                 break;
             case 2:
-                system("cls");
                 _menuActividades.aparecer();
                 break;
             case 3:
-                system("cls");
                 _menuInscripciones.aparecer();
                 break;
             case 4:
 
                 break;
             case 5:
-
+                _menuExportar.aparecer();
                 break;
             case 6:
+                _menuConfiguraciones.aparecer();
                 break;
             case 7:
                 system("cls");

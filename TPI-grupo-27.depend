@@ -206,12 +206,15 @@
 
 1749434108 c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\entidades\fecha.h
 
-1748437200 source:c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\entidades\inscripcion.cpp
+1750048256 source:c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\entidades\inscripcion.cpp
 	<iostream>
+	<cstring>
+	<string>
 	"Inscripcion.h"
 
-1748437263 c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\entidades\inscripcion.h
+1750048203 c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\entidades\inscripcion.h
 	"Fecha.h"
+	<string>
 
 1749649677 source:c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\entidades\socio.cpp
 	<iostream>
@@ -230,11 +233,13 @@
 	"Archivos/ArchivoSocios.h"
 	"funcionesConsola.h"
 
-1748444488 c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\menues\menuprincipal.h
+1750051477 c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\menues\menuprincipal.h
 	"Menu.h"
 	"MenuSocios.h"
 	"MenuActividades.h"
 	"MenuInscripciones.h"
+	"MenuExportar.h"
+	"MenuConfiguraciones.h"
 
 1748060904 c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\menues\menu.h
 	<string>
@@ -281,7 +286,7 @@
 	"MenuInscripciones.h"
 	"Menu.h"
 
-1749785485 source:c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\menues\menuprincipal.cpp
+1750051477 source:c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\menues\menuprincipal.cpp
 	<string>
 	<iostream>
 	"MenuPrincipal.h"
@@ -308,30 +313,33 @@
 1749041198 c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\entidades\pago.h
 	"Fecha.h"
 
-1749649704 c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\archivos\archivosocios.h
+1750049933 c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\archivos\archivosocios.h
 	"Archivo.h"
 	"../Entidades/Socio.h"
 
-1749783544 source:c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\archivos\archivoactividades.cpp
+1750050011 source:c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\archivos\archivoactividades.cpp
 	<iostream>
 	"ArchivoActividades.h"
 
-1748470892 source:c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\archivos\archivoinscripciones.cpp
+1750049857 source:c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\archivos\archivoinscripciones.cpp
+	<iostream>
 	"ArchivoInscripciones.h"
 
-1748470892 c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\archivos\archivoinscripciones.h
+1750049933 c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\archivos\archivoinscripciones.h
+	"Archivo.h"
+	"../Entidades/Inscripcion.h"
 
 1749039462 source:c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\archivos\archivopagos.cpp
 
-1749649818 source:c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\archivos\archivosocios.cpp
+1750049899 source:c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\archivos\archivosocios.cpp
 	<iostream>
 	"ArchivoSocios.h"
 
-1749785485 source:c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\funcionesconsola.cpp
+1750050293 source:c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\funcionesconsola.cpp
 	<iostream>
 	"rlutil.h"
 
-1749648144 source:c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\managers\managersocios.cpp
+1750050239 source:c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\managers\managersocios.cpp
 	<iostream>
 	<string>
 	<iomanip>
@@ -339,16 +347,42 @@
 	"../funcionesConsola.h"
 	"../rlutil.h"
 
-1749785749 c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\managers\managersocios.h
+1749877224 c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\managers\managersocios.h
 	"../Archivos/ArchivoSocios.h"
 
 1749519996 c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\funcionesconsola.h
 
-1749651451 c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\archivos\archivoactividades.h
+1750049933 c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\archivos\archivoactividades.h
 	"Archivo.h"
 	"../Entidades/Actividad.h"
 
 1749785276 c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\entidades\actividad.h
 	"Fecha.h"
 	<string>
+
+1750049401 c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\menues\menuexportar.h
+	"Menu.h"
+	"../Managers/ManagerSocios.h"
+	"../Managers/ManagerInscripciones.h"
+
+1750049453 source:c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\menues\menuexportar.cpp
+	<iostream>
+	"MenuExportar.h"
+
+1750050239 source:c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\managers\managerinscripciones.cpp
+	<iostream>
+	"ManagerInscripciones.h"
+	"../funcionesConsola.h"
+
+1750049246 c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\managers\managerinscripciones.h
+	"../Archivos/ArchivoInscripciones.h"
+
+1750051379 c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\menues\menuconfiguraciones.h
+	"Menu.h"
+	"../Managers/ManagerSocios.h"
+	"../Managers/ManagerInscripciones.h"
+
+1750052792 source:c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\menues\menuconfiguraciones.cpp
+	<iostream>
+	"MenuConfiguraciones.h"
 

@@ -1,4 +1,6 @@
-#include<iostream>
+#include <iostream>
+#include <cstring>
+#include <string>
 #include "Inscripcion.h"
 using namespace std;
 
@@ -36,4 +38,13 @@ bool Inscripcion::getEliminado() {
 
 void Inscripcion::setEliminado(bool estadoEliminado) {
     eliminado = estadoEliminado;
+}
+
+/// CSV acá
+
+string Inscripcion::toCSV(){
+    string ss = to_string(idActividad) + ";" +
+                to_string(idSocio) + ";" +
+                fechaInscripcion.toString(); + ";";
+    return ss;
 }

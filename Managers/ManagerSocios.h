@@ -19,6 +19,7 @@ public:
 
     void listarPorApellido();
     void buscarPorId();
+    void exportarCSV();
 
 
 private:

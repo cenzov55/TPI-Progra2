@@ -40,7 +40,6 @@ void mensajeError(string mensaje){
 
     rlutil::locate(1, 25);
     cout << mensaje;
-    system("pause>nul");
     rlutil::resetColor();
     rlutil::setBackgroundColor(rlutil::WHITE);
 }
@@ -71,7 +70,6 @@ void mensajeExito(string mensaje){
 
     rlutil::locate(1, 25);
     cout << mensaje;
-    system("pause>nul");
     rlutil::resetColor();
     rlutil::setBackgroundColor(rlutil::WHITE);
 }

@@ -84,15 +84,19 @@ int ArchivoSocios::getNuevoId(){
     return getCantidadRegistros() + 1;
 }
 
-bool ArchivoSocios::exportarCSV(){
+int ArchivoSocios::exportarCSV(){
 
     FILE *csv;
     csv = fopen("Socios.csv", "w");
     if (csv == nullptr){
-        return false;
+        return -1; /// -1 error al crear el archivo
     }
 
     int cantRegistros = getCantidadRegistros();
+
+    if (cantRegistros == -1){
+        return -2; /// -2 no hay registros
+    }
     Socio *socios = new Socio[cantRegistros];
     leerTodos(cantRegistros, socios);
 
@@ -107,7 +111,7 @@ bool ArchivoSocios::exportarCSV(){
     fclose(csv);
 
     delete[] socios;
-    return true;
+    return 0; /// 0 codigo exitoso
 }
 
 
