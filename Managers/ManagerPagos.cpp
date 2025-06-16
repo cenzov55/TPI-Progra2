@@ -144,11 +144,13 @@ void ManagerPagos::listarPagosSocio()
     cout << "----------------------------------------" << endl;
     mostrarEncabezadoTabla();
 
+    int contador = 0;
+
     for (int i = 0; i < cantidadRegistros; i++)
     {
         // Si el pago no es del socio, lo salteamos
         if( pagos[i].getIdSocio() != socio.getIdSocio()) continue;
-
+        contador++;
         /// Intercalar colores, solo estetico.
         if (i % 2 == 0)
         {
@@ -161,6 +163,7 @@ void ManagerPagos::listarPagosSocio()
         mostrarPago(pagos[i]);
         cout << endl;
     }
+    if(contador == 0) mensajeError("No se encontraron pagos para el socio ingresado.");
 
     system("pause>nul");
     delete[] pagos;
@@ -289,8 +292,10 @@ int ManagerPagos::pedirIdSocio()
         mensajeFormulario(1, "Ingrese ID del Socio:");
         cin >> idSocio;
         posicion = _archivoSocios.buscar(idSocio);
-        if (posicion == -1)
+        if (posicion == -1){
             mensajeError("Socio no encontrado");
+            system("pause>nul");
+            }
     } while (posicion == -1);
 
     return idSocio;
