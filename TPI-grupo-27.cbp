@@ -54,6 +54,8 @@
 		<Unit filename="Entidades/Socio.h" />
 		<Unit filename="Managers/ManagerInscripciones.cpp" />
 		<Unit filename="Managers/ManagerInscripciones.h" />
+		<Unit filename="Managers/ManagerPagos.cpp" />
+		<Unit filename="Managers/ManagerPagos.h" />
 		<Unit filename="Managers/ManagerSocios.cpp" />
 		<Unit filename="Managers/ManagerSocios.h" />
 		<Unit filename="Menues/Menu.cpp" />
@@ -66,6 +68,8 @@
 		<Unit filename="Menues/MenuExportar.h" />
 		<Unit filename="Menues/MenuInscripciones.cpp" />
 		<Unit filename="Menues/MenuInscripciones.h" />
+		<Unit filename="Menues/MenuPagos.cpp" />
+		<Unit filename="Menues/MenuPagos.h" />
 		<Unit filename="Menues/MenuPrincipal.cpp" />
 		<Unit filename="Menues/MenuPrincipal.h" />
 		<Unit filename="Menues/MenuSocios.cpp" />

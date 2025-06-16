@@ -3,6 +3,7 @@
 #include "MenuSocios.h"
 #include "MenuActividades.h"
 #include "MenuInscripciones.h"
+#include "MenuPagos.h"
 #include "MenuExportar.h"
 #include "MenuConfiguraciones.h"
 
@@ -19,4 +20,7 @@ class MenuPrincipal : public Menu
         MenuInscripciones _menuInscripciones;
         MenuExportar _menuExportar;
         MenuConfiguraciones _menuConfiguraciones;
+        MenuPagos _menuPagos;
+
+        bool salir();
 };

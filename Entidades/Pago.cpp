@@ -1,38 +1,83 @@
 #include <iostream>
 #include "Pago.h"
+
 using namespace std;
 
-int Pago::getIdSocio() {
-    return IdSocio;
+Pago::Pago() {}
+
+int Pago::getIdSocio()
+{
+    return _idSocio;
 }
 
-int Pago::getIdActividad() {
-    return IdActividad;
+int Pago::getMetodoDePago()
+{
+    return _metodoDePago;
 }
 
-float Pago::getImporte() {
-    return importe;
+int Pago::getIdActividad()
+{
+    return _idActividad;
 }
 
-Fecha Pago::getFechaDePago() {
-    return fechaDePago;
+float Pago::getImporte()
+{
+    return _importe;
 }
 
-void Pago::setIdSocio(int idSocio) {
+Fecha Pago::getFechaDePago()
+{
+    return _fechaDePago;
+}
+
+bool Pago::getEliminado(){
+    return _eliminado;
+}
+
+void Pago::setIdSocio(int idSocio)
+{
     if (idSocio > 0)
-        IdSocio = idSocio;
+        _idSocio = idSocio;
 }
 
-void Pago::setIdActividad(int idActividad) {
+void Pago::setIdActividad(int idActividad)
+{
     if (idActividad > 0)
-        IdActividad = idActividad;
+        _idActividad = idActividad;
 }
 
-void Pago::setImporte(float nuevoImporte) {
+void Pago::setImporte(float nuevoImporte)
+{
     if (nuevoImporte >= 0)
-        importe = nuevoImporte;
+        _importe = nuevoImporte;
 }
 
-void Pago::setFechaDePago(Fecha nuevaFecha) {
-    fechaDePago = nuevaFecha;
+void Pago::setFechaDePago(Fecha nuevaFecha)
+{
+    _fechaDePago = nuevaFecha;
+}
+
+bool Pago::setMetodoDePago(int metodoDePago)
+{
+    if (metodoDePago >= 0 && metodoDePago <= 3)
+    {
+        _metodoDePago = metodoDePago;
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+void Pago::setEliminado(bool eliminado){
+    _eliminado = eliminado;
+}
+
+string Pago::toCSV()
+{
+    return to_string(_idSocio) + ";" +
+           to_string(_idActividad) + ";" +
+           _fechaDePago.toString() + ";" +
+           to_string(_importe) + ";";
 }

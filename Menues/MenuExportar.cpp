@@ -36,6 +36,7 @@ void MenuExportar::aparecer() {
                 _managerInscripciones.exportarCSV();
                 break;
             case 4:
+                _managerPagos.exportarCSV();
                 break;
             case 5:
                 return;

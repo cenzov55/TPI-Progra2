@@ -10,18 +10,18 @@ MenuActividades::MenuActividades(){
     setCantidadOpciones(CANT_OPCIONES);
 
     const string opciones[CANT_OPCIONES] = {
-        "1. Agregar",
-        "2. Borrar",
-        "3. Modificar",
-        "4. Listar",
-        "5. Salir"
+        "Agregar",
+        "Borrar",
+        "Modificar",
+        "Listar",
+        "Volver"
     };
 
     setOpciones(opciones);
     setAncho();
     setAlto();
     setPosicionCentro();
-    setTitulo("Menu De Actividades");
+    setTitulo("Menu Actividades");
 }
 
 

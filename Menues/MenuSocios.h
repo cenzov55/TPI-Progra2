@@ -7,8 +7,6 @@ class MenuSocios : public Menu
     public:
         MenuSocios();
         void aparecer();
-
     private:
         ManagerSocios _managerSocios;
-
 };

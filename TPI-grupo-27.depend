@@ -1,316 +1,173 @@
 # depslib dependency file v1.0
-1748198988 source:c:\users\nico\desktop\ejerclase\tpi-grupo-27\entidades\fecha.cpp
+1749858512 source:c:\users\evinellacuello\desktop\proyecto repo tomi\tpi-progra2\archivos\archivo.cpp
+	<string>
+	"Archivo.h"
+
+1749858512 c:\users\evinellacuello\desktop\proyecto repo tomi\tpi-progra2\archivos\archivo.h
+	<string>
+
+1749858512 source:c:\users\evinellacuello\desktop\proyecto repo tomi\tpi-progra2\archivos\archivoactividades.cpp
 	<iostream>
+	"ArchivoActividades.h"
+
+1749858512 c:\users\evinellacuello\desktop\proyecto repo tomi\tpi-progra2\archivos\archivoactividades.h
+	"Archivo.h"
+	"../Entidades/Actividad.h"
+
+1749858513 c:\users\evinellacuello\desktop\proyecto repo tomi\tpi-progra2\entidades\actividad.h
 	"Fecha.h"
-	<cstring>
-	<ctime>
-
-1748198448 c:\users\nico\desktop\ejerclase\tpi-grupo-27\entidades\fecha.h
-
-1748439200 source:c:\users\nico\desktop\ejerclase\tpi-grupo-27\main.cpp
-	<iostream>
-	"Menues/MenuPrincipal.h"
-
-1748437447 source:c:\users\nico\desktop\ejerclase\tpi-grupo-27\entidades\actividad.cpp
-	<iostream>
-
-1748437771 source:c:\users\nico\desktop\ejerclase\tpi-grupo-27\entidades\socio.cpp
-	<iostream>
-	<cstring>
-	"Socio.h"
-
-1748437808 c:\users\nico\desktop\ejerclase\tpi-grupo-27\entidades\socio.h
-	<string>
-	"Fecha.h"
-
-1748437200 source:c:\users\nico\desktop\ejerclase\tpi-grupo-27\entidades\inscripcion.cpp
-	<iostream>
-	"Inscripcion.h"
-
-1748437263 c:\users\nico\desktop\ejerclase\tpi-grupo-27\entidades\inscripcion.h
-	"Fecha.h"
-
-1748439912 source:c:\users\nico\desktop\ejerclase\tpi-grupo-27\menues\menuprincipal.cpp
-	<string>
-	<iostream>
-	"MenuPrincipal.h"
-	"Menu.h"
-
-1748439888 c:\users\nico\desktop\ejerclase\tpi-grupo-27\menues\menuprincipal.h
-	"Menu.h"
-	"MenuSocios.h"
-
-1748060904 c:\users\nico\desktop\ejerclase\tpi-grupo-27\menues\menu.h
 	<string>
 
-1731188191 source:c:\users\nico\desktop\ejerclase\tpi-grupo-27\rlutil\example.c
-	"rlutil.h"
-	<stdlib.h>
-	<stdio.h>
-	"math.h"
+1749858513 c:\users\evinellacuello\desktop\proyecto repo tomi\tpi-progra2\entidades\fecha.h
 
-1731188191 c:\users\nico\desktop\ejerclase\tpi-grupo-27\rlutil\rlutil.h
+1749858513 source:c:\users\evinellacuello\desktop\proyecto repo tomi\tpi-progra2\archivos\archivoinscripciones.cpp
+	"ArchivoInscripciones.h"
+
+1749858513 c:\users\evinellacuello\desktop\proyecto repo tomi\tpi-progra2\archivos\archivoinscripciones.h
+
+1750024776 source:c:\users\evinellacuello\desktop\proyecto repo tomi\tpi-progra2\archivos\archivosocios.cpp
 	<iostream>
-	<string>
-	<cstdio>
-	<stdio.h>
-	<string.h>
-	<windows.h>
-	<conio.h>
-	<termios.h>
-	<unistd.h>
-	<sys/ioctl.h>
-	<sys/types.h>
-	<sys/time.h>
+	"ArchivoSocios.h"
 
-1731188191 source:c:\users\nico\desktop\ejerclase\tpi-grupo-27\rlutil\test.cpp
-	"rlutil.h"
-	<algorithm>
-	<cstdlib>
-	<cstdio>
-	<ctime>
+1749858513 c:\users\evinellacuello\desktop\proyecto repo tomi\tpi-progra2\archivos\archivosocios.h
+	"Archivo.h"
+	"../Entidades/Socio.h"
 
-1748438514 source:c:\users\nico\desktop\ejerclase\tpi-grupo-27\menues\menu.cpp
-	<iostream>
-	<string>
-	"Menu.h"
-	"../rlutil.h"
-
-1731188191 c:\users\nico\desktop\ejerclase\tpi-grupo-27\rlutil.h
-	<iostream>
-	<string>
-	<cstdio>
-	<stdio.h>
-	<string.h>
-	<windows.h>
-	<conio.h>
-	<termios.h>
-	<unistd.h>
-	<sys/ioctl.h>
-	<sys/types.h>
-	<sys/time.h>
-
-1748439812 c:\users\nico\desktop\ejerclase\tpi-grupo-27\menues\menusocios.h
-	"Menu.h"
-
-1748440054 source:c:\users\nico\desktop\ejerclase\tpi-grupo-27\menues\menusocios.cpp
-	<string>
-	<iostream>
-	"MenuSocios.h"
-	"Menu.h"
-
-1748439200 source:c:\users\thotexako\desktop\2do cuatri\prog. 2\tpi\tpi-grupo-27\main.cpp
-	<iostream>
-	"Menues/MenuPrincipal.h"
-
-1748444488 c:\users\thotexako\desktop\2do cuatri\prog. 2\tpi\tpi-grupo-27\menues\menuprincipal.h
-	"Menu.h"
-	"MenuSocios.h"
-	"MenuActividades.h"
-	"MenuInscripciones.h"
-
-1748060904 c:\users\thotexako\desktop\2do cuatri\prog. 2\tpi\tpi-grupo-27\menues\menu.h
-	<string>
-
-1748439812 c:\users\thotexako\desktop\2do cuatri\prog. 2\tpi\tpi-grupo-27\menues\menusocios.h
-	"Menu.h"
-
-1748437447 source:c:\users\thotexako\desktop\2do cuatri\prog. 2\tpi\tpi-grupo-27\entidades\actividad.cpp
-	<iostream>
-
-1748198988 source:c:\users\thotexako\desktop\2do cuatri\prog. 2\tpi\tpi-grupo-27\entidades\fecha.cpp
-	<iostream>
-	"Fecha.h"
-	<cstring>
-	<ctime>
-
-1748198448 c:\users\thotexako\desktop\2do cuatri\prog. 2\tpi\tpi-grupo-27\entidades\fecha.h
-
-1748437200 source:c:\users\thotexako\desktop\2do cuatri\prog. 2\tpi\tpi-grupo-27\entidades\inscripcion.cpp
-	<iostream>
-	"Inscripcion.h"
-
-1748437263 c:\users\thotexako\desktop\2do cuatri\prog. 2\tpi\tpi-grupo-27\entidades\inscripcion.h
-	"Fecha.h"
-
-1748437771 source:c:\users\thotexako\desktop\2do cuatri\prog. 2\tpi\tpi-grupo-27\entidades\socio.cpp
-	<iostream>
-	<cstring>
-	"Socio.h"
-
-1748437808 c:\users\thotexako\desktop\2do cuatri\prog. 2\tpi\tpi-grupo-27\entidades\socio.h
+1749858513 c:\users\evinellacuello\desktop\proyecto repo tomi\tpi-progra2\entidades\socio.h
 	<string>
 	"Fecha.h"
 
-1748438514 source:c:\users\thotexako\desktop\2do cuatri\prog. 2\tpi\tpi-grupo-27\menues\menu.cpp
-	<iostream>
-	<string>
-	"Menu.h"
-	"../rlutil.h"
-
-1731188191 c:\users\thotexako\desktop\2do cuatri\prog. 2\tpi\tpi-grupo-27\rlutil.h
-	<iostream>
-	<string>
-	<cstdio>
-	<stdio.h>
-	<string.h>
-	<windows.h>
-	<conio.h>
-	<termios.h>
-	<unistd.h>
-	<sys/ioctl.h>
-	<sys/types.h>
-	<sys/time.h>
-
-1748444488 source:c:\users\thotexako\desktop\2do cuatri\prog. 2\tpi\tpi-grupo-27\menues\menuprincipal.cpp
-	<string>
-	<iostream>
-	"MenuPrincipal.h"
-	"Menu.h"
-
-1748440054 source:c:\users\thotexako\desktop\2do cuatri\prog. 2\tpi\tpi-grupo-27\menues\menusocios.cpp
-	<string>
-	<iostream>
-	"MenuSocios.h"
-	"Menu.h"
-
-1748443802 source:c:\users\thotexako\desktop\2do cuatri\prog. 2\tpi\tpi-grupo-27\menues\menuactividades.cpp
-	<string>
-	<iostream>
-	"MenuActividades.h"
-	"Menu.h"
-
-1748443802 c:\users\thotexako\desktop\2do cuatri\prog. 2\tpi\tpi-grupo-27\menues\menuactividades.h
-	"Menu.h"
-
-1748444377 c:\users\thotexako\desktop\2do cuatri\prog. 2\tpi\tpi-grupo-27\menues\menuinscripciones.h
-	"Menu.h"
-
-1748444377 source:c:\users\thotexako\desktop\2do cuatri\prog. 2\tpi\tpi-grupo-27\menues\menuinscripciones.cpp
-	<string>
-	<iostream>
-	"MenuInscripciones.h"
-	"Menu.h"
-
-1749785168 source:c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\entidades\actividad.cpp
+1749858513 source:c:\users\evinellacuello\desktop\proyecto repo tomi\tpi-progra2\entidades\actividad.cpp
 	<iostream>
 	<cstring>
 	<string>
 	"Actividad.h"
 
-1749785485 source:c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\entidades\fecha.cpp
+1749858513 source:c:\users\evinellacuello\desktop\proyecto repo tomi\tpi-progra2\entidades\fecha.cpp
 	<iostream>
 	"Fecha.h"
 	<cstring>
 	<ctime>
 
-1749434108 c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\entidades\fecha.h
-
-1750048256 source:c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\entidades\inscripcion.cpp
+1749858513 source:c:\users\evinellacuello\desktop\proyecto repo tomi\tpi-progra2\entidades\inscripcion.cpp
 	<iostream>
-	<cstring>
-	<string>
 	"Inscripcion.h"
 
-1750048203 c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\entidades\inscripcion.h
+1749858513 c:\users\evinellacuello\desktop\proyecto repo tomi\tpi-progra2\entidades\inscripcion.h
 	"Fecha.h"
-	<string>
 
-1749649677 source:c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\entidades\socio.cpp
+1750068825 source:c:\users\evinellacuello\desktop\proyecto repo tomi\tpi-progra2\entidades\pago.cpp
+	<iostream>
+	"Pago.h"
+
+1750068849 c:\users\evinellacuello\desktop\proyecto repo tomi\tpi-progra2\entidades\pago.h
+	"Fecha.h"
+
+1750070116 source:c:\users\evinellacuello\desktop\proyecto repo tomi\tpi-progra2\entidades\socio.cpp
 	<iostream>
 	<cstring>
 	<string>
 	"Socio.h"
 
-1749427630 c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\entidades\socio.h
-	<string>
-	"Fecha.h"
+1749858513 source:c:\users\evinellacuello\desktop\proyecto repo tomi\tpi-progra2\funcionesconsola.cpp
+	<iostream>
+	"rlutil.h"
 
-1749651399 source:c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\main.cpp
+1749858513 c:\users\evinellacuello\desktop\proyecto repo tomi\tpi-progra2\rlutil.h
+	<iostream>
+	<string>
+	<cstdio>
+	<stdio.h>
+	<string.h>
+	<windows.h>
+	<conio.h>
+	<termios.h>
+	<unistd.h>
+	<sys/ioctl.h>
+	<sys/types.h>
+	<sys/time.h>
+
+1749858513 source:c:\users\evinellacuello\desktop\proyecto repo tomi\tpi-progra2\main.cpp
 	<iostream>
 	"Menues/MenuPrincipal.h"
 	"Entidades/Socio.h"
 	"Archivos/ArchivoSocios.h"
 	"funcionesConsola.h"
 
-1750051477 c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\menues\menuprincipal.h
+1750023304 c:\users\evinellacuello\desktop\proyecto repo tomi\tpi-progra2\menues\menuprincipal.h
+
+1750099652 c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\menues\menuprincipal.h
 	"Menu.h"
 	"MenuSocios.h"
 	"MenuActividades.h"
 	"MenuInscripciones.h"
+	"MenuPagos.h"
 	"MenuExportar.h"
 	"MenuConfiguraciones.h"
 
-1748060904 c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\menues\menu.h
+1749858513 c:\users\evinellacuello\desktop\proyecto repo tomi\tpi-progra2\menues\menu.h
 	<string>
 
-1749424269 c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\menues\menusocios.h
+1749930943 c:\users\evinellacuello\desktop\proyecto repo tomi\tpi-progra2\menues\menusocios.h
 	"Menu.h"
 	"../Managers/ManagerSocios.h"
 
-1749041124 c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\menues\menuactividades.h
+1749858513 c:\users\evinellacuello\desktop\proyecto repo tomi\tpi-progra2\managers\managersocios.h
+	"../Archivos/ArchivoSocios.h"
+
+1749943320 c:\users\evinellacuello\desktop\proyecto repo tomi\tpi-progra2\menues\menuactividades.h
 	"Menu.h"
 
-1748444377 c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\menues\menuinscripciones.h
+1749858513 c:\users\evinellacuello\desktop\proyecto repo tomi\tpi-progra2\menues\menuinscripciones.h
 	"Menu.h"
 
-1749519655 source:c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\menues\menu.cpp
+1749858513 c:\users\evinellacuello\desktop\proyecto repo tomi\tpi-progra2\funcionesconsola.h
+
+1750025272 source:c:\users\evinellacuello\desktop\proyecto repo tomi\tpi-progra2\managers\managersocios.cpp
+	<iostream>
+	<string>
+	<iomanip>
+	"ManagerSocios.h"
+	"../funcionesConsola.h"
+	"../rlutil.h"
+
+1749858513 source:c:\users\evinellacuello\desktop\proyecto repo tomi\tpi-progra2\menues\menu.cpp
 	<iostream>
 	<string>
 	"Menu.h"
 	"../rlutil.h"
 
-1731188191 c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\rlutil.h
-	<iostream>
-	<string>
-	<cstdio>
-	<stdio.h>
-	<string.h>
-	<windows.h>
-	<conio.h>
-	<termios.h>
-	<unistd.h>
-	<sys/ioctl.h>
-	<sys/types.h>
-	<sys/time.h>
-
-1748443802 source:c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\menues\menuactividades.cpp
+1749939113 source:c:\users\evinellacuello\desktop\proyecto repo tomi\tpi-progra2\menues\menuactividades.cpp
 	<string>
 	<iostream>
 	"MenuActividades.h"
 	"Menu.h"
 
-1748444779 source:c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\menues\menuinscripciones.cpp
+1749939129 source:c:\users\evinellacuello\desktop\proyecto repo tomi\tpi-progra2\menues\menuinscripciones.cpp
 	<string>
 	<iostream>
 	"MenuInscripciones.h"
 	"Menu.h"
 
-1750051477 source:c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\menues\menuprincipal.cpp
-	<string>
+1750102474 source:c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\menues\menuprincipal.cpp
 	<iostream>
 	"MenuPrincipal.h"
 	"Menu.h"
+	<string>
+	"../funcionesConsola.h"
 
-1749785968 source:c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\menues\menusocios.cpp
+1749939135 source:c:\users\evinellacuello\desktop\proyecto repo tomi\tpi-progra2\menues\menusocios.cpp
 	<string>
 	<iostream>
 	"MenuSocios.h"
 	"Menu.h"
 	"../Entidades/Socio.h"
 
-1746055573 source:c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\archivos\archivo.cpp
-	<string>
-	"Archivo.h"
-
-1746055567 c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\archivos\archivo.h
-	<string>
-
-1749041276 source:c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\entidades\pago.cpp
+1750071198 source:c:\users\evinellacuello\desktop\proyecto repo tomi\tpi-progra2\archivos\archivopagos.cpp
 	<iostream>
-	"Pago.h"
+	"ArchivoPagos.h"
 
-1749041198 c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\entidades\pago.h
+1750101486 c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\entidades\pago.h
 	"Fecha.h"
 
 1750049933 c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\archivos\archivosocios.h
@@ -329,9 +186,11 @@
 	"Archivo.h"
 	"../Entidades/Inscripcion.h"
 
-1749039462 source:c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\archivos\archivopagos.cpp
+1750101197 source:c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\archivos\archivopagos.cpp
+	<iostream>
+	"ArchivoPagos.h"
 
-1750049899 source:c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\archivos\archivosocios.cpp
+1750099220 source:c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\archivos\archivosocios.cpp
 	<iostream>
 	"ArchivoSocios.h"
 
@@ -343,7 +202,7 @@
 	<iostream>
 	<string>
 	<iomanip>
-	"ManagerSocios.h"
+	"ManagerPagos.h"
 	"../funcionesConsola.h"
 	"../rlutil.h"
 
@@ -360,12 +219,13 @@
 	"Fecha.h"
 	<string>
 
-1750049401 c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\menues\menuexportar.h
+1750102178 c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\menues\menuexportar.h
 	"Menu.h"
 	"../Managers/ManagerSocios.h"
 	"../Managers/ManagerInscripciones.h"
+	"../Managers/ManagerPagos.h"
 
-1750049453 source:c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\menues\menuexportar.cpp
+1750102194 source:c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\menues\menuexportar.cpp
 	<iostream>
 	"MenuExportar.h"
 
@@ -385,4 +245,135 @@
 1750052792 source:c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\menues\menuconfiguraciones.cpp
 	<iostream>
 	"MenuConfiguraciones.h"
+
+1746055573 source:c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\archivos\archivo.cpp
+	<string>
+	"Archivo.h"
+
+1746055567 c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\archivos\archivo.h
+	<string>
+
+1749434108 c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\entidades\fecha.h
+
+1750048203 c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\entidades\inscripcion.h
+	"Fecha.h"
+	<string>
+
+1749785168 source:c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\entidades\actividad.cpp
+	<iostream>
+	<cstring>
+	<string>
+	"Actividad.h"
+
+1749785485 source:c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\entidades\fecha.cpp
+	<iostream>
+	"Fecha.h"
+	<cstring>
+	<ctime>
+
+1750048256 source:c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\entidades\inscripcion.cpp
+	<iostream>
+	<cstring>
+	<string>
+	"Inscripcion.h"
+
+1749649677 source:c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\entidades\socio.cpp
+	<iostream>
+	<cstring>
+	<string>
+	"Socio.h"
+
+1749427630 c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\entidades\socio.h
+	<string>
+	"Fecha.h"
+
+1731188191 c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\rlutil.h
+	<iostream>
+	<string>
+	<cstdio>
+	<stdio.h>
+	<string.h>
+	<windows.h>
+	<conio.h>
+	<termios.h>
+	<unistd.h>
+	<sys/ioctl.h>
+	<sys/types.h>
+	<sys/time.h>
+
+1749651399 source:c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\main.cpp
+	<iostream>
+	"Menues/MenuPrincipal.h"
+	"Entidades/Socio.h"
+	"Archivos/ArchivoSocios.h"
+	"funcionesConsola.h"
+
+1748060904 c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\menues\menu.h
+	<string>
+
+1750099220 c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\menues\menusocios.h
+	"Menu.h"
+	"../Managers/ManagerSocios.h"
+
+1750099220 c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\menues\menuactividades.h
+	"Menu.h"
+
+1748444377 c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\menues\menuinscripciones.h
+	"Menu.h"
+
+1750099220 c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\menues\menupagos.h
+	"Menu.h"
+	"../Managers/ManagerPagos.h"
+
+1750102323 c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\managers\managerpagos.h
+	"../Archivos/ArchivoPagos.h"
+	"../Archivos/ArchivoSocios.h"
+	"../Archivos/ArchivoActividades.h"
+
+1750101117 c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\archivos\archivopagos.h
+	"Archivo.h"
+	"../Entidades/Pago.h"
+
+1749519655 source:c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\menues\menu.cpp
+	<iostream>
+	<string>
+	"Menu.h"
+	"../rlutil.h"
+
+1750101465 source:c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\entidades\pago.cpp
+	<iostream>
+	"Pago.h"
+
+1750102235 source:c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\managers\managerpagos.cpp
+	<iostream>
+	<cstring>
+	<string>
+	<iomanip>
+	"ManagerPagos.h"
+	"../funcionesConsola.h"
+	"../rlutil.h"
+
+1750100203 source:c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\menues\menuactividades.cpp
+	<string>
+	<iostream>
+	"MenuActividades.h"
+	"Menu.h"
+
+1750100397 source:c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\menues\menuinscripciones.cpp
+	<string>
+	<iostream>
+	"MenuInscripciones.h"
+	"Menu.h"
+
+1750099220 source:c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\menues\menusocios.cpp
+	<string>
+	<iostream>
+	"MenuSocios.h"
+	"Menu.h"
+	"../Entidades/Socio.h"
+
+1750099220 source:c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\menues\menupagos.cpp
+	<iostream>
+	"Menu.h"
+	"MenuPagos.h"
 
