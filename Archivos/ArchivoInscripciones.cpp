@@ -123,3 +123,50 @@ int ArchivoInscripciones::exportarCSV(){
     return 0; /// 0 codigo exitoso
 }
 
+bool ArchivoInscripciones::crearBackup(){
+
+    FILE *copia;
+    copia = fopen("InscripcionesCopia.dat", "wb");
+    if (copia == nullptr){
+        return false; 
+    }  
+
+    int cantRegistros = getCantidadRegistros();
+    Inscripcion *inscripciones = new Inscripcion[cantRegistros];
+    leerTodos(cantRegistros, inscripciones);
+
+    ///Escribo todos los registros del vector de una sola vez en la copia
+    ///y comparo con la cantidad de registros para saber si se escribieron todos bien
+    bool ok = (fwrite(inscripciones, sizeof(Inscripcion), cantRegistros, copia) == cantRegistros);
+    fclose(copia);
+    delete[] inscripciones;
+    return ok;
+}
+
+bool ArchivosInscripciones::usarBackup(){
+    ArchivoInscripciones copia("InscripcionesCopia.dat");
+    
+    if (copia.getCantidadRegistros() <= 0){
+        return false; 
+        /// por si da error o no hay registros en la copia 
+        /// nos vamos antes de borrar el archivo original 
+    }
+
+    _pArchivo = fopen("Inscripciones.dat", "wb"); ///Borro lo que hay en el archivo original
+    if (_pArchivo == nullptr){
+        return false;
+    }
+    
+    int cantRegistros = copia.getCantidadRegistros();
+    Inscripcion *inscripciones = new Inscripcion[cantRegistros];
+    copia.leerTodos(cantRegistros, inscripciones);
+    
+
+    bool ok = (fwrite(inscripciones, sizeof(Inscripcion), cantRegistros, _pArchivo) == cantRegistros);
+    
+
+    cerrar(); //cierra el puntero del archivo normal 
+    delete[] inscripciones;
+    return ok;
+}
+
