@@ -37,8 +37,7 @@ bool ArchivoActividades::guardar(Actividad actividad)
 
 int ArchivoActividades::buscar(int idActividad)
 {
-
-    if(!abrirLectura()) return false;
+    if(!abrirLectura()) return -1;
     int posicion = 0;
     Actividad actividad;
     while(fread(&actividad,sizeof(Actividad),1,_pArchivo)){

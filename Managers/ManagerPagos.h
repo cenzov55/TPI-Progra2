@@ -3,7 +3,8 @@
 #include "../Archivos/ArchivoSocios.h"
 #include "../Archivos/ArchivoActividades.h"
 
-class ManagerPagos {
+class ManagerPagos
+{
 
 public:
     ManagerPagos();
@@ -12,8 +13,14 @@ public:
     void listar();
     void exportarCSV();
     void listarPagosSocio();
-    void listarPagosActividad(Actividad &actividad);
 
+private:
+    ArchivoSocios _archivoSocios;
+    ArchivoActividades _archivoActividades;
+    ArchivoPagos _archivoPagos;
+
+    void mostrarPago(Pago &pago);
+    void mostrarEncabezadoTabla();
     void pedirMes(Fecha &fecha);
     void pedirDia(Fecha &fecha);
     void pedirAnio(Fecha &fecha);
@@ -21,12 +28,4 @@ public:
     int pedirIdActividad();
     int pedirImporte();
     void pedirMetodoDePago(Pago &pago);
-
-private:
-    void mostrarPago(Pago &pago);
-    void mostrarEncabezadoTabla();
-
-    ArchivoSocios _archivoSocios;
-    ArchivoActividades _archivoActividades;
-    ArchivoPagos _archivoPagos;
 };

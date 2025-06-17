@@ -37,10 +37,16 @@ bool ArchivoInscripciones::guardar(Inscripcion inscripcion)
 
 int ArchivoInscripciones::buscar(int idActividad, int idSocio)
 {
-    if(!abrirLectura()) return false;
+    if(!abrirLectura()) return -1;
     int posicion = 0;
     Inscripcion inscripcion;
+    int cantRegistros = getCantidadRegistros();
+    cout << "Cantidad de registros: " << cantRegistros << endl;
+    cout << "Buscando inscripcion con ID Actividad: " << idActividad << " y ID Socio: " << idSocio << endl;
+
     while(fread(&inscripcion,sizeof(Inscripcion),1,_pArchivo)){
+        cout << "Leyendo inscripcion en posicion: " << posicion << endl;
+        cout << "ID Actividad: " << inscripcion.getIdActividad() << ", ID Socio: " << inscripcion.getIdSocio() << endl;
         if(inscripcion.getIdActividad() == idActividad && inscripcion.getIdSocio() == idSocio){
             cerrar();
             return posicion;
