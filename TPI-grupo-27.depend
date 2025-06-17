@@ -6,7 +6,7 @@
 1749858512 c:\users\evinellacuello\desktop\proyecto repo tomi\tpi-progra2\archivos\archivo.h
 	<string>
 
-1750103378 source:c:\users\evinellacuello\desktop\proyecto repo tomi\tpi-progra2\archivos\archivoactividades.cpp
+1750170402 source:c:\users\evinellacuello\desktop\proyecto repo tomi\tpi-progra2\archivos\archivoactividades.cpp
 	<iostream>
 	"ArchivoActividades.h"
 
@@ -20,7 +20,7 @@
 
 1749858513 c:\users\evinellacuello\desktop\proyecto repo tomi\tpi-progra2\entidades\fecha.h
 
-1750103378 source:c:\users\evinellacuello\desktop\proyecto repo tomi\tpi-progra2\archivos\archivoinscripciones.cpp
+1750169522 source:c:\users\evinellacuello\desktop\proyecto repo tomi\tpi-progra2\archivos\archivoinscripciones.cpp
 	<iostream>
 	"ArchivoInscripciones.h"
 
@@ -52,13 +52,11 @@
 	<cstring>
 	<ctime>
 
-1750103378 source:c:\users\evinellacuello\desktop\proyecto repo tomi\tpi-progra2\entidades\inscripcion.cpp
+1750118738 source:c:\users\evinellacuello\desktop\proyecto repo tomi\tpi-progra2\entidades\inscripcion.cpp
 	<iostream>
-	<cstring>
-	<string>
 	"Inscripcion.h"
 
-1750103378 c:\users\evinellacuello\desktop\proyecto repo tomi\tpi-progra2\entidades\inscripcion.h
+1750120131 c:\users\evinellacuello\desktop\proyecto repo tomi\tpi-progra2\entidades\inscripcion.h
 	"Fecha.h"
 	<string>
 
@@ -128,12 +126,13 @@
 1749943320 c:\users\evinellacuello\desktop\proyecto repo tomi\tpi-progra2\menues\menuactividades.h
 	"Menu.h"
 
-1749858513 c:\users\evinellacuello\desktop\proyecto repo tomi\tpi-progra2\menues\menuinscripciones.h
+1750113446 c:\users\evinellacuello\desktop\proyecto repo tomi\tpi-progra2\menues\menuinscripciones.h
 	"Menu.h"
+	"../Managers/ManagerInscripciones.h"
 
 1749858513 c:\users\evinellacuello\desktop\proyecto repo tomi\tpi-progra2\funcionesconsola.h
 
-1750103378 source:c:\users\evinellacuello\desktop\proyecto repo tomi\tpi-progra2\managers\managersocios.cpp
+1750115778 source:c:\users\evinellacuello\desktop\proyecto repo tomi\tpi-progra2\managers\managersocios.cpp
 	<iostream>
 	<string>
 	<iomanip>
@@ -153,8 +152,7 @@
 	"MenuActividades.h"
 	"Menu.h"
 
-1750103378 source:c:\users\evinellacuello\desktop\proyecto repo tomi\tpi-progra2\menues\menuinscripciones.cpp
-	<string>
+1750172485 source:c:\users\evinellacuello\desktop\proyecto repo tomi\tpi-progra2\menues\menuinscripciones.cpp
 	<iostream>
 	"MenuInscripciones.h"
 	"Menu.h"
@@ -166,7 +164,7 @@
 	<string>
 	"../funcionesConsola.h"
 
-1749939135 source:c:\users\evinellacuello\desktop\proyecto repo tomi\tpi-progra2\menues\menusocios.cpp
+1750124059 source:c:\users\evinellacuello\desktop\proyecto repo tomi\tpi-progra2\menues\menusocios.cpp
 	<string>
 	<iostream>
 	"MenuSocios.h"
@@ -396,7 +394,7 @@
 	"Menu.h"
 	"../Managers/ManagerPagos.h"
 
-1750103378 c:\users\evinellacuello\desktop\proyecto repo tomi\tpi-progra2\managers\managerpagos.h
+1750115291 c:\users\evinellacuello\desktop\proyecto repo tomi\tpi-progra2\managers\managerpagos.h
 	"../Archivos/ArchivoPagos.h"
 	"../Archivos/ArchivoSocios.h"
 	"../Archivos/ArchivoActividades.h"
@@ -411,18 +409,22 @@
 	"../Managers/ManagerInscripciones.h"
 	"../Managers/ManagerPagos.h"
 
-1750103378 c:\users\evinellacuello\desktop\proyecto repo tomi\tpi-progra2\managers\managerinscripciones.h
+1750172529 c:\users\evinellacuello\desktop\proyecto repo tomi\tpi-progra2\managers\managerinscripciones.h
 	"../Archivos/ArchivoInscripciones.h"
+	"../Archivos/ArchivoSocios.h"
+	"../Archivos/ArchivoActividades.h"
 
 1750103378 c:\users\evinellacuello\desktop\proyecto repo tomi\tpi-progra2\menues\menuconfiguraciones.h
 	"Menu.h"
 	"../Managers/ManagerSocios.h"
 	"../Managers/ManagerInscripciones.h"
 
-1750103378 source:c:\users\evinellacuello\desktop\proyecto repo tomi\tpi-progra2\managers\managerinscripciones.cpp
+1750169735 source:c:\users\evinellacuello\desktop\proyecto repo tomi\tpi-progra2\managers\managerinscripciones.cpp
 	<iostream>
 	"ManagerInscripciones.h"
 	"../funcionesConsola.h"
+	"../rlutil.h"
+	<iomanip>
 
 1750103378 source:c:\users\evinellacuello\desktop\proyecto repo tomi\tpi-progra2\menues\menuconfiguraciones.cpp
 	<iostream>
@@ -438,4 +440,13 @@
 	"Menu.h"
 	<string>
 	"../funcionesConsola.h"
+
+1750170572 source:c:\users\evinellacuello\desktop\proyecto repo tomi\tpi-progra2\managers\managerpagos.cpp
+	<iostream>
+	<cstring>
+	<string>
+	<iomanip>
+	"ManagerPagos.h"
+	"../funcionesConsola.h"
+	"../rlutil.h"
 

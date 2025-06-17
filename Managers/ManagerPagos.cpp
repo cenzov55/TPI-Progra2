@@ -5,14 +5,14 @@
 #include "ManagerPagos.h"
 #include "../funcionesConsola.h"
 #include "../rlutil.h"
+
 using namespace std;
 
 ManagerPagos::ManagerPagos()
     : _archivoSocios("Socios.dat"),
       _archivoPagos("Pagos.dat"),
       _archivoActividades("Actividades.dat")
-{
-}
+{}
 
 void ManagerPagos::agregar()
 {
@@ -170,33 +170,6 @@ void ManagerPagos::listarPagosSocio()
 
 }
 
-void ManagerPagos::exportarCSV(){
-
-    system("cls");
-    imprimirFormulario("Pagos CSV");
-    mensajeFormulario(3, "Se exportaran los datos de los pagos en un archivo .csv");
-    mensajeFormulario(4, "en la carpeta donde se encuentra el programa");
-
-    int codigo = _archivoPagos.exportarCSV();
-
-    if (codigo == -1)
-    {
-        mensajeError("Error al exportar en csv.");
-        system("pause>nul");
-        return;
-    }
-
-    if (codigo == -2)
-    {
-        mensajeError("No hay registros para poder exportar en csv");
-        system("pause>nul");
-        return;
-    }
-
-    mensajeExito("Pagos exportados correctamente");
-    system("pause>nul");
-}
-
 
 void ManagerPagos::mostrarPago(Pago &pago)
 {
@@ -314,6 +287,7 @@ int ManagerPagos::pedirIdActividad()
         posicion = _archivoActividades.buscar(idActividad);
         if (posicion == -1)
             mensajeError("Actividad no encontrada");
+            system("pause>nul");
     } while (posicion == -1);
     return posicion;
 }
@@ -351,4 +325,31 @@ void ManagerPagos::pedirMetodoDePago(Pago &pago)
         }
 
     } while (!metodoValido);
+}
+
+void ManagerPagos::exportarCSV(){
+
+    system("cls");
+    imprimirFormulario("Pagos CSV");
+    mensajeFormulario(3, "Se exportaran los datos de los pagos en un archivo .csv");
+    mensajeFormulario(4, "en la carpeta donde se encuentra el programa");
+
+    int codigo = _archivoPagos.exportarCSV();
+
+    if (codigo == -1)
+    {
+        mensajeError("Error al exportar en csv.");
+        system("pause>nul");
+        return;
+    }
+
+    if (codigo == -2)
+    {
+        mensajeError("No hay registros para poder exportar en csv");
+        system("pause>nul");
+        return;
+    }
+
+    mensajeExito("Pagos exportados correctamente");
+    system("pause>nul");
 }

@@ -1,9 +1,15 @@
 #include <iostream>
-#include <cstring>
-#include <string>
 #include "Inscripcion.h"
 using namespace std;
 
+Inscripcion::Inscripcion(){}
+
+Inscripcion::Inscripcion(int idSocio, int idActividad, Fecha fechaInscripcion){
+    setIdSocio(idSocio);
+    setIdActividad(idActividad);
+    setFechaInscripcion(fechaInscripcion);
+    eliminado = false;
+}
 
 int Inscripcion::getIdActividad() {
     return idActividad;

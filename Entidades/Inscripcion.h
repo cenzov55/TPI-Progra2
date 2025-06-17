@@ -10,6 +10,8 @@ private:
     bool eliminado;
 
 public:
+    Inscripcion();
+    Inscripcion(int idSocio, int idActividad, Fecha fechaInscripcion);
 
     // Getters
     int getIdActividad();

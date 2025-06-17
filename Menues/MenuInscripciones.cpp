@@ -1,4 +1,3 @@
-#include <string>
 #include <iostream>
 #include "MenuInscripciones.h"
 #include "Menu.h"
@@ -10,10 +9,9 @@ MenuInscripciones::MenuInscripciones(){
     setCantidadOpciones(CANT_OPCIONES);
 
     const string opciones[CANT_OPCIONES] = {
-        "Agregar",
-        "Borrar",
-        "Modificar",
-        "Listar Todas",
+        "Inscribir Socio a Actividad",
+        "Borrar Inscripcion",
+        "Listar",
         "Volver"
     };
 
@@ -21,7 +19,7 @@ MenuInscripciones::MenuInscripciones(){
     setAncho();
     setAlto();
     setPosicionCentro();
-    setTitulo("Menu Inscripciones");
+    setTitulo("Inscripciones ABML");
 }
 
 
@@ -30,18 +28,17 @@ void MenuInscripciones::aparecer(){
         int opcion = seleccion();
         switch (opcion) {
             case 1:
-
+                _managerInscripciones.agregar();
                 break;
             case 2:
-
+                _managerInscripciones.borrar();
                 break;
             case 3:
-
+                _managerInscripciones.listar();
                 break;
             case 4:
+            return;
                 break;
-            case 5:
-                return;
             default:
                 cout << "Opción no válida. Intente nuevamente." << endl;
                 system("pause>nul");
