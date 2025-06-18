@@ -9,11 +9,14 @@ class ManagerPagos
 public:
     ManagerPagos();
     void agregar();
-    void modificar();
     void listar();
     void exportarCSV();
     void listarPagosSocio();
     void backup();
+    void recaudacion();
+    void mostrarEncabezadoRecaudacion();
+    
+
 
 private:
     ArchivoSocios _archivoSocios;
