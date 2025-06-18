@@ -101,13 +101,23 @@ void ManagerInscripciones::borrar()
     system("cls");
     imprimirFormulario("Borrar inscripcion");
 
-    int posicionSocio = pedirIdSocio();
+    int cantidadInscripciones = _archivoInscripciones.getCantidadRegistros();
+    if (cantidadInscripciones <= 0)
+    {
+        mensajeError("No hay inscripciones registradas.");
+        system("pause>nul");
+        return;
+    }
+
+    int idSocio = pedirIdSocio();
+    int posicionSocio = _archivoSocios.buscar(idSocio);
     if (posicionSocio == -1)
     {
         mensajeError("El socio ingresado no existe");
         system("pause>nul");
         return;
     }
+
     Socio socio = _archivoSocios.leer(posicionSocio);
 
     if (socio.getEliminado())
