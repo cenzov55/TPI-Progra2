@@ -5,7 +5,7 @@
 using namespace std;
 
 MenuInscripciones::MenuInscripciones(){
-    const int CANT_OPCIONES = 5;
+    const int CANT_OPCIONES = 4;
     setCantidadOpciones(CANT_OPCIONES);
 
     const string opciones[CANT_OPCIONES] = {

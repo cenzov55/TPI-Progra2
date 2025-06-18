@@ -40,6 +40,14 @@ void ManagerInscripciones::agregar()
         system("pause>nul");
         return;
     }
+    //PARA QUE NO SE INSCRIBA DOS VECES AL MISMO SOCIO EN LA MISMA ACTIVIDAD
+    bool inscripcionExistente = _archivoInscripciones.buscar(actividad.getIdActividad(), socio.getIdSocio()) != -1;
+    if (inscripcionExistente)
+    {
+        mensajeError("El socio ya se encuentra inscripto en la actividad.");
+        system("pause>nul");
+        return;
+    }
 
     mensajeFormulario(3, "Fecha Nacimiento:");
     pedirAnio(fechaInscripcion);
@@ -324,7 +332,7 @@ int ManagerInscripciones::pedirIdSocio()
         }
     } while (posicion == -1);
 
-    return idSocio;
+    return posicion;
 }
 
 int ManagerInscripciones::pedirIdActividad()

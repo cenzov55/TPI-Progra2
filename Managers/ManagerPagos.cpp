@@ -38,15 +38,14 @@ void ManagerPagos::agregar()
         return;
     }
     int posicionActividad = pedirIdActividad();
+
     Actividad actividad = _archivoActividades.leer(posicionActividad);
-    /*descomentar al implementar el ABM de actividades
         if (actividad.getEliminado())
     {
         mensajeError("La actividad ingresada se encuentra eliminada.");
         system("pause>nul");
         return;
     }
-*/
     int importe = pedirImporte();
 
     pago.setFechaDePago(fecha);
@@ -318,7 +317,7 @@ int ManagerPagos::pedirIdSocio()
             }
     } while (posicion == -1);
 
-    return idSocio;
+    return posicion;
 }
 
 int ManagerPagos::pedirIdActividad()
@@ -399,4 +398,50 @@ void ManagerPagos::exportarCSV(){
 
     mensajeExito("Pagos exportados correctamente");
     system("pause>nul");
+}
+
+void ManagerPagos::recaudacion(){
+    system("cls");
+    cout << "Recaudacion por mes" << endl;
+    cout << "---------------------" << endl;
+ int meses[12] = {0};
+    int cantidadRegistros = _archivoPagos.getCantidadRegistros();
+    if (cantidadRegistros <= 0)
+    { /// si es 0 no hay pagos, pero puede ser -1 que significa error
+        mensajeError("No hay pagos registrados.");
+        system("pause>nul");
+        return;
+    }
+
+    Pago *pagos = new Pago[cantidadRegistros];
+    _archivoPagos.leerTodos(cantidadRegistros, pagos);
+
+    for (int i = 0; i < cantidadRegistros; i++)
+    {
+        int mes = pagos[i].getFechaDePago().getMes() - 1; 
+        meses[mes] += pagos[i].getImporte();
+    }
+
+    mostrarEncabezadoRecaudacion();
+    for (int i = 0; i < 12; i++)
+    {
+        rlutil::setBackgroundColor(rlutil::WHITE);
+        rlutil::setColor(rlutil::BLACK);
+        cout << (char)179 << left << setw(12) << (i + 1) << (char)179;
+        cout << left << setw(12) << meses[i] << (char)179;
+        cout << endl;
+    }
+    rlutil::setBackgroundColor(rlutil::BLACK);
+    rlutil::resetColor();
+    system("pause>nul");
+
+    delete[] pagos;
+}
+//POR MES
+void ManagerPagos::mostrarEncabezadoRecaudacion(){
+    rlutil::setBackgroundColor(rlutil::CYAN);
+    rlutil::setColor(rlutil::BLACK);
+    cout << (char)179 << left << setw(12) << "MES" << (char)179;
+    cout << left << setw(12) << "RECAUDACION" << (char)179;
+    cout << endl;
 }
