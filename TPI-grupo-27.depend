@@ -301,12 +301,9 @@
 	<sys/types.h>
 	<sys/time.h>
 
-1749651399 source:c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\main.cpp
+1750102744 source:c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\main.cpp
 	<iostream>
 	"Menues/MenuPrincipal.h"
-	"Entidades/Socio.h"
-	"Archivos/ArchivoSocios.h"
-	"funcionesConsola.h"
 
 1748060904 c:\users\nico\desktop\tpi-programacion2\tpi-grupo-27\menues\menu.h
 	<string>
