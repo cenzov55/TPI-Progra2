@@ -31,7 +31,7 @@ void MenuConfiguraciones::aparecer() {
                 _managerSocios.backup();
                 break;
             case 2:
-                //_managerActividades.backup();
+                _managerActividades.backup();
                 break;
             case 3:
                 _managerInscripciones.backup();

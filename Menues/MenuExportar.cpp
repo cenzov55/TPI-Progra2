@@ -31,6 +31,7 @@ void MenuExportar::aparecer() {
                 _managerSocios.exportarCSV();
                 break;
             case 2:
+                _managerActividades.exportarCSV();
                 break;
             case 3:
                 _managerInscripciones.exportarCSV();

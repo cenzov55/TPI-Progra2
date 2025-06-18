@@ -36,7 +36,7 @@ bool ArchivoSocios::guardar(Socio socio)
 
 int ArchivoSocios::buscar(int idSocio)
 {
-    if(!abrirLectura()) return false;
+    if(!abrirLectura()) return -1;
     int posicion = 0;
     Socio socio;
     while(fread(&socio,sizeof(Socio),1,_pArchivo)){

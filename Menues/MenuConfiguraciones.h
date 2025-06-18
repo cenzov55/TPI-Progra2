@@ -3,6 +3,7 @@
 #include "../Managers/ManagerSocios.h"
 #include "../Managers/ManagerInscripciones.h"
 #include "../Managers/ManagerPagos.h"
+#include "../Managers/ManagerActividades.h"
 
 class MenuConfiguraciones : public Menu {
 
@@ -13,9 +14,8 @@ public:
 private:
     ManagerSocios _managerSocios;
     ManagerInscripciones _managerInscripciones;
-    //ManagerActividades _managerActividades;
+    ManagerActividades _managerActividades;
     ManagerPagos _managerPagos;
-    ///faltan los demas managers
 
 };
 
