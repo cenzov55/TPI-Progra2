@@ -77,6 +77,14 @@ void ManagerInscripciones::agregar()
     pedirMes(fechaInscripcion);
     pedirDia(fechaInscripcion);
 
+    /// Validar que la fecha de inscripcion no sea posterior a la fecha de inicio de la actividad
+    if (fechaInscripcion > actividad.getFechaInicio())
+    {
+        mensajeError("La fecha de inscripcion no puede ser posterior a la fecha de inicio de la actividad.");
+        system("pause>nul");
+        return;
+    }
+
     bool ok = _archivoInscripciones.guardar(Inscripcion(socio.getIdSocio(), actividad.getIdActividad(), fechaInscripcion));
     if (!ok)
     {

@@ -19,7 +19,6 @@ class Fecha{
         void restarDia();
         void agregarDias(int dias);
         std::string toString();
-        std::string toStringConHoraHoy();
 
         ///GETTERS
         int getDia();
