@@ -76,7 +76,7 @@ void ManagerActividades::modificar()
         return;
     }
 
-    mensajeFormulario(3, "Datos del socio seleccionado: ");
+    mensajeFormulario(3, "Datos de la actividad seleccionada: ");
     cout << endl;
 
     mostrarEncabezadoTabla();
@@ -252,12 +252,50 @@ void ManagerActividades::listar()
                 rlutil::setBackgroundColor(rlutil::WHITE);
             }
             mostrarActividad(actividades[i]);
-            cout << endl;
         }
     }
 
     delete[] actividades;
     system("pause>nul");
+}
+
+void ManagerActividades::buscarPorId(){
+
+    imprimirFormulario("Buscar Actividad por Id");
+    int idActividad;
+    mensajeFormulario(3, "Ingrese el id de actividad a buscar: ");
+    cin >> idActividad;
+
+    int posicion = _archivoActividades.buscar(idActividad);
+
+    if (posicion == -1){
+        mensajeError("La actividad ingresada no existe");
+        system("pause>nul");
+        return;
+    }
+
+    Actividad actividad;
+    actividad = _archivoActividades.leer(posicion);
+
+    if (actividad.getEliminado()){
+        mensajeFormulario(5, "La actividad ingresada se encuentra eliminada.");
+        system("pause");
+        return;
+    }
+
+    ///Lo vuelvo a imprimir para borrar el texto anterior
+    ///y asi tener espacio para mostrar el socio entero.
+    imprimirFormulario("Buscar Socio por Id");
+
+    mensajeFormulario(3,"ID: " + to_string(actividad.getIdActividad()));
+    mensajeFormulario(4,"Nombre: " + actividad.getNombre());
+    mensajeFormulario(5,"Responsable: " + actividad.getResponsable());
+    mensajeFormulario(6,"Arancel: " + to_string(actividad.getArancel()));
+    mensajeFormulario(7,"Fecha Inicio: " + actividad.getFechaInicio().toString());
+
+    mensajeExito("Operacion Exitosa");
+    system("pause>nul");
+
 }
 
 void ManagerActividades::exportarCSV()
@@ -351,10 +389,10 @@ void ManagerActividades::backup()
 void ManagerActividades::mostrarActividad(Actividad &actividad)
 {
     cout << (char)179 << left << setw(5) << actividad.getIdActividad() << (char)179;
-    cout << left << setw(35) << actividad.getNombre() << (char)179;
-    cout << left << setw(35) << actividad.getResponsable() << (char)179;
+    cout << left << setw(35) << truncar(actividad.getNombre(), 35) << (char)179;
+    cout << left << setw(35) << truncar(actividad.getResponsable(), 35) << (char)179;
     cout << left << setw(12) << actividad.getFechaInicio().toString() << (char)179;
-    cout << left << setw(10) << fixed << setprecision(2) << actividad.getArancel() << (char)179 << endl;
+    cout << left << setw(20) << actividad.getArancel() << (char)179 << endl;
 }
 
 void ManagerActividades::mostrarEncabezadoTabla()
@@ -365,7 +403,7 @@ void ManagerActividades::mostrarEncabezadoTabla()
     cout << left << setw(35) << "Nombre" << (char)179;
     cout << left << setw(35) << "Responsable" << (char)179;
     cout << left << setw(12) << "Fecha Inicio" << (char)179;
-    cout << left << setw(10) << fixed << setprecision(2) << "Arancel" << (char)179 << endl;
+    cout << left << setw(20) << "Arancel" << (char)179 << endl;
     rlutil::setBackgroundColor(rlutil::WHITE);
 }
 
@@ -494,6 +532,7 @@ void ManagerActividades::pedirArancel(Actividad &actividad)
         mensajeFormulario(4, "Arancel: ");
         cin >> arancel;
         cin.ignore();
+
         ok = actividad.setArancel(arancel);
         if (!ok)
         {

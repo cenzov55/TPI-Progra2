@@ -560,7 +560,7 @@ void ManagerSocios::pedirMes(Fecha &fecha)
         limpiarError();
         mensajeFormulario(8, "Mes: ");
         cin >> mes;
-
+        cin.ignore();
         mesValido = fecha.setMes(mes);
         if (!mesValido)
         {
@@ -580,7 +580,7 @@ void ManagerSocios::pedirDia(Fecha &fecha)
         limpiarError();
         mensajeFormulario(9, "Dia: ");
         cin >> dia;
-
+        cin.ignore();
         diaValido = fecha.setDia(dia);
         if (!diaValido)
         {
@@ -599,6 +599,7 @@ void ManagerSocios::pedirAnio(Fecha &fecha)
         limpiarError();
         mensajeFormulario(7, "Anio: ");
         cin >> anio;
+        cin.ignore();
 
         anioValido = fecha.setAnio(anio);
         if (!anioValido)

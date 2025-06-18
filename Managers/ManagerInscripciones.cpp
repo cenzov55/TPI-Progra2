@@ -22,8 +22,30 @@ void ManagerInscripciones::agregar()
     ///---------
     Fecha fechaInscripcion;
 
+    int cantidadActividades = _archivoActividades.getCantidadRegistros();
+    if (cantidadActividades <= 0)
+    {
+        mensajeError("No hay actividades registradas.");
+        system("pause>nul");
+        return;
+    }
+
+    int cantidadSocios = _archivoSocios.getCantidadRegistros();
+    if (cantidadSocios <= 0)
+    {
+        mensajeError("No hay socios registrados.");
+        system("pause>nul");
+        return;
+    }
+
     int idSocio = pedirIdSocio();
     int posicionSocio = _archivoSocios.buscar(idSocio);
+    if (posicionSocio == -1) {
+        mensajeError("El socio ingresado no existe.");
+        system("pause>nul");
+        return;
+    }
+
     Socio socio = _archivoSocios.leer(posicionSocio);
     if (socio.getEliminado())
     {
@@ -32,7 +54,8 @@ void ManagerInscripciones::agregar()
         return;
     }
 
-    int posicionActividad = pedirIdActividad();
+    int idActividad = pedirIdActividad();
+    int posicionActividad = _archivoActividades.buscar(idActividad);
     Actividad actividad = _archivoActividades.leer(posicionActividad);
     if (actividad.getEliminado())
     {
@@ -49,7 +72,7 @@ void ManagerInscripciones::agregar()
         return;
     }
 
-    mensajeFormulario(3, "Fecha Nacimiento:");
+    mensajeFormulario(3, "Fecha Inscripcion:");
     pedirAnio(fechaInscripcion);
     pedirMes(fechaInscripcion);
     pedirDia(fechaInscripcion);
@@ -85,7 +108,15 @@ void ManagerInscripciones::borrar()
         system("pause>nul");
         return;
     }
-    int posicionActividad = pedirIdActividad();
+
+    int idActividad = pedirIdActividad();
+    int posicionActividad = _archivoActividades.buscar(idActividad);
+    if (posicionActividad == -1) {
+        mensajeError("La actividad ingresada no existe.");
+        system("pause>nul");
+        return;
+    }
+
     Actividad actividad = _archivoActividades.leer(posicionActividad);
     if (actividad.getEliminado())
     {
@@ -100,6 +131,7 @@ void ManagerInscripciones::borrar()
         system("pause>nul");
         return;
     }
+
     Inscripcion inscripcion = _archivoInscripciones.leer(posicionInscripcion);
     if (inscripcion.getEliminado())
     {
@@ -332,7 +364,7 @@ int ManagerInscripciones::pedirIdSocio()
         }
     } while (posicion == -1);
 
-    return posicion;
+    return idSocio;
 }
 
 int ManagerInscripciones::pedirIdActividad()
@@ -352,7 +384,7 @@ int ManagerInscripciones::pedirIdActividad()
             system("pause>nul");
         }
     } while (posicion == -1);
-    return posicion;
+    return idActividad;
 }
 
 void ManagerInscripciones::exportarCSV()

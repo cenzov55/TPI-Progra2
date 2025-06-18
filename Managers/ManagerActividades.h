@@ -14,6 +14,7 @@ public:
     void exportarCSV();
     void backup();
 
+    void buscarPorId();
 private:
     ArchivoActividades _archivoActividades;
 

@@ -45,7 +45,7 @@ void Inscripcion::setEliminado(bool estadoEliminado) {
     _eliminado = estadoEliminado;
 }
 
-/// CSV acá
+/// CSV aca
 
 string Inscripcion::toCSV(){
     string ss = to_string(_idActividad) + ";" +
