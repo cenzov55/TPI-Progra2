@@ -1,28 +1,29 @@
 #pragma once
-#include "../Archivos/ArchivoInscripciones.h"
-#include "../Archivos/ArchivoSocios.h"
 #include "../Archivos/ArchivoActividades.h"
+#include "../Entidades/Actividad.h"
+#include <string>
 
-class ManagerInscripciones {
+class ManagerActividades {
 
 public:
-    ManagerInscripciones();
+    ManagerActividades();
     void agregar();
     void borrar();
+    void modificar();
     void listar();
     void exportarCSV();
     void backup();
 
 private:
-    ArchivoInscripciones _archivoInscripciones;
-    ArchivoSocios _archivoSocios;
     ArchivoActividades _archivoActividades;
 
-    void mostrarInscripcion(Inscripcion &inscripcion);
+    void mostrarActividad(Actividad &actividad);
     void mostrarEncabezadoTabla();
     void pedirMes(Fecha &fecha);
     void pedirDia(Fecha &fecha);
     void pedirAnio(Fecha &fecha);
-    int pedirIdSocio();
     int pedirIdActividad();
+    void pedirNombre(Actividad &actividad);
+    void pedirResponsable(Actividad &actividad);
+    void pedirArancel(Actividad &actividad);
 };

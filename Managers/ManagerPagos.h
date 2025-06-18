@@ -13,6 +13,7 @@ public:
     void listar();
     void exportarCSV();
     void listarPagosSocio();
+    void backup();
 
 private:
     ArchivoSocios _archivoSocios;

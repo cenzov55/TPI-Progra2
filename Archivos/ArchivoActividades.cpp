@@ -119,10 +119,15 @@ bool ArchivoActividades::crearBackup(){
     FILE *copia;
     copia = fopen("ActividadesCopia.dat", "wb");
     if (copia == nullptr){
-        return false; 
-    }  
+        return false;
+    }
 
     int cantRegistros = getCantidadRegistros();
+
+    if (cantRegistros <= 0){
+        return false;
+    }
+
     Actividad *actividades = new Actividad[cantRegistros];
     leerTodos(cantRegistros, actividades);
 
@@ -136,27 +141,27 @@ bool ArchivoActividades::crearBackup(){
 
 bool ArchivoActividades::usarBackup(){
     ArchivoActividades copia("ActividadesCopia.dat");
-    
+
     if (copia.getCantidadRegistros() <= 0){
-        return false; 
-        /// por si da error o no hay registros en la copia 
-        /// nos vamos antes de borrar el archivo original 
+        return false;
+        /// por si da error o no hay registros en la copia
+        /// nos vamos antes de borrar el archivo original
     }
 
     _pArchivo = fopen("Actividades.dat", "wb"); ///Borro lo que hay en el archivo original
     if (_pArchivo == nullptr){
         return false;
     }
-    
+
     int cantRegistros = copia.getCantidadRegistros();
     Actividad *actividades = new Actividad[cantRegistros];
     copia.leerTodos(cantRegistros, actividades);
-    
+
 
     bool ok = (fwrite(actividades, sizeof(Actividad), cantRegistros, _pArchivo) == cantRegistros);
-    
 
-    cerrar(); //cierra el puntero del archivo normal 
-    delete[] inscripciones;
+
+    cerrar(); //cierra el puntero del archivo normal
+    delete[] actividades;
     return ok;
 }

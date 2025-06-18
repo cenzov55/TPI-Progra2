@@ -52,6 +52,8 @@
 		<Unit filename="Entidades/Pago.h" />
 		<Unit filename="Entidades/Socio.cpp" />
 		<Unit filename="Entidades/Socio.h" />
+		<Unit filename="Managers/ManagerActividades.cpp" />
+		<Unit filename="Managers/ManagerActividades.h" />
 		<Unit filename="Managers/ManagerInscripciones.cpp" />
 		<Unit filename="Managers/ManagerInscripciones.h" />
 		<Unit filename="Managers/ManagerPagos.cpp" />

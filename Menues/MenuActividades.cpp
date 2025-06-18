@@ -30,20 +30,21 @@ void MenuActividades::aparecer(){
         int opcion = seleccion();
         switch (opcion) {
             case 1:
-
+                _managerActividades.agregar();
                 break;
             case 2:
-
+                _managerActividades.borrar();
                 break;
             case 3:
-
+                _managerActividades.modificar();
                 break;
             case 4:
+                _managerActividades.listar();
                 break;
             case 5:
                 return;
             default:
-                cout << "Opción no válida. Intente nuevamente." << endl;
+                cout << "OpciÃ³n no valida. Intente nuevamente." << endl;
                 system("pause>nul");
         }
     }

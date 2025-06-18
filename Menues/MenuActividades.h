@@ -1,6 +1,6 @@
 #pragma once
-
 #include "Menu.h"
+#include "../Managers/ManagerActividades.h"
 
 class MenuActividades : public Menu
 {
@@ -9,6 +9,5 @@ class MenuActividades : public Menu
         void aparecer();
 
     private:
-        //aca iria el manager y/o archivo
-
+        ManagerActividades _managerActividades;
 };

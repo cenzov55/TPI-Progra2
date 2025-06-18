@@ -97,10 +97,15 @@ bool ArchivoPagos::crearBackup(){
     FILE *copia;
     copia = fopen("PagosCopia.dat", "wb");
     if (copia == nullptr){
-        return false; 
-    }  
+        return false;
+    }
 
     int cantRegistros = getCantidadRegistros();
+
+    if (cantRegistros <= 0){
+        return false;
+    }
+
     Pago *pagos = new Pago[cantRegistros];
     leerTodos(cantRegistros, pagos);
 
@@ -115,27 +120,27 @@ bool ArchivoPagos::crearBackup(){
 
 bool ArchivoPagos::usarBackup(){
     ArchivoPagos copia("PagosCopia.dat");
-    
+
     if (copia.getCantidadRegistros() <= 0){
-        return false; 
-        /// por si da error o no hay registros en la copia 
-        /// nos vamos antes de borrar el archivo original 
+        return false;
+        /// por si da error o no hay registros en la copia
+        /// nos vamos antes de borrar el archivo original
     }
 
     _pArchivo = fopen("Pagos.dat", "wb"); ///Borro lo que hay en el archivo original
     if (_pArchivo == nullptr){
         return false;
     }
-    
-    int cantRegistros = copia.getCantidadRegistros();
-    Socio *socios = new Socio[cantRegistros];
-    copia.leerTodos(cantRegistros, socios);
-    
 
-    bool ok = (fwrite(socios, sizeof(Socio), cantRegistros, _pArchivo) == cantRegistros);
-    
-    cerrar(); //cierra el puntero del archivo normal 
-    delete[] socios;
+    int cantRegistros = copia.getCantidadRegistros();
+    Pago *pagos = new Pago[cantRegistros];
+    copia.leerTodos(cantRegistros, pagos);
+
+
+    bool ok = (fwrite(pagos, sizeof(Pago), cantRegistros, _pArchivo) == cantRegistros);
+
+    cerrar(); //cierra el puntero del archivo normal
+    delete[] pagos;
     return ok;
 
 }

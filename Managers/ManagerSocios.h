@@ -9,6 +9,7 @@ public:
     void borrar();
     void modificar();
     void listar();
+    void backup();
     void pedirDni(Socio &socio);
     void pedirNombre(Socio &socio);
     void pedirApellido(Socio &socio);

@@ -28,17 +28,21 @@ void MenuConfiguraciones::aparecer() {
         int opcion = seleccion();
         switch (opcion) {
             case 1:
+                _managerSocios.backup();
                 break;
             case 2:
+                //_managerActividades.backup();
                 break;
             case 3:
+                _managerInscripciones.backup();
                 break;
             case 4:
+                _managerPagos.backup();
                 break;
             case 5:
                 return;
             default:
-                cout << "Opción no válida. Intente nuevamente." << endl;
+                cout << "Opcion no valida. Intente nuevamente." << endl;
                 system("pause>nul");
         }
     }

@@ -392,6 +392,53 @@ void ManagerSocios::exportarCSV(){
     system("pause>nul");
 }
 
+void ManagerSocios::backup() {
+    system("cls");
+    imprimirFormulario("Copia de seguridad de Socios");
+
+    string respuesta;
+    bool crearBackup;
+    bool resultado;
+
+    while (true) {
+        limpiarError();
+        limpiarLinea(7);
+
+        mensajeFormulario(3, "Deseas crear (c) o aplicar (a) una copia de seguridad? (c/a): ");
+        getline(cin, respuesta);
+
+        if (respuesta == "c" || respuesta == "C") {
+            crearBackup = true;
+            break;
+        }
+        else if (respuesta == "a" || respuesta == "A") {
+            crearBackup = false;
+            break;
+        }
+        else {
+            mensajeError("Respuesta invalida. Ingresa 'c' para crear o 'a' para aplicar una copia de seguridad.");
+        }
+    }
+
+    if (crearBackup) {
+        resultado = _archivoSocios.crearBackup();
+        if (resultado) {
+            mensajeExito("Copia creada correctamente.");
+        } else {
+            mensajeError("Error al crear la copia.");
+        }
+    }
+    else {
+        resultado = _archivoSocios.usarBackup();
+        if (resultado) {
+            mensajeExito("Copia aplicada correctamente.");
+        } else {
+            mensajeError("Error al aplicar la copia.");
+        }
+    }
+    system("pause>nul");
+}
+
 ///Esto es similar al encabezado pero con todos los datos del socio.
 ///ademas se le agrega un metodo truncar(string texto), este lo que hace
 ///es limitar el texto a la cantidad de caracteres establecidos en el setw(),

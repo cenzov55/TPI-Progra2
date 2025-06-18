@@ -180,6 +180,53 @@ void ManagerInscripciones::listar()
     system("pause>nul");
 }
 
+void ManagerInscripciones::backup() {
+    system("cls");
+    imprimirFormulario("Copia de seguridad de Inscripciones");
+
+    string respuesta;
+    bool crearBackup;
+    bool resultado;
+
+    while (true) {
+        limpiarError();
+        limpiarLinea(7);
+
+        mensajeFormulario(3, "Deseas crear (c) o aplicar (a) una copia de seguridad? (c/a): ");
+        getline(cin, respuesta);
+
+        if (respuesta == "c" || respuesta == "C") {
+            crearBackup = true;
+            break;
+        }
+        else if (respuesta == "a" || respuesta == "A") {
+            crearBackup = false;
+            break;
+        }
+        else {
+            mensajeError("Respuesta invalida. Ingresa 'c' para crear o 'a' para aplicar una copia de seguridad.");
+        }
+    }
+
+    if (crearBackup) {
+        resultado = _archivoInscripciones.crearBackup();
+        if (resultado) {
+            mensajeExito("Copia creada correctamente.");
+        } else {
+            mensajeError("Error al crear la copia.");
+        }
+    }
+    else {
+        resultado = _archivoInscripciones.usarBackup();
+        if (resultado) {
+            mensajeExito("Copia aplicada correctamente.");
+        } else {
+            mensajeError("Error al aplicar la copia.");
+        }
+    }
+    system("pause>nul");
+}
+
 void ManagerInscripciones::mostrarInscripcion(Inscripcion &inscripcion)
 {
     cout << (char)179 << left << setw(12) << inscripcion.getIdSocio() << (char)179;
