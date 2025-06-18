@@ -15,4 +15,6 @@ public:
     void leerTodos(int cantidadRegistros, Socio *vec);
     int getNuevoId();
     int exportarCSV();
+    bool crearBackup();
+    bool usarBackup();
 };

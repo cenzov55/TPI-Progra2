@@ -5,14 +5,14 @@
 #include "ManagerPagos.h"
 #include "../funcionesConsola.h"
 #include "../rlutil.h"
+
 using namespace std;
 
 ManagerPagos::ManagerPagos()
     : _archivoSocios("Socios.dat"),
       _archivoPagos("Pagos.dat"),
       _archivoActividades("Actividades.dat")
-{
-}
+{}
 
 void ManagerPagos::agregar()
 {
@@ -144,11 +144,13 @@ void ManagerPagos::listarPagosSocio()
     cout << "----------------------------------------" << endl;
     mostrarEncabezadoTabla();
 
+    int contador = 0;
+
     for (int i = 0; i < cantidadRegistros; i++)
     {
         // Si el pago no es del socio, lo salteamos
         if( pagos[i].getIdSocio() != socio.getIdSocio()) continue;
-
+        contador++;
         /// Intercalar colores, solo estetico.
         if (i % 2 == 0)
         {
@@ -161,37 +163,11 @@ void ManagerPagos::listarPagosSocio()
         mostrarPago(pagos[i]);
         cout << endl;
     }
+    if(contador == 0) mensajeError("No se encontraron pagos para el socio ingresado.");
 
     system("pause>nul");
     delete[] pagos;
 
-}
-
-void ManagerPagos::exportarCSV(){
-
-    system("cls");
-    imprimirFormulario("Pagos CSV");
-    mensajeFormulario(3, "Se exportaran los datos de los pagos en un archivo .csv");
-    mensajeFormulario(4, "en la carpeta donde se encuentra el programa");
-
-    int codigo = _archivoPagos.exportarCSV();
-
-    if (codigo == -1)
-    {
-        mensajeError("Error al exportar en csv.");
-        system("pause>nul");
-        return;
-    }
-
-    if (codigo == -2)
-    {
-        mensajeError("No hay registros para poder exportar en csv");
-        system("pause>nul");
-        return;
-    }
-
-    mensajeExito("Pagos exportados correctamente");
-    system("pause>nul");
 }
 
 
@@ -289,8 +265,10 @@ int ManagerPagos::pedirIdSocio()
         mensajeFormulario(1, "Ingrese ID del Socio:");
         cin >> idSocio;
         posicion = _archivoSocios.buscar(idSocio);
-        if (posicion == -1)
+        if (posicion == -1){
             mensajeError("Socio no encontrado");
+            system("pause>nul");
+            }
     } while (posicion == -1);
 
     return idSocio;
@@ -309,6 +287,7 @@ int ManagerPagos::pedirIdActividad()
         posicion = _archivoActividades.buscar(idActividad);
         if (posicion == -1)
             mensajeError("Actividad no encontrada");
+            system("pause>nul");
     } while (posicion == -1);
     return posicion;
 }
@@ -346,4 +325,31 @@ void ManagerPagos::pedirMetodoDePago(Pago &pago)
         }
 
     } while (!metodoValido);
+}
+
+void ManagerPagos::exportarCSV(){
+
+    system("cls");
+    imprimirFormulario("Pagos CSV");
+    mensajeFormulario(3, "Se exportaran los datos de los pagos en un archivo .csv");
+    mensajeFormulario(4, "en la carpeta donde se encuentra el programa");
+
+    int codigo = _archivoPagos.exportarCSV();
+
+    if (codigo == -1)
+    {
+        mensajeError("Error al exportar en csv.");
+        system("pause>nul");
+        return;
+    }
+
+    if (codigo == -2)
+    {
+        mensajeError("No hay registros para poder exportar en csv");
+        system("pause>nul");
+        return;
+    }
+
+    mensajeExito("Pagos exportados correctamente");
+    system("pause>nul");
 }

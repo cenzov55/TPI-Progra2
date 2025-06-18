@@ -14,4 +14,6 @@ public:
     Pago leer(int posicion);
     void leerTodos(int cantidadRegistros, Pago *vec);
     int exportarCSV();
+    bool crearBackup();
+    bool usarBackup();
 };

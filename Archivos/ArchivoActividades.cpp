@@ -37,8 +37,7 @@ bool ArchivoActividades::guardar(Actividad actividad)
 
 int ArchivoActividades::buscar(int idActividad)
 {
-
-    if(!abrirLectura()) return false;
+    if(!abrirLectura()) return -1;
     int posicion = 0;
     Actividad actividad;
     while(fread(&actividad,sizeof(Actividad),1,_pArchivo)){
@@ -113,4 +112,51 @@ int ArchivoActividades::exportarCSV(){
 
     delete[] actividades;
     return 0; ///codigo exitoso
+}
+
+bool ArchivoActividades::crearBackup(){
+
+    FILE *copia;
+    copia = fopen("ActividadesCopia.dat", "wb");
+    if (copia == nullptr){
+        return false; 
+    }  
+
+    int cantRegistros = getCantidadRegistros();
+    Actividad *actividades = new Actividad[cantRegistros];
+    leerTodos(cantRegistros, actividades);
+
+    ///Escribo todos los registros del vector de una sola vez en la copia
+    ///y comparo con la cantidad de registros para saber si se escribieron todos bien
+    bool ok = (fwrite(actividades, sizeof(Actividad), cantRegistros, copia) == cantRegistros);
+    fclose(copia);
+    delete[] actividades;
+    return ok;
+}
+
+bool ArchivoActividades::usarBackup(){
+    ArchivoActividades copia("ActividadesCopia.dat");
+    
+    if (copia.getCantidadRegistros() <= 0){
+        return false; 
+        /// por si da error o no hay registros en la copia 
+        /// nos vamos antes de borrar el archivo original 
+    }
+
+    _pArchivo = fopen("Actividades.dat", "wb"); ///Borro lo que hay en el archivo original
+    if (_pArchivo == nullptr){
+        return false;
+    }
+    
+    int cantRegistros = copia.getCantidadRegistros();
+    Actividad *actividades = new Actividad[cantRegistros];
+    copia.leerTodos(cantRegistros, actividades);
+    
+
+    bool ok = (fwrite(actividades, sizeof(Actividad), cantRegistros, _pArchivo) == cantRegistros);
+    
+
+    cerrar(); //cierra el puntero del archivo normal 
+    delete[] inscripciones;
+    return ok;
 }
