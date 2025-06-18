@@ -4,10 +4,10 @@
 
 class Inscripcion {
 private:
-    int idActividad;
-    int idSocio;
-    Fecha fechaInscripcion;
-    bool eliminado;
+    int _idActividad;
+    int _idSocio;
+    Fecha _fechaInscripcion;
+    bool _eliminado;
 
 public:
     Inscripcion();

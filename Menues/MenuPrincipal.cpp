@@ -8,7 +8,7 @@ using namespace std;
 
 MenuPrincipal::MenuPrincipal()
 {
-    const int CANT_OPCIONES = 8;
+    const int CANT_OPCIONES = 7;
     setCantidadOpciones(CANT_OPCIONES);
 
     const string opciones[CANT_OPCIONES] = {
@@ -16,7 +16,6 @@ MenuPrincipal::MenuPrincipal()
         "Actividades ABML",
         "Inscripciones ABML",
         "Registro de Pagos",
-        "Informes",
         "Exportar datos",
         "Configuracion",
         "Salir"
@@ -48,14 +47,12 @@ void MenuPrincipal::aparecer()
             _menuPagos.aparecer();
             break;
         case 5:
+        _menuExportar.aparecer();
             break;
         case 6:
-            _menuExportar.aparecer();
+        _menuConfiguraciones.aparecer();
             break;
         case 7:
-            _menuConfiguraciones.aparecer();
-            break;
-        case 8:
             system("cls");
             if (salir())
             {

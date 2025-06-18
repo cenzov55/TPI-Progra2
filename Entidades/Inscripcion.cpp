@@ -8,49 +8,48 @@ Inscripcion::Inscripcion(int idSocio, int idActividad, Fecha fechaInscripcion){
     setIdSocio(idSocio);
     setIdActividad(idActividad);
     setFechaInscripcion(fechaInscripcion);
-    eliminado = false;
+    _eliminado = false;
 }
 
 int Inscripcion::getIdActividad() {
-    return idActividad;
+    return _idActividad;
 }
 
 void Inscripcion::setIdActividad(int nuevoIdActividad) {
     if (nuevoIdActividad >= 0)
-        idActividad = nuevoIdActividad;
+        _idActividad = nuevoIdActividad;
 }
 
 int Inscripcion::getIdSocio() {
-    return idSocio;
+    return _idSocio;
 }
 
 
 void Inscripcion::setIdSocio(int nuevoIdSocio) {
-    if (nuevoIdSocio >= 0)
-        idSocio = nuevoIdSocio;
+    if (nuevoIdSocio >= 0) _idSocio = nuevoIdSocio;
 }
 
 Fecha Inscripcion::getFechaInscripcion() {
-    return fechaInscripcion;
+    return _fechaInscripcion;
 }
 
 void Inscripcion::setFechaInscripcion(Fecha nuevaFechaInscripcion) {
-    fechaInscripcion = nuevaFechaInscripcion;
+    _fechaInscripcion = nuevaFechaInscripcion;
 }
 
 bool Inscripcion::getEliminado() {
-    return eliminado;
+    return _eliminado;
 }
 
 void Inscripcion::setEliminado(bool estadoEliminado) {
-    eliminado = estadoEliminado;
+    _eliminado = estadoEliminado;
 }
 
 /// CSV acá
 
 string Inscripcion::toCSV(){
-    string ss = to_string(idActividad) + ";" +
-                to_string(idSocio) + ";" +
-                fechaInscripcion.toString(); + ";";
+    string ss = to_string(_idActividad) + ";" +
+                to_string(_idSocio) + ";" +
+                _fechaInscripcion.toString(); + ";";
     return ss;
 }

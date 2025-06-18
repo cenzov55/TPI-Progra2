@@ -38,15 +38,14 @@ void ManagerPagos::agregar()
         return;
     }
     int posicionActividad = pedirIdActividad();
+
     Actividad actividad = _archivoActividades.leer(posicionActividad);
-    /*descomentar al implementar el ABM de actividades
         if (actividad.getEliminado())
     {
         mensajeError("La actividad ingresada se encuentra eliminada.");
         system("pause>nul");
         return;
     }
-*/
     int importe = pedirImporte();
 
     pago.setFechaDePago(fecha);
@@ -318,7 +317,7 @@ int ManagerPagos::pedirIdSocio()
             }
     } while (posicion == -1);
 
-    return idSocio;
+    return posicion;
 }
 
 int ManagerPagos::pedirIdActividad()
