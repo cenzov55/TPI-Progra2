@@ -6,7 +6,7 @@
 using namespace std;
 
 MenuActividades::MenuActividades(){
-    const int CANT_OPCIONES = 5;
+    const int CANT_OPCIONES = 6;
     setCantidadOpciones(CANT_OPCIONES);
 
     const string opciones[CANT_OPCIONES] = {
@@ -14,6 +14,7 @@ MenuActividades::MenuActividades(){
         "Borrar",
         "Modificar",
         "Listar",
+        "Dar de alta",
         "Volver"
     };
 
@@ -42,6 +43,9 @@ void MenuActividades::aparecer(){
                 _managerActividades.listar();
                 break;
             case 5:
+                _managerActividades.darDeAlta();
+                break;
+            case 6:
                 return;
             default:
                 cout << "Opción no valida. Intente nuevamente." << endl;

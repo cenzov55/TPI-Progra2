@@ -10,13 +10,8 @@ public:
     void modificar();
     void listar();
     void backup();
-    void pedirDni(Socio &socio);
-    void pedirNombre(Socio &socio);
-    void pedirApellido(Socio &socio);
-    void pedirEmail(Socio &socio);
-    void pedirMes(Fecha &fecha);
-    void pedirDia(Fecha &fecha);
-    void pedirAnio(Fecha &fecha);
+    void darDeAlta();
+
 
     void listarPorApellido();
     void buscarPorId();
@@ -24,6 +19,14 @@ public:
 
 
 private:
+
+    void pedirDni(Socio &socio);
+    void pedirNombre(Socio &socio);
+    void pedirApellido(Socio &socio);
+    void pedirEmail(Socio &socio);
+    void pedirMes(Fecha &fecha);
+    void pedirDia(Fecha &fecha);
+    void pedirAnio(Fecha &fecha);
     void mostrarSocio(Socio &socio);
     void mostrarEncabezadoTabla();
 

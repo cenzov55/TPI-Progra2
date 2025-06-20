@@ -208,8 +208,7 @@ void ManagerSocios::modificar()
     imprimirFormulario("Modificar Socio");
     int id = socio.getIdSocio();
     mensajeFormulario(1, "ID: " + to_string(id));
-
-    pedirDni(socio);
+    mensajeFormulario(2, "DNI: " + socio.getDni());
 
     pedirNombre(socio);
     pedirApellido(socio);
@@ -222,6 +221,7 @@ void ManagerSocios::modificar()
     pedirMes(nuevaFecha);
     pedirDia(nuevaFecha);
 
+    socio.setFechaNacimiento(nuevaFecha);
     bool ok = _archivoSocios.modificar(socio, posicion);
     if (!ok)
     {
@@ -324,6 +324,95 @@ void ManagerSocios::listarPorApellido(){
     system("pause>nul");
     delete[] socios;
 
+}
+
+void ManagerSocios::darDeAlta()
+{
+    system("cls");
+    imprimirFormulario("Dar de alta al socio");
+
+    int idSocio;
+    mensajeFormulario(1, "Ingresa el numero de socio a dar de alta: ");
+    cin >> idSocio;
+    cin.ignore(); /// Para limpiar el salto de linea pendiente
+
+    int posicion = _archivoSocios.buscar(idSocio);
+    if (posicion == -1)
+    {
+        mensajeError("El socio ingresado no existe");
+        system("pause>nul");
+        return;
+    }
+
+    Socio socio = _archivoSocios.leer(posicion);
+    if (!socio.getEliminado())
+    {
+        mensajeFormulario(3, "El socio ingresado no se encuentra eliminado.");
+        system("pause>nul");
+        return;
+    }
+
+    mensajeFormulario(3, "Datos del socio seleccionado: ");
+    cout << endl;
+
+    mostrarEncabezadoTabla();
+    mostrarSocio(socio);
+
+    string respuesta;
+    bool darAlta = false;
+
+    do
+    {
+
+        limpiarError();
+        limpiarLinea(7);
+        mensajeFormulario(7, "Quieres dar de alta a el socio? (s/n): ");
+        getline(cin, respuesta);
+
+        if (respuesta == "s" || respuesta == "S")
+        {
+            darAlta = true;
+            break;
+        }
+
+        else if (respuesta == "n" || respuesta == "N")
+        {
+            darAlta = false;
+            break;
+        }
+
+        else
+        {
+            mensajeError("Respuesta invalida. Ingrese 's' o 'n'.");
+        }
+
+    } while (true);
+
+    if (!darAlta)
+    {
+        mensajeFormulario(9, "Operacion cancelada.");
+        system("pause>nul");
+        return;
+    }
+
+    /// Similar a agregar
+
+    imprimirFormulario("Dar de alta a el Socio");
+
+    mostrarSocio(socio);
+    socio.setEliminado(false);
+
+
+    bool ok = _archivoSocios.modificar(socio, posicion);
+    if (!ok)
+    {
+        mensajeError("Error al dar de alta a el socio.");
+        system("pause>nul");
+        return;
+    }
+
+    mensajeExito("Socio dado de alta correctamente");
+    system("pause>nul");
 }
 
 void ManagerSocios::buscarPorId(){

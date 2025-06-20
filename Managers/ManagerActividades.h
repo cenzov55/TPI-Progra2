@@ -13,6 +13,7 @@ public:
     void listar();
     void exportarCSV();
     void backup();
+    void darDeAlta();
 
     void buscarPorId();
 private:

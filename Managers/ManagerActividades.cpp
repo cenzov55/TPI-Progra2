@@ -134,6 +134,7 @@ void ManagerActividades::modificar()
     pedirAnio(nuevaFecha);
     pedirMes(nuevaFecha);
     pedirDia(nuevaFecha);
+    actividad.setFechaInicio(nuevaFecha);
 
     bool ok = _archivoActividades.modificar(actividad, posicion);
     if (!ok)
@@ -383,6 +384,98 @@ void ManagerActividades::backup()
         }
     }
 
+    system("pause>nul");
+}
+
+void ManagerActividades::darDeAlta()
+{
+    system("cls");
+    limpiarError();
+
+    imprimirFormulario("Dar de alta a la actividad");
+
+    int idActividad;
+    mensajeFormulario(1, "Ingresa el numero de actividad a dar de alta: ");
+    cin >> idActividad;
+    cin.ignore(); /// Para limpiar el salto de linea pendiente
+
+    int posicion = _archivoActividades.buscar(idActividad);
+    if (posicion == -1)
+    {
+        mensajeError("La actividad ingresada no existe");
+        system("pause>nul");
+        return;
+    }
+
+    Actividad actividad = _archivoActividades.leer(posicion);
+    if (!actividad.getEliminado())
+    {
+        mensajeFormulario(3, "La actividad ingresada no se encuentra eliminada.");
+        system("pause>nul");
+        return;
+    }
+
+    mensajeFormulario(3, "Datos de la actividad seleccionada: ");
+    cout << endl;
+
+    mostrarEncabezadoTabla();
+    mostrarActividad(actividad);
+
+    string respuesta;
+    bool darAlta = false;
+
+    do
+    {
+
+        limpiarError();
+        limpiarLinea(7);
+        mensajeFormulario(7, "Quieres dar de alta a la actividad? (s/n): ");
+        getline(cin, respuesta);
+
+        if (respuesta == "s" || respuesta == "S")
+        {
+            darAlta = true;
+            break;
+        }
+
+        else if (respuesta == "n" || respuesta == "N")
+        {
+            darAlta = false;
+            break;
+        }
+
+        else
+        {
+            mensajeError("Respuesta invalida. Ingrese 's' o 'n'.");
+        }
+
+    } while (true);
+
+    if (!darAlta)
+    {
+        mensajeFormulario(9, "Operacion cancelada.");
+        system("pause>nul");
+        return;
+    }
+
+    /// Similar a agregar
+
+    imprimirFormulario("Dar de alta a la actividad");
+    int id = actividad.getIdActividad();
+
+    mostrarActividad(actividad  );
+    actividad.setEliminado(false);
+
+
+    bool ok = _archivoActividades.modificar(actividad, posicion);
+    if (!ok)
+    {
+        mensajeError("Error al dar de alta a la actividad.");
+        system("pause>nul");
+        return;
+    }
+
+    mensajeExito("Actividad dada de alta correctamente");
     system("pause>nul");
 }
 

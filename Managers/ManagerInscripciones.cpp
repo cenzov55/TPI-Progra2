@@ -20,7 +20,6 @@ void ManagerInscripciones::agregar()
     rlutil::setColor(rlutil::BLACK);
     rlutil::setBackgroundColor(rlutil::WHITE);
     ///---------
-    Fecha fechaInscripcion;
 
     int cantidadActividades = _archivoActividades.getCantidadRegistros();
     if (cantidadActividades <= 0)
@@ -73,19 +72,14 @@ void ManagerInscripciones::agregar()
     }
 
     mensajeFormulario(3, "Fecha Inscripcion:");
+    Fecha fechaInscripcion;
     pedirAnio(fechaInscripcion);
     pedirMes(fechaInscripcion);
     pedirDia(fechaInscripcion);
 
-    /// Validar que la fecha de inscripcion no sea posterior a la fecha de inicio de la actividad
-    if (fechaInscripcion > actividad.getFechaInicio())
-    {
-        mensajeError("La fecha de inscripcion no puede ser posterior a la fecha de inicio de la actividad.");
-        system("pause>nul");
-        return;
-    }
+    Inscripcion inscripcion(socio.getIdSocio(), actividad.getIdActividad(), fechaInscripcion);
 
-    bool ok = _archivoInscripciones.guardar(Inscripcion(socio.getIdSocio(), actividad.getIdActividad(), fechaInscripcion));
+    bool ok = _archivoInscripciones.guardar(inscripcion);
     if (!ok)
     {
         mensajeError("Error al inscribir socio.");
@@ -122,7 +116,7 @@ void ManagerInscripciones::borrar()
 
     if (socio.getEliminado())
     {
-        mensajeError("El socio ingresado se encuentra eliminado.");
+        mensajeError("El socio ingresado ya se encuentra eliminado.");
         system("pause>nul");
         return;
     }
@@ -142,6 +136,7 @@ void ManagerInscripciones::borrar()
         system("pause>nul");
         return;
     }
+
     int posicionInscripcion = _archivoInscripciones.buscar(actividad.getIdActividad(), socio.getIdSocio());
     if (posicionInscripcion == -1)
     {
@@ -313,7 +308,7 @@ void ManagerInscripciones::pedirMes(Fecha &fecha)
         limpiarLinea(5);
         mensajeFormulario(5, "Mes: ");
         cin >> mes;
-
+        cin.ignore();
         mesValido = fecha.setMes(mes);
         if (!mesValido)
         {
@@ -334,7 +329,7 @@ void ManagerInscripciones::pedirDia(Fecha &fecha)
         limpiarLinea(6);
         mensajeFormulario(6, "Dia: ");
         cin >> dia;
-
+        cin.ignore();
         diaValido = fecha.setDia(dia);
         if (!diaValido)
         {
@@ -354,6 +349,7 @@ void ManagerInscripciones::pedirAnio(Fecha &fecha)
         limpiarLinea(4);
         mensajeFormulario(4, "Anio: ");
         cin >> anio;
+        cin.ignore();
 
         anioValido = fecha.setAnio(anio);
         if (!anioValido)
@@ -374,6 +370,7 @@ int ManagerInscripciones::pedirIdSocio()
         limpiarLinea(1);
         mensajeFormulario(1, "Ingrese ID del Socio:");
         cin >> idSocio;
+        cin.ignore();
         posicion = _archivoSocios.buscar(idSocio);
         if (posicion == -1)
         {
@@ -395,6 +392,7 @@ int ManagerInscripciones::pedirIdActividad()
         limpiarLinea(2);
         mensajeFormulario(2, "Ingrese ID de Actividad:");
         cin >> idActividad;
+        cin.ignore();
         posicion = _archivoActividades.buscar(idActividad);
         if (posicion == -1)
         {

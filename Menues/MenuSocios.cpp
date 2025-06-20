@@ -7,7 +7,7 @@
 using namespace std;
 
 MenuSocios::MenuSocios() {
-    const int CANT_OPCIONES = 7;
+    const int CANT_OPCIONES = 8;
     setCantidadOpciones(CANT_OPCIONES);
 
     const string opciones[CANT_OPCIONES] = {
@@ -17,6 +17,7 @@ MenuSocios::MenuSocios() {
         "Listar",
         "Listar por apellido",
         "Buscar por id",
+        "Dar de alta",
         "Volver"
     };
 
@@ -51,6 +52,9 @@ void MenuSocios::aparecer(){
                 _managerSocios.buscarPorId();
                 break;
             case 7:
+                _managerSocios.darDeAlta();
+                break;
+            case 8:
                 return;
             default:
                 cout << "Opcion no valida. Intente nuevamente." << endl;
