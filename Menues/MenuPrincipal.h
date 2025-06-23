@@ -6,6 +6,7 @@
 #include "MenuPagos.h"
 #include "MenuExportar.h"
 #include "MenuConfiguraciones.h"
+#include "MenuReportes.h"
 
 class MenuPrincipal : public Menu
 {
@@ -21,6 +22,6 @@ class MenuPrincipal : public Menu
         MenuExportar _menuExportar;
         MenuConfiguraciones _menuConfiguraciones;
         MenuPagos _menuPagos;
-
+        MenuReportes _menuReportes;
         bool salir();
 };

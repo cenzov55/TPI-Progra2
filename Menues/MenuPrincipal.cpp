@@ -8,7 +8,7 @@ using namespace std;
 
 MenuPrincipal::MenuPrincipal()
 {
-    const int CANT_OPCIONES = 7;
+    const int CANT_OPCIONES = 8;
     setCantidadOpciones(CANT_OPCIONES);
 
     const string opciones[CANT_OPCIONES] = {
@@ -18,8 +18,8 @@ MenuPrincipal::MenuPrincipal()
         "Registro de Pagos",
         "Exportar datos",
         "Configuracion",
-        "Salir"
-    };
+        "Reportes",
+        "Salir"};
 
     setOpciones(opciones);
     setAncho();
@@ -33,7 +33,8 @@ void MenuPrincipal::aparecer()
     while (true)
     {
         int opcion = seleccion();
-        switch (opcion) {
+        switch (opcion)
+        {
         case 1:
             _menuSocios.aparecer();
             break;
@@ -47,12 +48,15 @@ void MenuPrincipal::aparecer()
             _menuPagos.aparecer();
             break;
         case 5:
-        _menuExportar.aparecer();
+            _menuExportar.aparecer();
             break;
         case 6:
-        _menuConfiguraciones.aparecer();
+            _menuConfiguraciones.aparecer();
             break;
         case 7:
+            _menuReportes.aparecer();
+            break;
+        case 8:
             system("cls");
             if (salir())
             {
@@ -67,19 +71,23 @@ void MenuPrincipal::aparecer()
     }
 }
 
-
-bool MenuPrincipal::salir(){
-string respuesta;
-    do {
+bool MenuPrincipal::salir()
+{
+    string respuesta;
+    do
+    {
         limpiarError();
         imprimirFormulario("Salir");
         mensajeFormulario(3, "Seguro que desea salir? (s/n): ");
         getline(cin, respuesta);
 
-        if (respuesta == "s" || respuesta == "S") return true;
+        if (respuesta == "s" || respuesta == "S")
+            return true;
 
-        else if (respuesta == "n" || respuesta == "N") return false;
-        else  mensajeError("Respuesta invalida. Ingrese 's' o 'n'.");
+        else if (respuesta == "n" || respuesta == "N")
+            return false;
+        else
+            mensajeError("Respuesta invalida. Ingrese 's' o 'n'.");
 
     } while (true);
 }
