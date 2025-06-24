@@ -7,12 +7,14 @@ using namespace std;
 
 MenuReportes::MenuReportes()
 {
-    const int CANT_OPCIONES = 2;
+    const int CANT_OPCIONES = 3;
     setCantidadOpciones(CANT_OPCIONES);
 
     const string opciones[CANT_OPCIONES] = {
         "Actividad con mas socios",
-        "Actividad con mayor recaudacion"};
+        "Actividad con mayor recaudacion",
+        "Volver"
+    };
 
     setOpciones(opciones);
     setAncho();

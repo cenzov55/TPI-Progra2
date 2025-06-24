@@ -40,10 +40,9 @@ int ArchivoInscripciones::buscar(int idActividad, int idSocio)
     if(!abrirLectura()) return -1;
     int posicion = 0;
     Inscripcion inscripcion;
-    int cantRegistros = getCantidadRegistros();
 
     while(fread(&inscripcion,sizeof(Inscripcion),1,_pArchivo)){
-        if(inscripcion.getIdActividad() == idActividad && inscripcion.getIdSocio() == idSocio && !inscripcion.getEliminado()){
+        if(inscripcion.getIdActividad() == idActividad && inscripcion.getIdSocio() == idSocio){
             cerrar();
             return posicion;
         }

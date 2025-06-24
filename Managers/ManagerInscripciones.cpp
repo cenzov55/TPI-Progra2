@@ -39,7 +39,8 @@ void ManagerInscripciones::agregar()
 
     int idSocio = pedirIdSocio();
     int posicionSocio = _archivoSocios.buscar(idSocio);
-    if (posicionSocio == -1) {
+    if (posicionSocio == -1)
+    {
         mensajeError("El socio ingresado no existe.");
         system("pause>nul");
         return;
@@ -62,14 +63,6 @@ void ManagerInscripciones::agregar()
         system("pause>nul");
         return;
     }
-    //PARA QUE NO SE INSCRIBA DOS VECES AL MISMO SOCIO EN LA MISMA ACTIVIDAD
-    bool inscripcionExistente = _archivoInscripciones.buscar(actividad.getIdActividad(), socio.getIdSocio()) != -1;
-    if (inscripcionExistente)
-    {
-        mensajeError("El socio ya se encuentra inscripto en la actividad.");
-        system("pause>nul");
-        return;
-    }
 
     mensajeFormulario(3, "Fecha Inscripcion:");
     Fecha fechaInscripcion;
@@ -77,15 +70,48 @@ void ManagerInscripciones::agregar()
     pedirMes(fechaInscripcion);
     pedirDia(fechaInscripcion);
 
-    Inscripcion inscripcion(socio.getIdSocio(), actividad.getIdActividad(), fechaInscripcion);
+    // PARA QUE NO SE INSCRIBA DOS VECES AL MISMO SOCIO EN LA MISMA ACTIVIDAD
+    int posicionInscripcion = _archivoInscripciones.buscar(actividad.getIdActividad(), socio.getIdSocio());
 
-    bool ok = _archivoInscripciones.guardar(inscripcion);
-    if (!ok)
+    if (posicionInscripcion != -1) /// SI YA EXISTE LA INSCRIPCION
     {
-        mensajeError("Error al inscribir socio.");
-        system("pause>nul");
-        return;
+        Inscripcion inscripcion = _archivoInscripciones.leer(posicionInscripcion);
+        // SI YA EXISTE Y ESTABA ELIMINADO LO VUELVO A HABILITAR USANDO MISMA POSICION E ID
+        if (inscripcion.getEliminado())
+        {
+            inscripcion.setEliminado(false);
+            inscripcion.setFechaInscripcion(Fecha()); /// Modifico fecha de inscripción
+            int ok = _archivoInscripciones.modificar(inscripcion, posicionInscripcion);
+            if (!ok)
+            {
+                mensajeError("Error al reactivar la inscripcion.");
+                system("pause>nul");
+                return;
+            }
+
+            mensajeExito("Inscripcion reactivada correctamente.");
+            system("pause>nul");
+            return;
+        }else
+        {
+            mensajeError("El socio ya se encuentra inscripto en la actividad.");
+            system("pause>nul");
+            return;
+        }
     }
+    // SI ES INSCRIPCION NUEVA LA CREO
+    else
+    {
+        Inscripcion inscripcion(socio.getIdSocio(), actividad.getIdActividad(), fechaInscripcion);
+        bool ok = _archivoInscripciones.guardar(inscripcion);
+        if (!ok)
+        {
+            mensajeError("Error al inscribir socio.");
+            system("pause>nul");
+            return;
+        }
+    }
+
     mensajeExito("Socio inscripto correctamente.");
     system("pause>nul");
 }
@@ -123,7 +149,8 @@ void ManagerInscripciones::borrar()
 
     int idActividad = pedirIdActividad();
     int posicionActividad = _archivoActividades.buscar(idActividad);
-    if (posicionActividad == -1) {
+    if (posicionActividad == -1)
+    {
         mensajeError("La actividad ingresada no existe.");
         system("pause>nul");
         return;
@@ -233,7 +260,8 @@ void ManagerInscripciones::listar()
     system("pause>nul");
 }
 
-void ManagerInscripciones::backup() {
+void ManagerInscripciones::backup()
+{
     system("cls");
     imprimirFormulario("Copia de seguridad de Inscripciones");
 
@@ -241,39 +269,51 @@ void ManagerInscripciones::backup() {
     bool crearBackup;
     bool resultado;
 
-    while (true) {
+    while (true)
+    {
         limpiarError();
         limpiarLinea(7);
 
         mensajeFormulario(3, "Deseas crear (c) o aplicar (a) una copia de seguridad? (c/a): ");
         getline(cin, respuesta);
 
-        if (respuesta == "c" || respuesta == "C") {
+        if (respuesta == "c" || respuesta == "C")
+        {
             crearBackup = true;
             break;
         }
-        else if (respuesta == "a" || respuesta == "A") {
+        else if (respuesta == "a" || respuesta == "A")
+        {
             crearBackup = false;
             break;
         }
-        else {
+        else
+        {
             mensajeError("Respuesta invalida. Ingresa 'c' para crear o 'a' para aplicar una copia de seguridad.");
         }
     }
 
-    if (crearBackup) {
+    if (crearBackup)
+    {
         resultado = _archivoInscripciones.crearBackup();
-        if (resultado) {
+        if (resultado)
+        {
             mensajeExito("Copia creada correctamente.");
-        } else {
+        }
+        else
+        {
             mensajeError("Error al crear la copia.");
         }
     }
-    else {
+    else
+    {
         resultado = _archivoInscripciones.usarBackup();
-        if (resultado) {
+        if (resultado)
+        {
             mensajeExito("Copia aplicada correctamente.");
-        } else {
+        }
+        else
+        {
             mensajeError("Error al aplicar la copia.");
         }
     }
@@ -430,4 +470,3 @@ void ManagerInscripciones::exportarCSV()
     mensajeExito("Inscripciones exportadas correctamente");
     system("pause>nul");
 }
-
