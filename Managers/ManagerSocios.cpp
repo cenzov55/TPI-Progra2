@@ -26,7 +26,7 @@ void ManagerSocios::agregar()
     ///---------
 
     Socio socio;
-    Fecha fecha;
+    Fecha fechaNac;
 
     int id = _archivoSocios.getNuevoId();
     mensajeFormulario(1, "ID: " + to_string(id));
@@ -38,12 +38,18 @@ void ManagerSocios::agregar()
     pedirEmail(socio);
 
     mensajeFormulario(6, "Fecha Nacimiento:");
-    pedirAnio(fecha);
-    pedirMes(fecha);
-    pedirDia(fecha);
+    pedirAnio(fechaNac);
+    pedirMes(fechaNac);
+    pedirDia(fechaNac);
+    socio.setFechaNacimiento(fechaNac);
 
-    socio.setFechaNacimiento(fecha);
-
+    Fecha fechaActual(true);
+    if (socio.getFechaNacimiento() > fechaActual)
+    {
+        mensajeError("La fecha de nacimiento no puede ser posterior a la fecha actual.");
+        system("pause>nul");
+        return;
+    }
 
     bool ok = _archivoSocios.guardar(socio);
     if (!ok)

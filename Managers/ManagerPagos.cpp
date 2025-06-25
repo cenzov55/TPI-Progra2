@@ -12,7 +12,8 @@ ManagerPagos::ManagerPagos()
     : _archivoSocios("Socios.dat"),
       _archivoPagos("Pagos.dat"),
       _archivoActividades("Actividades.dat")
-{}
+{
+}
 
 void ManagerPagos::agregar()
 {
@@ -22,8 +23,6 @@ void ManagerPagos::agregar()
     rlutil::setBackgroundColor(rlutil::WHITE);
     ///---------
 
-    Pago pago;
-    Fecha fecha;
     /// Validar que existan actividades y socios para poder realizar un pago
     int cantidadActividades = _archivoActividades.getCantidadRegistros();
     if (cantidadActividades <= 0)
@@ -80,31 +79,65 @@ void ManagerPagos::agregar()
         system("pause>nul");
         return;
     }
-    ///---------
+    int posicionPago = _archivoPagos.buscar(socio.getIdSocio(), actividad.getIdActividad());
+    if (posicionPago != -1)
+    {
+        mensajeError("Ya existe un pago registrado para el socio y la actividad ingresados.");
+        system("pause>nul");
+        return;
+    }
 
     /// Pedir importe y validar que sea mayor a 0
-    int importe = pedirImporte();
-
-    pago.setFechaDePago(fecha);
+    // int importe = pedirImporte();
+    float importe = actividad.getArancel();
+    mensajeFormulario(3, "El importe a abonar es: $" + to_string(importe) + ". ¿Deseas continuar? (s/n): ");
+    string respuesta;
+    getline(cin, respuesta);
+    //
+    if (respuesta != "s" && respuesta != "S")
+    {
+        mensajeError("Operación cancelada por el usuario.");
+        system("pause>nul");
+        return;
+    }
+    Pago pago;
     pago.setIdSocio(socio.getIdSocio());
     pago.setIdActividad(actividad.getIdActividad());
     pago.setImporte(importe);
     pedirMetodoDePago(pago);
 
+    // Fecha fecha;
     /// Pedir fecha de pago
-    mensajeFormulario(5, "Fecha del pago:");
-    pedirAnio(fecha);
-    pedirMes(fecha);
-    pedirDia(fecha);
-    pago.setFechaDePago(fecha);
-    ///---------
+    // mensajeFormulario(5, "Fecha del pago:");
+    // pedirAnio(fecha);
+    // pedirMes(fecha);
+    // pedirDia(fecha);
+    // pago.setFechaDePago(fecha);
 
     /// Validar que la fecha de pago no sea posterior a la fecha actual
     Fecha fechaActual(true);
+    pago.setFechaDePago(fechaActual);
     Fecha fechaPago = pago.getFechaDePago();
-    
-    if (fechaPago > fechaActual) {
+
+    /// cout con datos del pago para ver que no guarde basura
+    // cout << "Datos del pago:" << endl;
+    // cout << "ID Socio: " << pago.getIdSocio() << endl;
+    // cout << "ID Actividad: " << pago.getIdActividad() << endl;
+    // cout << "Importe: $" << pago.getImporte() << endl;
+    // cout << "Fecha de Pago: " << pago.getFechaDePago().toString() << endl;
+    // cout << "Metodo de Pago: " << pago.getMetodoDePago() << endl;
+    // cout << "Fecha actual: " << fechaActual.toString() << endl;
+    // system("pause>nul");
+
+    if (fechaPago > fechaActual)
+    {
         mensajeError("No se puede realizar un pago en una fecha posterior a la fecha actual.");
+        system("pause>nul");
+        return;
+    }
+    if (actividad.getFechaInicio() < fechaPago)
+    {
+        mensajeError("No se puede realizar un pago en una fecha posterior a la fecha de inicio de la actividad.");
         system("pause>nul");
         return;
     }
@@ -197,7 +230,8 @@ void ManagerPagos::listarPagosSocio()
     for (int i = 0; i < cantidadRegistros; i++)
     {
         // Si el pago no es del socio, lo salteamos
-        if( pagos[i].getIdSocio() != socio.getIdSocio()) continue;
+        if (pagos[i].getIdSocio() != socio.getIdSocio())
+            continue;
         contador++;
         /// Intercalar colores, solo estetico.
         if (i % 2 == 0)
@@ -211,14 +245,15 @@ void ManagerPagos::listarPagosSocio()
         mostrarPago(pagos[i]);
         cout << endl;
     }
-    if(contador == 0) mensajeError("No se encontraron pagos para el socio ingresado.");
+    if (contador == 0)
+        mensajeError("No se encontraron pagos para el socio ingresado.");
 
     system("pause>nul");
     delete[] pagos;
-
 }
 
-void ManagerPagos::backup() {
+void ManagerPagos::backup()
+{
     system("cls");
     imprimirFormulario("Copia de seguridad de Pagos");
 
@@ -226,50 +261,61 @@ void ManagerPagos::backup() {
     bool crearBackup;
     bool resultado;
 
-    while (true) {
+    while (true)
+    {
         limpiarError();
         limpiarLinea(7);
 
         mensajeFormulario(3, "Deseas crear (c) o aplicar (a) una copia de seguridad? (c/a): ");
         getline(cin, respuesta);
 
-        if (respuesta == "c" || respuesta == "C") {
+        if (respuesta == "c" || respuesta == "C")
+        {
             crearBackup = true;
             break;
         }
-        else if (respuesta == "a" || respuesta == "A") {
+        else if (respuesta == "a" || respuesta == "A")
+        {
             crearBackup = false;
             break;
         }
-        else {
+        else
+        {
             mensajeError("Respuesta invalida. Ingresa 'c' para crear o 'a' para aplicar una copia de seguridad.");
         }
     }
 
-    if (crearBackup) {
+    if (crearBackup)
+    {
         resultado = _archivoPagos.crearBackup();
-        if (resultado) {
+        if (resultado)
+        {
             mensajeExito("Copia creada correctamente.");
-        } else {
+        }
+        else
+        {
             mensajeError("Error al crear la copia.");
         }
     }
-    else {
+    else
+    {
         resultado = _archivoPagos.usarBackup();
-        if (resultado) {
+        if (resultado)
+        {
             mensajeExito("Copia aplicada correctamente.");
-        } else {
+        }
+        else
+        {
             mensajeError("Error al aplicar la copia.");
         }
     }
     system("pause>nul");
 }
 
-
 void ManagerPagos::mostrarPago(Pago &pago)
 {
-    Socio socio = _archivoSocios.leer(pago.getIdSocio());
-    Actividad actividad = _archivoActividades.leer(pago.getIdActividad());
+    Socio socio = _archivoSocios.leer(_archivoSocios.buscar(pago.getIdSocio()));
+    Actividad actividad = _archivoActividades.leer(_archivoActividades.buscar(pago.getIdActividad()));
 
     cout << (char)179 << left << setw(8) << pago.getIdSocio() << (char)179;
     cout << setw(25) << truncar(socio.getNombre() + " " + socio.getApellido(), 25) << (char)179;
@@ -305,6 +351,7 @@ void ManagerPagos::pedirMes(Fecha &fecha)
         limpiarLinea(7);
         mensajeFormulario(7, "Mes: ");
         cin >> mes;
+        cin.ignore();
 
         mesValido = fecha.setMes(mes);
         if (!mesValido)
@@ -326,6 +373,7 @@ void ManagerPagos::pedirDia(Fecha &fecha)
         limpiarLinea(8);
         mensajeFormulario(8, "Dia: ");
         cin >> dia;
+        cin.ignore();
 
         diaValido = fecha.setDia(dia);
         if (!diaValido)
@@ -346,6 +394,7 @@ void ManagerPagos::pedirAnio(Fecha &fecha)
         limpiarLinea(6);
         mensajeFormulario(6, "Anio: ");
         cin >> anio;
+        cin.ignore();
 
         anioValido = fecha.setAnio(anio);
         if (!anioValido)
@@ -366,11 +415,14 @@ int ManagerPagos::pedirIdSocio()
         limpiarLinea(1);
         mensajeFormulario(1, "Ingrese ID del Socio:");
         cin >> idSocio;
+        cin.ignore();
+
         posicion = _archivoSocios.buscar(idSocio);
-        if (posicion == -1){
+        if (posicion == -1)
+        {
             mensajeError("Socio no encontrado");
             system("pause>nul");
-            }
+        }
     } while (posicion == -1);
 
     return idSocio;
@@ -386,14 +438,16 @@ int ManagerPagos::pedirIdActividad()
         limpiarLinea(2);
         mensajeFormulario(2, "Ingrese ID de Actividad:");
         cin >> idActividad;
+        cin.ignore();
+
         posicion = _archivoActividades.buscar(idActividad);
         if (posicion == -1)
             mensajeError("Actividad no encontrada");
-            system("pause>nul");
+        system("pause>nul");
     } while (posicion == -1);
     return idActividad;
 }
-
+// cambiado por confirmar importe BORRAR?
 int ManagerPagos::pedirImporte()
 {
     float importe;
@@ -403,6 +457,8 @@ int ManagerPagos::pedirImporte()
         limpiarLinea(3);
         mensajeFormulario(3, "Ingrese Importe: ");
         cin >> importe;
+        cin.ignore();
+
         if (importe < 0)
             mensajeError("El importe no valido.");
     } while (importe < 0);
@@ -419,6 +475,7 @@ void ManagerPagos::pedirMetodoDePago(Pago &pago)
         limpiarLinea(4);
         mensajeFormulario(4, "Metodo de Pago (1: Efectivo, 2: Tarjeta, 3: Transferencia): ");
         cin >> metodoDePago;
+        cin.ignore();
 
         metodoValido = pago.setMetodoDePago(metodoDePago);
         if (!metodoValido)
@@ -429,7 +486,8 @@ void ManagerPagos::pedirMetodoDePago(Pago &pago)
     } while (!metodoValido);
 }
 
-void ManagerPagos::exportarCSV(){
+void ManagerPagos::exportarCSV()
+{
 
     system("cls");
     imprimirFormulario("Pagos CSV");
@@ -454,56 +512,4 @@ void ManagerPagos::exportarCSV(){
 
     mensajeExito("Pagos exportados correctamente");
     system("pause>nul");
-}
-
-void ManagerPagos::recaudacion(){
-    system("cls");
-    cout << "Recaudacion por mes" << endl;
-    cout << "---------------------" << endl;
- int meses[12] = {0};
-    int cantidadRegistros = _archivoPagos.getCantidadRegistros();
-    if (cantidadRegistros <= 0)
-    { /// si es 0 no hay pagos, pero puede ser -1 que significa error
-        mensajeError("No hay pagos registrados.");
-        system("pause>nul");
-        return;
-    }
-
-    Pago *pagos = new Pago[cantidadRegistros];
-    _archivoPagos.leerTodos(cantidadRegistros, pagos);
-
-    for (int i = 0; i < cantidadRegistros; i++)
-    {
-        int mes = pagos[i].getFechaDePago().getMes() - 1; 
-        meses[mes] += pagos[i].getImporte();
-    }
-
-    mostrarEncabezadoRecaudacion();
-
-    string nombreMeses[12] = {
-    "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
-    "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
-    };
-
-    for (int i = 0; i < 12; i++)
-    {
-        rlutil::setBackgroundColor(rlutil::WHITE);
-        rlutil::setColor(rlutil::BLACK);
-        cout << (char)179 << left << setw(12) << nombreMeses[i] << (char)179;
-        cout << left << setw(12) << meses[i] << (char)179;
-        cout << endl;
-    }
-    rlutil::setBackgroundColor(rlutil::BLACK);
-    rlutil::resetColor();
-    system("pause>nul");
-
-    delete[] pagos;
-}
-//POR MES
-void ManagerPagos::mostrarEncabezadoRecaudacion(){
-    rlutil::setBackgroundColor(rlutil::CYAN);
-    rlutil::setColor(rlutil::BLACK);
-    cout << (char)179 << left << setw(12) << "MES" << (char)179;
-    cout << left << setw(12) << "RECAUDACION" << (char)179;
-    cout << endl;
 }

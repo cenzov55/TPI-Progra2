@@ -9,7 +9,8 @@ using namespace std;
 ManagerInscripciones::ManagerInscripciones()
     : _archivoInscripciones("Inscripciones.dat"),
       _archivoSocios("Socios.dat"),
-      _archivoActividades("Actividades.dat")
+      _archivoActividades("Actividades.dat"),
+      _archivoPagos("Pagos.dat")
 {
 }
 
@@ -64,11 +65,11 @@ void ManagerInscripciones::agregar()
         return;
     }
 
-    mensajeFormulario(3, "Fecha Inscripcion:");
-    Fecha fechaInscripcion;
-    pedirAnio(fechaInscripcion);
-    pedirMes(fechaInscripcion);
-    pedirDia(fechaInscripcion);
+    // mensajeFormulario(3, "Fecha Inscripcion:");
+    Fecha fechaInscripcion = Fecha(true); /// Fecha actual
+    // pedirAnio(fechaInscripcion);
+    // pedirMes(fechaInscripcion);
+    // pedirDia(fechaInscripcion);
 
     // PARA QUE NO SE INSCRIBA DOS VECES AL MISMO SOCIO EN LA MISMA ACTIVIDAD
     int posicionInscripcion = _archivoInscripciones.buscar(actividad.getIdActividad(), socio.getIdSocio());
@@ -92,7 +93,8 @@ void ManagerInscripciones::agregar()
             mensajeExito("Inscripcion reactivada correctamente.");
             system("pause>nul");
             return;
-        }else
+        }
+        else
         {
             mensajeError("El socio ya se encuentra inscripto en la actividad.");
             system("pause>nul");
@@ -102,6 +104,15 @@ void ManagerInscripciones::agregar()
     // SI ES INSCRIPCION NUEVA LA CREO
     else
     {
+        // Verifico si el socio tiene un pago registrado para la actividad
+        int posicionPago = _archivoPagos.buscar(socio.getIdSocio(), actividad.getIdActividad());
+        if (posicionPago == -1) /// SI NO EXISTE PAGO
+        {
+            mensajeError("El socio no tiene un pago registrado para esta actividad.");
+            system("pause>nul");
+            return;
+        }
+
         Inscripcion inscripcion(socio.getIdSocio(), actividad.getIdActividad(), fechaInscripcion);
         bool ok = _archivoInscripciones.guardar(inscripcion);
         if (!ok)
@@ -175,7 +186,7 @@ void ManagerInscripciones::borrar()
     Inscripcion inscripcion = _archivoInscripciones.leer(posicionInscripcion);
     if (inscripcion.getEliminado())
     {
-        mensajeFormulario(3, "La inscripcion ya se encuentra eliminada.");
+        mensajeError("La inscripcion ya se encuentra eliminada.");
         system("pause>nul");
         return;
     }
@@ -322,8 +333,13 @@ void ManagerInscripciones::backup()
 
 void ManagerInscripciones::mostrarInscripcion(Inscripcion &inscripcion)
 {
+    Socio socio = _archivoSocios.leer(_archivoSocios.buscar(inscripcion.getIdSocio()));
+    Actividad actividad = _archivoActividades.leer(_archivoActividades.buscar(inscripcion.getIdActividad()));
+
     cout << (char)179 << left << setw(12) << inscripcion.getIdSocio() << (char)179;
-    cout << left << setw(12) << inscripcion.getIdActividad() << (char)179;
+    cout << left << setw(24) << socio.getNombre()+" "+ socio.getApellido() << (char)179;
+    cout << left << setw(24) << inscripcion.getIdActividad() << (char)179;
+    cout << left << setw(24) << actividad.getNombre() << (char)179;
     cout << left << setw(24) << inscripcion.getFechaInscripcion().toString() << (char)179;
 }
 
@@ -332,7 +348,9 @@ void ManagerInscripciones::mostrarEncabezadoTabla()
     rlutil::setBackgroundColor(rlutil::CYAN);
     rlutil::setColor(rlutil::BLACK);
     cout << (char)179 << left << setw(12) << "ID SOCIO" << (char)179;
-    cout << left << setw(12) << "ID ACTIVIDAD" << (char)179;
+    cout << left << setw(24) << "NOMBRE COMPLETO SOCIO" << (char)179;
+    cout << left << setw(24) << "ID ACTIVIDAD" << (char)179;
+    cout << left << setw(24) << "NOMBRE ACTIVIDAD" << (char)179;
     cout << left << setw(24) << "FECHA INSCRIPCION" << (char)179;
     cout << endl;
 }

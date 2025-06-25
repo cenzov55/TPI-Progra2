@@ -14,8 +14,8 @@ MenuPrincipal::MenuPrincipal()
     const string opciones[CANT_OPCIONES] = {
         "Socios ABML",
         "Actividades ABML",
-        "Inscripciones ABML",
         "Registro de Pagos",
+        "Inscripciones ABML",
         "Exportar datos",
         "Configuracion",
         "Reportes",
@@ -42,10 +42,10 @@ void MenuPrincipal::aparecer()
             _menuActividades.aparecer();
             break;
         case 3:
-            _menuInscripciones.aparecer();
+            _menuPagos.aparecer();
             break;
         case 4:
-            _menuPagos.aparecer();
+            _menuInscripciones.aparecer();
             break;
         case 5:
             _menuExportar.aparecer();

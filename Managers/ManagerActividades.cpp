@@ -37,6 +37,13 @@ void ManagerActividades::agregar()
 
     actividad.setFechaInicio(fecha);
 
+    Fecha fechaActual(true);
+    if (actividad.getFechaInicio() < fechaActual)
+    {
+        mensajeError("La fecha de inicio no puede ser anterior a la fecha actual.");
+        system("pause>nul");
+        return;
+    }
 
     bool ok = _archivoActividades.guardar(actividad);
     if (!ok)
@@ -266,7 +273,7 @@ void ManagerActividades::buscarPorId(){
     int idActividad;
     mensajeFormulario(3, "Ingrese el id de actividad a buscar: ");
     cin >> idActividad;
-
+cin.ignore();
     int posicion = _archivoActividades.buscar(idActividad);
 
     if (posicion == -1){

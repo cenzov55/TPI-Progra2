@@ -65,13 +65,15 @@ int ArchivoPagos::exportarCSV()
 {
     FILE *csv;
     csv = fopen("Pagos.csv", "w");
-    if (csv == nullptr){
+    if (csv == nullptr)
+    {
         return -1; /// -1 error al crear el archivo
     }
 
     int cantRegistros = getCantidadRegistros();
 
-    if (cantRegistros == -1){
+    if (cantRegistros == -1)
+    {
         return -2; /// -2 no hay registros
     }
     Pago *pagos = new Pago[cantRegistros];
@@ -79,56 +81,59 @@ int ArchivoPagos::exportarCSV()
 
     fprintf(csv, "ID Socio;ID Actividad;Fecha de Pago;Importe\n");
 
-    for (int i=0; i < cantRegistros; i++){
-        if (!pagos[i].getEliminado()){
-            fprintf(csv, "%s\n", pagos[i].toCSV().c_str());
-        }
+    for (int i = 0; i < cantRegistros; i++)
+    {
+        fprintf(csv, "%s\n", pagos[i].toCSV().c_str());
     }
 
     fclose(csv);
 
     delete[] pagos;
     return 0; /// 0 codigo exitoso
-
 }
 
-bool ArchivoPagos::crearBackup(){
+bool ArchivoPagos::crearBackup()
+{
 
     FILE *copia;
     copia = fopen("PagosCopia.dat", "wb");
-    if (copia == nullptr){
+    if (copia == nullptr)
+    {
         return false;
     }
 
     int cantRegistros = getCantidadRegistros();
 
-    if (cantRegistros <= 0){
+    if (cantRegistros <= 0)
+    {
         return false;
     }
 
     Pago *pagos = new Pago[cantRegistros];
     leerTodos(cantRegistros, pagos);
 
-    ///Escribo todos los registros del vector de una sola vez en la copia
-    ///y comparo con la cantidad de registros para saber si se escribieron todos bien
+    /// Escribo todos los registros del vector de una sola vez en la copia
+    /// y comparo con la cantidad de registros para saber si se escribieron todos bien
     bool ok = (fwrite(pagos, sizeof(Pago), cantRegistros, copia) == cantRegistros);
     fclose(copia);
     delete[] pagos;
     return ok;
 }
 
-
-bool ArchivoPagos::usarBackup(){
+bool ArchivoPagos::usarBackup()
+{
     ArchivoPagos copia("PagosCopia.dat");
 
-    if (copia.getCantidadRegistros() <= 0){
+    if (copia.getCantidadRegistros() <= 0)
+    {
         return false;
         /// por si da error o no hay registros en la copia
         /// nos vamos antes de borrar el archivo original
     }
 
-    _pArchivo = fopen("Pagos.dat", "wb"); ///Borro lo que hay en el archivo original
-    if (_pArchivo == nullptr){
+    _pArchivo = fopen("Pagos.dat", "wb"); /// Borro lo que hay en el archivo original
+    if (_pArchivo == nullptr)
+    {
         return false;
     }
 
@@ -136,11 +141,31 @@ bool ArchivoPagos::usarBackup(){
     Pago *pagos = new Pago[cantRegistros];
     copia.leerTodos(cantRegistros, pagos);
 
-
     bool ok = (fwrite(pagos, sizeof(Pago), cantRegistros, _pArchivo) == cantRegistros);
 
-    cerrar(); //cierra el puntero del archivo normal
+    cerrar(); // cierra el puntero del archivo normal
     delete[] pagos;
     return ok;
+}
 
+int ArchivoPagos::buscar(int idSocio, int idActividad)
+{
+    if (!abrirLectura())
+        return -1;
+
+    Pago pago;
+    int posicion = 0;
+
+    while (fread(&pago, sizeof(Pago), 1, _pArchivo) == 1)
+    {
+        if (pago.getIdSocio() == idSocio && pago.getIdActividad() == idActividad)
+        {
+            cerrar();
+            return posicion;
+        }
+        posicion++;
+    }
+
+    cerrar();
+    return -1; // No encontrado
 }
