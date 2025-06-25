@@ -1,28 +1,30 @@
+#include <string>
 #include <iostream>
 #include "Menu.h"
-#include "MenuPagos.h"
+#include "MenuReportes.h"
 
 using namespace std;
 
-MenuPagos::MenuPagos()
+MenuReportes::MenuReportes()
 {
     const int CANT_OPCIONES = 4;
     setCantidadOpciones(CANT_OPCIONES);
 
     const string opciones[CANT_OPCIONES] = {
-        "Registrar pago",
-        "Listar",
-        "Listar pagos del socio",
-        "Volver"};
+        "Actividad con mas socios",
+        "Actividad con mayor recaudacion",
+        "Recaudacion por mes",
+        "Volver"
+    };
 
     setOpciones(opciones);
     setAncho();
     setAlto();
     setPosicionCentro();
-    setTitulo("Pagos ABML");
+    setTitulo("Reportes");
 }
 
-void MenuPagos::aparecer()
+void MenuReportes::aparecer()
 {
     while (true)
     {
@@ -30,13 +32,13 @@ void MenuPagos::aparecer()
         switch (opcion)
         {
         case 1:
-            _managerPagos.agregar();
+            _managerReportes.actividadMasInscriptos();
             break;
         case 2:
-            _managerPagos.listar();
+            _managerReportes.actividadMayorRecaudacion();
             break;
         case 3:
-            _managerPagos.listarPagosSocio();
+            _managerReportes.recaudacionPorMes();
             break;
         case 4:
             return;

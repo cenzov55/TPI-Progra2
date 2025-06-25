@@ -12,7 +12,7 @@ MenuExportar::MenuExportar() {
         "Actividades en CSV",
         "Inscripciones en CSV",
         "Pagos en CSV",
-        "Salir"
+        "Volver"
     };
 
     setOpciones(opciones);

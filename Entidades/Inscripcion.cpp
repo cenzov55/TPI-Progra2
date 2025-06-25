@@ -9,6 +9,7 @@ Inscripcion::Inscripcion(int idSocio, int idActividad, Fecha fechaInscripcion){
     setIdActividad(idActividad);
     setFechaInscripcion(fechaInscripcion);
     _eliminado = false;
+    _pagoRealizado = false;
 }
 
 int Inscripcion::getIdActividad() {

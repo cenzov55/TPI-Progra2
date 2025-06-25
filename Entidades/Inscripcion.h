@@ -8,6 +8,7 @@ private:
     int _idSocio;
     Fecha _fechaInscripcion;
     bool _eliminado;
+    bool _pagoRealizado;
 
 public:
     Inscripcion();

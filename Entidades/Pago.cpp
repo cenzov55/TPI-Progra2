@@ -30,10 +30,6 @@ Fecha Pago::getFechaDePago()
     return _fechaDePago;
 }
 
-bool Pago::getEliminado(){
-    return _eliminado;
-}
-
 void Pago::setIdSocio(int idSocio)
 {
     if (idSocio > 0)
@@ -68,10 +64,6 @@ bool Pago::setMetodoDePago(int metodoDePago)
     {
         return false;
     }
-}
-
-void Pago::setEliminado(bool eliminado){
-    _eliminado = eliminado;
 }
 
 string Pago::toCSV()

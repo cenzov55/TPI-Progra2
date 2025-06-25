@@ -12,7 +12,7 @@ MenuConfiguraciones::MenuConfiguraciones() {
         "Copia de seguridad Actividades",
         "Copia de seguridad Inscripciones",
         "Copia de seguridad Pagos",
-        "Salir"
+        "Volver"
     };
 
     setOpciones(opciones);
