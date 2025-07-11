@@ -7,4 +7,4 @@ void mensajeExito(std::string mensaje);
 void limpiarLinea(int posicion);
 void limpiarError();
 std::string truncar(const std::string &str, int maximo);
-
+std::string truncarFloatDosDecimales(float numero);

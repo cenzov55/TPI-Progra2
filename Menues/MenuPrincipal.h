@@ -3,10 +3,10 @@
 #include "MenuSocios.h"
 #include "MenuActividades.h"
 #include "MenuInscripciones.h"
+#include "MenuReportes.h"
 #include "MenuPagos.h"
 #include "MenuExportar.h"
 #include "MenuConfiguraciones.h"
-#include "MenuReportes.h"
 
 class MenuPrincipal : public Menu
 {

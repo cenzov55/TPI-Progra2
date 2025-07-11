@@ -108,4 +108,29 @@ string truncar(const string &str, int maximo) {
     return str;
 }
 
+string truncarFloatDosDecimales(float numero) {
+    std::string str = std::to_string(numero);  // Ej: "123.456780"
+    std::string resultado = "";
 
+    bool puntoEncontrado = false;
+    int contadorDecimales = 0;
+    size_t i = 0;
+
+    while (true) {
+        char c = str[i];
+        resultado += c;
+
+        if (c == '.') { ///  busca el punto de los decimales
+            puntoEncontrado = true;
+        } else if (puntoEncontrado) {
+            contadorDecimales++;
+            if (contadorDecimales == 2) break;
+        }
+
+        i++;
+
+        if (i >= str.length()) break;
+    }
+
+    return resultado;
+}

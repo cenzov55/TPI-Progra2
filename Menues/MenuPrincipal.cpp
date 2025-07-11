@@ -14,12 +14,13 @@ MenuPrincipal::MenuPrincipal()
     const string opciones[CANT_OPCIONES] = {
         "Socios ABML",
         "Actividades ABML",
-        "Registro de Pagos",
         "Inscripciones ABML",
+        "Registro de Pagos",
+        "Reportes",
         "Exportar datos",
         "Configuracion",
-        "Reportes",
-        "Salir"};
+        "Salir"
+    };
 
     setOpciones(opciones);
     setAncho();
@@ -33,8 +34,7 @@ void MenuPrincipal::aparecer()
     while (true)
     {
         int opcion = seleccion();
-        switch (opcion)
-        {
+        switch (opcion) {
         case 1:
             _menuSocios.aparecer();
             break;
@@ -42,19 +42,19 @@ void MenuPrincipal::aparecer()
             _menuActividades.aparecer();
             break;
         case 3:
-            _menuPagos.aparecer();
-            break;
-        case 4:
             _menuInscripciones.aparecer();
             break;
+        case 4:
+            _menuPagos.aparecer();
+            break;
         case 5:
-            _menuExportar.aparecer();
+            _menuReportes.aparecer();
             break;
         case 6:
-            _menuConfiguraciones.aparecer();
+        _menuExportar.aparecer();
             break;
         case 7:
-            _menuReportes.aparecer();
+        _menuConfiguraciones.aparecer();
             break;
         case 8:
             system("cls");
@@ -71,23 +71,19 @@ void MenuPrincipal::aparecer()
     }
 }
 
-bool MenuPrincipal::salir()
-{
-    string respuesta;
-    do
-    {
+
+bool MenuPrincipal::salir(){
+string respuesta;
+    do {
         limpiarError();
         imprimirFormulario("Salir");
         mensajeFormulario(3, "Seguro que desea salir? (s/n): ");
         getline(cin, respuesta);
 
-        if (respuesta == "s" || respuesta == "S")
-            return true;
+        if (respuesta == "s" || respuesta == "S") return true;
 
-        else if (respuesta == "n" || respuesta == "N")
-            return false;
-        else
-            mensajeError("Respuesta invalida. Ingrese 's' o 'n'.");
+        else if (respuesta == "n" || respuesta == "N") return false;
+        else  mensajeError("Respuesta invalida. Ingrese 's' o 'n'.");
 
     } while (true);
 }

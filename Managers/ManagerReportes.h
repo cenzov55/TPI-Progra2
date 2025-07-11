@@ -8,13 +8,18 @@ class ManagerReportes {
 
 public:
     ManagerReportes();
-    void actividadMasInscriptos();
     void actividadMayorRecaudacion();
     void recaudacionPorMes();
+    void recaudacionPorSocio();
+    void recaudacionPorInscripcion();
+    float encontrarPosicionMaxima(float vec[], int tam);  /// recibe vector float y tama�o. devuelve la posicion maxima del vector
+
 
 private:
     ArchivoInscripciones _archivoInscripciones;
     ArchivoSocios _archivoSocios;
     ArchivoActividades _archivoActividades;
     ArchivoPagos _archivoPagos;
+
+
 };

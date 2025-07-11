@@ -51,6 +51,7 @@ void ManagerPagos::agregar()
         return;
     }
 
+
     /// Leer socio y validar que no este eliminado
     Socio socio = _archivoSocios.leer(posicionSocio);
     if (socio.getEliminado())
@@ -71,6 +72,7 @@ void ManagerPagos::agregar()
         return;
     }
 
+
     /// Leer actividad y validar que no este eliminada
     Actividad actividad = _archivoActividades.leer(posicionActividad);
     if (actividad.getEliminado())
@@ -89,9 +91,13 @@ void ManagerPagos::agregar()
 
     /// Pedir importe y validar que sea mayor a 0
     // int importe = pedirImporte();
+
+
     float importe = actividad.getArancel();
-    mensajeFormulario(3, "El importe a abonar es: $" + to_string(importe) + ". ¿Deseas continuar? (s/n): ");
+    string importeString =  truncarFloatDosDecimales(importe);
+    mensajeFormulario(3, "El importe a abonar es: $" + importeString + " Deseas continuar? (s/n): ");
     string respuesta;
+
     getline(cin, respuesta);
     //
     if (respuesta != "s" && respuesta != "S")
@@ -485,6 +491,8 @@ void ManagerPagos::pedirMetodoDePago(Pago &pago)
 
     } while (!metodoValido);
 }
+
+
 
 void ManagerPagos::exportarCSV()
 {

@@ -10,6 +10,7 @@ private:
     Fecha _fechaInicio;
     float _arancel;
     bool _eliminado;
+    float _acumulador;
 
 public:
     // Constructores
@@ -24,6 +25,7 @@ public:
     float getArancel();
     bool getEliminado();
 
+
     // Setters
     bool setIdActividad(int idActividad);
     bool setNombre(const std::string& nombre);
@@ -31,6 +33,7 @@ public:
     bool setFechaInicio(Fecha fechaInicio);
     bool setArancel(float arancel);
     bool setEliminado(bool eliminado);
+
 
     // Exportar a CSV
     std::string toCSV();
