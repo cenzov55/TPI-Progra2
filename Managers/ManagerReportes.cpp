@@ -438,4 +438,4 @@ float ManagerReportes::encontrarPosicionMaxima(float vec[], int tam)
     }
 
     return posMax;
-};
+}
