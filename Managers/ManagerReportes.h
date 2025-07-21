@@ -12,7 +12,9 @@ public:
     void recaudacionPorMes();
     void recaudacionPorSocio();
     void recaudacionPorInscripcion();
-    float encontrarPosicionMaxima(float vec[], int tam);  /// recibe vector float y tama�o. devuelve la posicion maxima del vector
+    float encontrarPosicionMaxima(float vec[], int tam);
+    int encontrarPosicionMaxima(int vec[], int tam);
+    /// recibe vector float/int y tamaño. devuelve la posicion maxima del vector
 
 
 private:
