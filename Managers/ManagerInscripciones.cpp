@@ -81,7 +81,7 @@ void ManagerInscripciones::agregar()
         if (inscripcion.getEliminado())
         {
             inscripcion.setEliminado(false);
-            inscripcion.setFechaInscripcion(Fecha()); /// Modifico fecha de inscripción
+            inscripcion.setFechaInscripcion(Fecha(true)); /// Modifico fecha de inscripción
             int ok = _archivoInscripciones.modificar(inscripcion, posicionInscripcion);
             if (!ok)
             {
