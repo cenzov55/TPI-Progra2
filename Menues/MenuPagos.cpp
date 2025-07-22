@@ -6,13 +6,14 @@ using namespace std;
 
 MenuPagos::MenuPagos()
 {
-    const int CANT_OPCIONES = 4;
+    const int CANT_OPCIONES = 5;
     setCantidadOpciones(CANT_OPCIONES);
 
     const string opciones[CANT_OPCIONES] = {
         "Registrar pago",
         "Listar",
         "Listar pagos del socio",
+        "Listar pagos de actividad",
         "Volver"};
 
     setOpciones(opciones);
@@ -39,6 +40,9 @@ void MenuPagos::aparecer()
             _managerPagos.listarPagosSocio();
             break;
         case 4:
+            _managerPagos.listarPagosActividad();
+            break;
+        case 5:
             return;
         default:
             cout << "Opcion no valida. Intente nuevamente." << endl;

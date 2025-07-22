@@ -11,11 +11,14 @@ public:
     void borrar();
     void modificar();
     void listar();
+    void listarEliminados();
+    void listarPorMes();
+    void buscarPorResponsable();
+    void darDeAlta();
+    void buscarPorId();
     void exportarCSV();
     void backup();
-    void darDeAlta();
 
-    void buscarPorId();
 private:
     ArchivoActividades _archivoActividades;
 

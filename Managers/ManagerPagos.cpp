@@ -222,13 +222,12 @@ void ManagerPagos::listarPagosSocio()
     Pago *pagos = new Pago[cantidadRegistros];
     _archivoPagos.leerTodos(cantidadRegistros, pagos);
 
-    string datosSocio = "Pagos del socio: " + socio.getNombre() + " " + socio.getApellido() + " (ID: " + to_string(socio.getIdSocio()) + ")";
-
+        
     rlutil::setBackgroundColor(rlutil::BLACK);
+    rlutil::setColor(rlutil::WHITE);
     system("cls");
 
-    cout << datosSocio << endl;
-    cout << "----------------------------------------" << endl;
+    cout << "Pagos del socio: " << socio.getNombre() << " " << socio.getApellido() << " (ID: " << socio.getIdSocio() << ")" << endl;
     mostrarEncabezadoTabla();
 
     int contador = 0;
@@ -255,6 +254,106 @@ void ManagerPagos::listarPagosSocio()
         mensajeError("No se encontraron pagos para el socio ingresado.");
 
     system("pause>nul");
+    delete[] pagos;
+}
+
+void ManagerPagos::listarPagosActividad()
+{
+    system("cls");
+    imprimirFormulario("Listar Pagos de Actividad");
+
+    int idActividad = pedirIdActividad();
+    int posicion = _archivoActividades.buscar(idActividad);
+    if (posicion == -1)
+    {
+        mensajeError("La actividad ingresada no existe");
+        system("pause>nul");
+        return;
+    }
+
+    Actividad actividad = _archivoActividades.leer(posicion);
+    if (actividad.getEliminado())
+    {
+        mensajeError("La actividad ingresada se encuentra eliminada.");
+        system("pause>nul");
+        return;
+    }
+
+    int cantidadRegistros = _archivoPagos.getCantidadRegistros();
+    if (cantidadRegistros <= 0)
+    { /// si es 0 no hay pagos, pero puede ser -1 que significa error
+        mensajeError("No hay pagos registrados.");
+        system("pause>nul");
+        return;
+    }
+
+    Pago *pagos = new Pago[cantidadRegistros];
+    _archivoPagos.leerTodos(cantidadRegistros, pagos);
+
+    // Verificar si hay pagos para esta actividad
+    bool hayPagos = false;
+    for (int i = 0; i < cantidadRegistros; i++)
+    {
+        if (pagos[i].getIdActividad() == idActividad)
+        {
+            hayPagos = true;
+            break;
+        }
+    }
+
+    if (!hayPagos)
+    {
+        mensajeError("No hay pagos registrados para esta actividad.");
+        system("pause>nul");
+        delete[] pagos;
+        return;
+    } 
+
+    rlutil::setBackgroundColor(rlutil::BLACK);
+    rlutil::setColor(rlutil::WHITE);
+    system("cls");
+
+    cout << "Pagos de la actividad: " << actividad.getNombre() << " (ID: " << actividad.getIdActividad() << ")" << endl;
+    cout << "Responsable: " << actividad.getResponsable() << endl;
+    cout << "Arancel: $" << fixed << setprecision(2) << actividad.getArancel() << endl;
+
+    mostrarEncabezadoTabla();
+
+    int contador = 0;
+    float totalRecaudado = 0;
+
+    for (int i = 0; i < cantidadRegistros; i++)
+    {
+        // Si el pago no es de la actividad, lo salteamos
+        if (pagos[i].getIdActividad() != idActividad)
+            continue;
+
+        contador++;
+        /// Intercalar colores, solo estetico.
+        if (contador % 2 == 0)
+        {
+            rlutil::setBackgroundColor(rlutil::GREY);
+        }
+        else
+        {
+            rlutil::setBackgroundColor(rlutil::WHITE);
+        }
+        rlutil::setColor(rlutil::BLACK);
+
+        mostrarPago(pagos[i]);
+        totalRecaudado += pagos[i].getImporte();
+    }
+
+    // Mostrar total recaudado
+    cout << endl << endl;
+    rlutil::setBackgroundColor(rlutil::LIGHTCYAN);
+    rlutil::setColor(rlutil::BLACK);
+    cout << setw(20) << left << "TOTAL RECAUDADO:   $" << setw(10) << fixed << setprecision(2) << totalRecaudado << endl;
+    cout << setw(20) << left << "CANTIDAD DE PAGOS: " << setw(10) << contador << endl;
+
+    system("pause>nul");
+    rlutil::setBackgroundColor(rlutil::BLACK);
+    rlutil::resetColor();
     delete[] pagos;
 }
 
@@ -448,11 +547,15 @@ int ManagerPagos::pedirIdActividad()
 
         posicion = _archivoActividades.buscar(idActividad);
         if (posicion == -1)
+        {
             mensajeError("Actividad no encontrada");
-        system("pause>nul");
+            system("pause>nul");
+        }
     } while (posicion == -1);
     return idActividad;
 }
+
+
 // cambiado por confirmar importe BORRAR?
 int ManagerPagos::pedirImporte()
 {
@@ -466,7 +569,7 @@ int ManagerPagos::pedirImporte()
         cin.ignore();
 
         if (importe < 0)
-            mensajeError("El importe no valido.");
+            mensajeError("El importe no puede ser negativo.");
     } while (importe < 0);
     return importe;
 }

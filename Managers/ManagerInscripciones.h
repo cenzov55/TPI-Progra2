@@ -11,6 +11,10 @@ public:
     void agregar();
     void borrar();
     void listar();
+    void listarEliminados();
+    void listarActividadesInscriptas();
+    void listarSociosInscriptos();
+    void darDeAlta();
     void exportarCSV();
     void backup();
 

@@ -10,7 +10,6 @@ private:
     Fecha _fechaInicio;
     float _arancel;
     bool _eliminado;
-    float _acumulador;
 
 public:
     // Constructores

@@ -488,3 +488,374 @@ void ManagerInscripciones::exportarCSV()
     mensajeExito("Inscripciones exportadas correctamente");
     system("pause>nul");
 }
+
+void ManagerInscripciones::listarActividadesInscriptas()
+{
+    system("cls");
+    imprimirFormulario("Actividades del Socio");
+    
+    int idSocio;
+    mensajeFormulario(1, "Ingrese el ID del socio: ");
+    cin >> idSocio;
+    cin.ignore(); // Para limpiar el salto de línea pendiente
+    
+    // Verificar que el socio existe
+    int posicionSocio = _archivoSocios.buscar(idSocio);
+    if (posicionSocio == -1) {
+        mensajeError("El socio ingresado no existe");
+        system("pause>nul");
+        return;
+    }
+    
+    Socio socio = _archivoSocios.leer(posicionSocio);
+    if (socio.getEliminado()) {
+        mensajeError("El socio ingresado se encuentra eliminado");
+        system("pause>nul");
+        return;
+    }
+    
+    // Obtener las inscripciones
+    int cantInscripciones = _archivoInscripciones.getCantidadRegistros();
+    if (cantInscripciones <= 0) {
+        mensajeError("No hay inscripciones registradas");
+        system("pause>nul");
+        return;
+    }
+    
+    Inscripcion *inscripciones = new Inscripcion[cantInscripciones];
+    _archivoInscripciones.leerTodos(cantInscripciones, inscripciones);
+    
+    // Verificar si hay inscripciones para este socio
+    bool tieneInscripciones = false;
+    for (int i = 0; i < cantInscripciones; i++) {
+        if (inscripciones[i].getIdSocio() == idSocio && !inscripciones[i].getEliminado()) {
+            tieneInscripciones = true;
+            break;
+        }
+    }
+    
+    if (!tieneInscripciones) {
+        mensajeError("El socio no tiene inscripciones activas");
+        system("pause>nul");
+        delete[] inscripciones;
+        return;
+    }
+    
+    rlutil::setBackgroundColor(rlutil::BLACK);
+    rlutil::setColor(rlutil::WHITE);
+    system("cls");
+    
+    // Mostrar información del socio
+    cout << "Socio: " << socio.getNombre() << " " << socio.getApellido() << " (ID: " << idSocio << ")" << endl;
+    cout << endl;
+    
+    // Encabezado de actividades
+    rlutil::setBackgroundColor(rlutil::CYAN);
+    rlutil::setColor(rlutil::BLACK);
+    cout << (char)179 << left << setw(5) << "ID" << (char)179;
+    cout << left << setw(25) << "Actividad" << (char)179;
+    cout << left << setw(20) << "Responsable" << (char)179;
+    cout << left << setw(12) << "Fecha Inicio" << (char)179;
+    cout << left << setw(10) << "Arancel" << (char)179;
+    cout << left << setw(15) << "Fecha Inscr." << (char)179;
+    cout << endl;
+    
+    int contador = 0;
+    // Mostrar las actividades del socio
+    for (int i = 0; i < cantInscripciones; i++) {
+        if (inscripciones[i].getIdSocio() == idSocio && !inscripciones[i].getEliminado()) {
+            int posActividad = _archivoActividades.buscar(inscripciones[i].getIdActividad());
+            
+            if (posActividad != -1) {
+                Actividad actividad = _archivoActividades.leer(posActividad);
+                
+                if (!actividad.getEliminado()) {
+                    // Intercalar colores
+                    if (contador % 2 == 0) {
+                        rlutil::setBackgroundColor(rlutil::GREY);
+                    } else {
+                        rlutil::setBackgroundColor(rlutil::WHITE);
+                    }
+                    rlutil::setColor(rlutil::BLACK);
+                    
+                    cout << (char)179 << left << setw(5) << actividad.getIdActividad() << (char)179;
+                    cout << left << setw(25) << truncar(actividad.getNombre(), 25) << (char)179;
+                    cout << left << setw(20) << truncar(actividad.getResponsable(), 20) << (char)179;
+                    cout << left << setw(12) << actividad.getFechaInicio().toString() << (char)179;
+                    cout << left << setw(10) << fixed << setprecision(2) << actividad.getArancel() << (char)179;
+                    cout << left << setw(15) << inscripciones[i].getFechaInscripcion().toString() << (char)179;
+                    cout << endl;
+                    
+                    contador++;
+                }
+            }
+        }
+    }
+    
+    if (contador == 0) {
+        mensajeError("El socio no tiene actividades activas");
+    }
+    
+    system("pause>nul");
+    rlutil::setBackgroundColor(rlutil::BLACK);
+    rlutil::resetColor();
+    delete[] inscripciones;
+}
+
+void ManagerInscripciones::listarSociosInscriptos()
+{
+    system("cls");
+    imprimirFormulario("Socios Inscriptos a Actividad");
+    
+    int idActividad;
+    mensajeFormulario(3, "Ingrese el ID de la actividad: ");
+    cin >> idActividad;
+    cin.ignore(); // Para limpiar el salto de línea pendiente
+    
+    // Verificar que la actividad existe
+    int posicionActividad = _archivoActividades.buscar(idActividad);
+    if (posicionActividad == -1) {
+        mensajeError("La actividad ingresada no existe");
+        system("pause>nul");
+        return;
+    }
+    
+    Actividad actividad = _archivoActividades.leer(posicionActividad);
+    if (actividad.getEliminado()) {
+        mensajeError("La actividad ingresada se encuentra eliminada");
+        system("pause>nul");
+        return;
+    }
+    
+    // Obtener las inscripciones
+    int cantInscripciones = _archivoInscripciones.getCantidadRegistros();
+    if (cantInscripciones <= 0) {
+        mensajeError("No hay inscripciones registradas");
+        system("pause>nul");
+        return;
+    }
+    
+    Inscripcion *inscripciones = new Inscripcion[cantInscripciones];
+    _archivoInscripciones.leerTodos(cantInscripciones, inscripciones);
+    
+    // Verificar si hay inscripciones para esta actividad
+    bool tieneInscripciones = false;
+    for (int i = 0; i < cantInscripciones; i++) {
+        if (inscripciones[i].getIdActividad() == idActividad && !inscripciones[i].getEliminado()) {
+            tieneInscripciones = true;
+            break;
+        }
+    }
+    
+    if (!tieneInscripciones) {
+        mensajeError("La actividad no tiene socios inscriptos");
+        system("pause>nul");
+        delete[] inscripciones;
+        return;
+    }
+    
+    rlutil::setBackgroundColor(rlutil::BLACK);
+    rlutil::setColor(rlutil::WHITE);
+    system("cls");
+    
+    // Mostrar información de la actividad
+    cout << "Actividad: " << actividad.getNombre() << " (ID: " << idActividad << ")" << endl;
+    cout << "Responsable: " << actividad.getResponsable() << endl;
+    cout << "Fecha Inicio: " << actividad.getFechaInicio().toString() << endl;
+    cout << "Arancel: $" << fixed << setprecision(2) << actividad.getArancel() << endl;
+    cout << endl;
+    
+    // Encabezado de socios
+    rlutil::setBackgroundColor(rlutil::CYAN);
+    rlutil::setColor(rlutil::BLACK);
+    cout << (char)179 << left << setw(5) << "ID" << (char)179;
+    cout << left << setw(12) << "DNI" << (char)179;
+    cout << left << setw(20) << "Nombre" << (char)179;
+    cout << left << setw(20) << "Apellido" << (char)179;
+    cout << left << setw(25) << "Email" << (char)179;
+    cout << left << setw(15) << "Fecha Inscr." << (char)179;
+    cout << endl;
+    
+    int contador = 0;
+    // Mostrar los socios inscriptos a la actividad
+    for (int i = 0; i < cantInscripciones; i++) {
+        if (inscripciones[i].getIdActividad() == idActividad && !inscripciones[i].getEliminado()) {
+            int posSocio = _archivoSocios.buscar(inscripciones[i].getIdSocio());
+            
+            if (posSocio != -1) {
+                Socio socio = _archivoSocios.leer(posSocio);
+                
+                if (!socio.getEliminado()) {
+                    // Intercalar colores
+                    if (contador % 2 == 0) {
+                        rlutil::setBackgroundColor(rlutil::GREY);
+                    } else {
+                        rlutil::setBackgroundColor(rlutil::WHITE);
+                    }
+                    rlutil::setColor(rlutil::BLACK);
+                    
+                    cout << (char)179 << left << setw(5) << socio.getIdSocio() << (char)179;
+                    cout << left << setw(12) << socio.getDni() << (char)179;
+                    cout << left << setw(20) << truncar(socio.getNombre(), 20) << (char)179;
+                    cout << left << setw(20) << truncar(socio.getApellido(), 20) << (char)179;
+                    cout << left << setw(25) << truncar(socio.getEmail(), 25) << (char)179;
+                    cout << left << setw(15) << inscripciones[i].getFechaInscripcion().toString() << (char)179;
+                    cout << endl;
+                    
+                    contador++;
+                }
+            }
+        }
+    }
+    
+    if (contador == 0) {
+        mensajeError("La actividad no tiene socios activos inscriptos");
+    }
+    
+    system("pause>nul");
+    rlutil::setBackgroundColor(rlutil::BLACK);
+    rlutil::resetColor();
+    delete[] inscripciones;
+}
+
+void ManagerInscripciones::listarEliminados()
+{
+    system("cls");
+    int cantidadRegistros = _archivoInscripciones.getCantidadRegistros();
+    if (cantidadRegistros <= 0)
+    {
+        mensajeError("No hay inscripciones registradas.");
+        system("pause>nul");
+        return;
+    }
+
+    Inscripcion *inscripciones = new Inscripcion[cantidadRegistros];
+    _archivoInscripciones.leerTodos(cantidadRegistros, inscripciones);
+
+    /// Verificar si hay inscripciones eliminadas
+    bool hayEliminadas = false;
+    for (int i = 0; i < cantidadRegistros; i++)
+    {
+        if (inscripciones[i].getEliminado())
+        {
+            hayEliminadas = true;
+            break;
+        }
+    }
+
+    if (!hayEliminadas)
+    {
+        mensajeError("No hay inscripciones eliminadas.");
+        system("pause>nul");
+        delete[] inscripciones;
+        return;
+    }
+
+    /// Encabezado con los nombres de los atributos
+    mostrarEncabezadoTabla();
+
+    /// Listado solo de inscripciones eliminadas
+    for (int i = 0; i < cantidadRegistros; i++)
+    {
+        /// Intercalar colores, solo estetico.
+        if (i % 2 == 0)
+        {
+            rlutil::setBackgroundColor(rlutil::GREY);
+        }
+        else
+        {
+            rlutil::setBackgroundColor(rlutil::WHITE);
+        }
+
+        if (inscripciones[i].getEliminado())
+        {
+            rlutil::setColor(rlutil::BLACK);
+            mostrarInscripcion(inscripciones[i]);
+            cout << endl;
+        }
+    }
+
+    system("pause>nul");
+    rlutil::setBackgroundColor(rlutil::BLACK);
+    rlutil::resetColor();
+    delete[] inscripciones;
+}
+
+void ManagerInscripciones::darDeAlta()
+{
+    system("cls");
+    imprimirFormulario("Dar de alta la inscripcion");
+
+    int idSocio, idActividad;
+    
+    idSocio = pedirIdSocio();
+    idActividad = pedirIdActividad();
+
+    // Buscar la inscripción usando ambos IDs
+    int posicion = _archivoInscripciones.buscar(idActividad, idSocio);
+    if (posicion == -1)
+    {
+        mensajeError("La inscripcion ingresada no existe");
+        system("pause>nul");
+        return;
+    }
+
+    Inscripcion inscripcion = _archivoInscripciones.leer(posicion);
+    if (!inscripcion.getEliminado())
+    {
+        mensajeFormulario(3, "La inscripcion ingresada no se encuentra eliminada.");
+        system("pause>nul");
+        return;
+    }
+
+    mensajeFormulario(3, "Datos de la inscripcion seleccionada: ");
+    cout << endl;
+
+    mostrarEncabezadoTabla();
+    mostrarInscripcion(inscripcion);
+
+    string respuesta;
+    bool darAlta = false;
+
+    do
+    {
+        limpiarError();
+        limpiarLinea(7);
+        mensajeFormulario(7, "Quieres dar de alta la inscripcion? (s/n): ");
+        getline(cin, respuesta);
+
+        if (respuesta == "s" || respuesta == "S")
+        {
+            darAlta = true;
+            break;
+        }
+        else if (respuesta == "n" || respuesta == "N")
+        {
+            darAlta = false;
+            break;
+        }
+        else
+        {
+            mensajeError("Respuesta invalida. Ingrese 's' o 'n'.");
+        }
+    } while (true);
+
+    if (!darAlta)
+    {
+        mensajeFormulario(9, "Operacion cancelada.");
+        system("pause>nul");
+        return;
+    }
+
+    inscripcion.setEliminado(false);
+    bool ok = _archivoInscripciones.modificar(inscripcion, posicion);
+    if (!ok)
+    {
+        mensajeError("Error al dar de alta la inscripcion.");
+        system("pause>nul");
+        return;
+    }
+
+    mensajeExito("Inscripcion dada de alta correctamente");
+    system("pause>nul");
+}

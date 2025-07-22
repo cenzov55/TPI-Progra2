@@ -13,7 +13,9 @@ public:
     void darDeAlta();
 
 
-    void listarPorApellido();
+    void buscarPorApellido();
+    void buscarPorEdad();
+    void listarEliminados();
     void buscarPorId();
     void exportarCSV();
 

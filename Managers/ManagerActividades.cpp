@@ -267,13 +267,242 @@ void ManagerActividades::listar()
     system("pause>nul");
 }
 
-void ManagerActividades::buscarPorId(){
+void ManagerActividades::listarEliminados()
+{
+    system("cls");
+    int cantidadRegistros = _archivoActividades.getCantidadRegistros();
+    if (cantidadRegistros <= 0)
+    {
+        mensajeError("No hay actividades registradas.");
+        system("pause>nul");
+        return;
+    }
 
+    Actividad *actividades = new Actividad[cantidadRegistros];
+    _archivoActividades.leerTodos(cantidadRegistros, actividades);
+
+    /// Verificar si hay actividades eliminadas
+    bool hayEliminadas = false;
+    for (int i = 0; i < cantidadRegistros; i++)
+    {
+        if (actividades[i].getEliminado())
+        {
+            hayEliminadas = true;
+            break;
+        }
+    }
+
+    if (!hayEliminadas)
+    {
+        mensajeError("No hay actividades eliminadas.");
+        system("pause>nul");
+        delete[] actividades;
+        return;
+    }
+
+    /// Encabezado con los nombres de los atributos
+    mostrarEncabezadoTabla();
+
+    /// Listado solo de actividades eliminadas
+    for (int i = 0; i < cantidadRegistros; i++)
+    {
+        /// Intercalar colores, solo estetico.
+        if (i % 2 == 0)
+        {
+            rlutil::setBackgroundColor(rlutil::GREY);
+        }
+        else
+        {
+            rlutil::setBackgroundColor(rlutil::WHITE);
+        }
+
+        if (actividades[i].getEliminado())
+        {
+            rlutil::setColor(rlutil::BLACK);
+            mostrarActividad(actividades[i]);
+        }
+    }
+
+    system("pause>nul");
+    rlutil::setBackgroundColor(rlutil::BLACK);
+    rlutil::resetColor();
+    delete[] actividades;
+}
+
+void ManagerActividades::listarPorMes()
+{
+    system("cls");
+    imprimirFormulario("Listar Actividades por Mes");
+    
+    Fecha fechaBusqueda;
+    mensajeFormulario(4, "Ingrese el periodo a buscar:");
+    
+    // Pedir año y mes usando los métodos existentes
+    pedirAnio(fechaBusqueda);
+    pedirMes(fechaBusqueda);
+    
+    int anioBuscado = fechaBusqueda.getAnio();
+    int mesBuscado = fechaBusqueda.getMes();
+    
+    int cantidadRegistros = _archivoActividades.getCantidadRegistros();
+    if (cantidadRegistros <= 0)
+    {
+        mensajeError("No hay actividades registradas.");
+        system("pause>nul");
+        return;
+    }
+
+    Actividad *actividades = new Actividad[cantidadRegistros];
+    _archivoActividades.leerTodos(cantidadRegistros, actividades);
+
+    /// Verificar si hay actividades para ese mes
+    /// con que haya una actividad en ese mes, ya se considera que hay coincidencias
+    bool hayCoincidencias = false;
+    for (int i = 0; i < cantidadRegistros; i++)
+    {
+        if (!actividades[i].getEliminado())
+        {
+            Fecha fechaInicio = actividades[i].getFechaInicio();
+            if (fechaInicio.getAnio() == anioBuscado && fechaInicio.getMes() == mesBuscado)
+            {
+                hayCoincidencias = true;
+                break;
+            }
+        }
+    }
+
+    if (!hayCoincidencias)
+    {
+        mensajeError("No hay actividades programadas para " + to_string(mesBuscado) + "/" + to_string(anioBuscado));
+        system("pause>nul");
+        delete[] actividades;
+        return;
+    }
+
+    rlutil::setBackgroundColor(rlutil::BLACK);
+    rlutil::setColor(rlutil::WHITE);
+    system("cls");
+
+    cout << "Actividades programadas para: " << mesBuscado << "/" << anioBuscado << endl;
+    cout << endl;
+
+
+    /// Encabezado con los nombres de los atributos
+    mostrarEncabezadoTabla();
+
+    int contador = 0;
+    /// Listado de actividades que coinciden con el mes
+    for (int i = 0; i < cantidadRegistros; i++)
+    {
+        if (!actividades[i].getEliminado())
+        {
+            Fecha fechaInicio = actividades[i].getFechaInicio();
+            if (fechaInicio.getAnio() == anioBuscado && fechaInicio.getMes() == mesBuscado)
+            {
+                /// Intercalar colores
+                if (contador % 2 == 0)
+                {
+                    rlutil::setBackgroundColor(rlutil::GREY);
+                }
+                else
+                {
+                    rlutil::setBackgroundColor(rlutil::WHITE);
+                }
+                rlutil::setColor(rlutil::BLACK);
+                
+                mostrarActividad(actividades[i]);
+                contador++;
+            }
+        }
+    }
+
+    system("pause>nul");
+    rlutil::setBackgroundColor(rlutil::BLACK);
+    rlutil::resetColor();
+    delete[] actividades;
+}
+
+void ManagerActividades::buscarPorResponsable()
+{
+    system("cls");
+    imprimirFormulario("Buscar Actividad por Responsable");
+    
+    string responsableBuscado;
+    mensajeFormulario(3, "Ingrese el responsable a buscar: ");
+    getline(cin, responsableBuscado);
+    
+    int cantRegistros = _archivoActividades.getCantidadRegistros();
+    if (cantRegistros <= 0) {
+        mensajeError("No hay registros de actividades");
+        system("pause>nul");
+        return;
+    }
+
+    Actividad *actividades = new Actividad[cantRegistros];
+    _archivoActividades.leerTodos(cantRegistros, actividades);
+
+    // Verificar si hay coincidencias
+    bool hayCoincidencias = false;
+    for (int i = 0; i < cantRegistros; i++) {
+        if (!actividades[i].getEliminado()) {
+            // Comparación directa ignorando mayúsculas/minúsculas
+            if (strcasecmp(actividades[i].getResponsable().c_str(), responsableBuscado.c_str()) == 0) {
+                hayCoincidencias = true;
+                break;
+            }
+        }
+    }
+    
+    if (!hayCoincidencias) {
+        mensajeError("No se encontraron actividades con ese responsable");
+        system("pause>nul");
+        delete[] actividades;
+        return;
+    }
+
+    rlutil::setBackgroundColor(rlutil::BLACK);
+    rlutil::setColor(rlutil::WHITE);
+    system("cls");
+
+    ///Encabezado con los nombres de los atributos
+    mostrarEncabezadoTabla();
+
+    int contador = 0;
+    /// Listado de actividades que coinciden
+    for (int i = 0; i < cantRegistros; i++) {
+        if (!actividades[i].getEliminado()) {
+            // Comparación directa ignorando mayúsculas/minúsculas
+            if (strcasecmp(actividades[i].getResponsable().c_str(), responsableBuscado.c_str()) == 0) {
+                ///Intercalar colores, solo estetico.
+                if (contador % 2 == 0) {
+                    rlutil::setBackgroundColor(rlutil::GREY);
+                } else {
+                    rlutil::setBackgroundColor(rlutil::WHITE);
+                }
+                rlutil::setColor(rlutil::BLACK);
+                
+                mostrarActividad(actividades[i]);
+                contador++;
+            }
+        }
+    }
+
+    system("pause>nul");
+    rlutil::setBackgroundColor(rlutil::BLACK);
+    rlutil::resetColor();
+    delete[] actividades;
+}
+
+void ManagerActividades::buscarPorId(){
+    
+    system("cls");
     imprimirFormulario("Buscar Actividad por Id");
+    
     int idActividad;
     mensajeFormulario(3, "Ingrese el id de actividad a buscar: ");
     cin >> idActividad;
-cin.ignore();
+    cin.ignore(); // Para limpiar el salto de línea pendiente
+
     int posicion = _archivoActividades.buscar(idActividad);
 
     if (posicion == -1){
@@ -282,28 +511,26 @@ cin.ignore();
         return;
     }
 
-    Actividad actividad;
-    actividad = _archivoActividades.leer(posicion);
+    Actividad actividad = _archivoActividades.leer(posicion);
 
     if (actividad.getEliminado()){
-        mensajeFormulario(5, "La actividad ingresada se encuentra eliminada.");
-        system("pause");
+        mensajeError("La actividad ingresada se encuentra eliminada.");
+        system("pause>nul");
         return;
     }
 
     ///Lo vuelvo a imprimir para borrar el texto anterior
-    ///y asi tener espacio para mostrar el socio entero.
-    imprimirFormulario("Buscar Socio por Id");
+    ///y asi tener espacio para mostrar la actividad completa.
+    imprimirFormulario("Buscar Actividad por Id");
 
-    mensajeFormulario(3,"ID: " + to_string(actividad.getIdActividad()));
-    mensajeFormulario(4,"Nombre: " + actividad.getNombre());
-    mensajeFormulario(5,"Responsable: " + actividad.getResponsable());
-    mensajeFormulario(6,"Arancel: " + to_string(actividad.getArancel()));
-    mensajeFormulario(7,"Fecha Inicio: " + actividad.getFechaInicio().toString());
+    mensajeFormulario(1, "ID: " + to_string(actividad.getIdActividad()));
+    mensajeFormulario(2, "Nombre: " + actividad.getNombre());
+    mensajeFormulario(3, "Responsable: " + actividad.getResponsable());
+    mensajeFormulario(4, "Arancel: $" + to_string((int)actividad.getArancel()));
+    mensajeFormulario(5, "Fecha Inicio: " + actividad.getFechaInicio().toString());
 
     mensajeExito("Operacion Exitosa");
     system("pause>nul");
-
 }
 
 void ManagerActividades::exportarCSV()

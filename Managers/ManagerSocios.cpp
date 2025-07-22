@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <iomanip>
+#include <cstring>
 #include "ManagerSocios.h"
 #include "../funcionesConsola.h"
 #include "../rlutil.h"
@@ -20,6 +21,7 @@ ManagerSocios::ManagerSocios()
 void ManagerSocios::agregar()
 {
     /// Estetico
+    system("cls");
     imprimirFormulario("Agregar Socio");
     rlutil::setColor(rlutil::BLACK);
     rlutil::setBackgroundColor(rlutil::WHITE);
@@ -282,8 +284,14 @@ void ManagerSocios::listar()
     delete[] socios;
 }
 
-void ManagerSocios::listarPorApellido(){
+void ManagerSocios::buscarPorApellido(){
     system("cls");
+    imprimirFormulario("Buscar Socio por Apellido");
+
+    string apellidoBuscado;
+    mensajeFormulario(3, "Ingrese el apellido a buscar: ");
+    getline(cin, apellidoBuscado);
+
     int cantRegistros = _archivoSocios.getCantidadRegistros();
     if (cantRegistros <= 0){
         mensajeError("No hay registros de socios");
@@ -295,42 +303,222 @@ void ManagerSocios::listarPorApellido(){
     socios = new Socio[cantRegistros];
     _archivoSocios.leerTodos(cantRegistros, socios);
 
-    ///Ordenamiento burbuja
-    for (int i = 0; i < cantRegistros - 1; i++) {
-        for (int j = 0; j < cantRegistros - i - 1; j++) {
-            ///strcmp compara 2 cadenas de caracteres (uso c_str() porque son strings y los convierto
-            ///a vector de caracteres), strcpm devuelve 0 si son iguales, -1 si es un string mas chico
-            ///alfabeticamente y 1 si es mas grande, por eso en este caso comparo el resultado con > 0
-            if (strcmp(socios[j].getApellido().c_str(), socios[j + 1].getApellido().c_str()) > 0) {
-                Socio aux = socios[j];
-                socios[j] = socios[j + 1];
-                socios[j + 1] = aux;
+    // Verificar si hay coincidencias
+    bool hayCoincidencias = false;
+    for (int i = 0; i < cantRegistros; i++) {
+        if (!socios[i].getEliminado()) {
+            // Comparación directa ignorando mayúsculas/minúsculas
+            if (strcasecmp(socios[i].getApellido().c_str(), apellidoBuscado.c_str()) == 0) {
+                hayCoincidencias = true;
+                break;
             }
         }
     }
 
+    if (!hayCoincidencias) {
+        mensajeError("No se encontraron socios con ese apellido");
+        system("pause>nul");
+        delete[] socios;
+        return;
+    }
+
+    rlutil::setBackgroundColor(rlutil::BLACK);
+    system("cls");
+
     ///Encabezado con los nombres de los atributos
     mostrarEncabezadoTabla();
 
-    /// Listado
+    int contador = 0;
+    /// Listado de socios que coinciden
     for (int i = 0; i < cantRegistros; i++) {
+        if (!socios[i].getEliminado()) {
+            /// Comparación directa ignorando mayúsculas/minúsculas
+            /// strcasecmp compara 2 cadenas de caracteres ignorando mayusculas y minusculas
+            /// devuelve 0 si son iguales, 1 si la primera es mayor y -1 si la segunda es mayor
+            if (strcasecmp(socios[i].getApellido().c_str(), apellidoBuscado.c_str()) == 0) {
+                ///Intercalar colores, solo estetico.
+                if (contador % 2 == 0) {
+                    rlutil::setBackgroundColor(rlutil::GREY);
+                } else {
+                    rlutil::setBackgroundColor(rlutil::WHITE);
+                }
+
+                mostrarSocio(socios[i]);
+                cout << endl;
+                contador++;
+            }
+        }
+    }
+
+    system("pause>nul");
+    rlutil::setBackgroundColor(rlutil::BLACK);
+    rlutil::resetColor();
+    delete[] socios;
+}
+
+void ManagerSocios::buscarPorEdad()
+{
+    system("cls");
+    imprimirFormulario("Buscar Socio por Edad");
+
+    int edadBuscada;
+    mensajeFormulario(3, "Ingrese la edad a buscar: ");
+    cin >> edadBuscada;
+    cin.ignore(); // Para limpiar el salto de línea pendiente
+
+    if (edadBuscada < 0 || edadBuscada > 120) {
+        mensajeError("Edad invalida. Debe estar entre 0 y 120 años.");
+        system("pause>nul");
+        return;
+    }
+
+    int cantRegistros = _archivoSocios.getCantidadRegistros();
+    if (cantRegistros <= 0) {
+        mensajeError("No hay registros de socios");
+        system("pause>nul");
+        return;
+    }
+
+    Socio *socios = new Socio[cantRegistros];
+    _archivoSocios.leerTodos(cantRegistros, socios);
+
+    // Obtener fecha actual para calcular edades
+    Fecha fechaActual(true);
+
+    // Verificar si hay coincidencias
+    bool hayCoincidencias = false;
+    for (int i = 0; i < cantRegistros; i++) {
+        if (!socios[i].getEliminado()) {
+            Fecha fechaNac = socios[i].getFechaNacimiento();
+
+            // Calcular edad
+            int edad = fechaActual.getAnio() - fechaNac.getAnio();
+
+            // Ajustar si aún no ha cumplido años este año
+            if (fechaActual.getMes() < fechaNac.getMes() ||
+                (fechaActual.getMes() == fechaNac.getMes() && fechaActual.getDia() < fechaNac.getDia())) {
+                edad--;
+            }
+
+            if (edad == edadBuscada) {
+                hayCoincidencias = true;
+                break;
+            }
+        }
+    }
+
+    if (!hayCoincidencias) {
+        mensajeError("No se encontraron socios con esa edad");
+        system("pause>nul");
+        delete[] socios;
+        return;
+    }
+
+    rlutil::setBackgroundColor(rlutil::BLACK);
+    system("cls");
+
+    ///Encabezado con los nombres de los atributos
+    mostrarEncabezadoTabla();
+
+    int contador = 0;
+    /// Listado de socios que coinciden
+    for (int i = 0; i < cantRegistros; i++) {
+        if (!socios[i].getEliminado()) {
+            Fecha fechaNac = socios[i].getFechaNacimiento();
+
+            // Calcular edad
+            int edad = fechaActual.getAnio() - fechaNac.getAnio();
+
+            // Ajustar si aún no ha cumplido años este año
+            if (fechaActual.getMes() < fechaNac.getMes() ||
+                (fechaActual.getMes() == fechaNac.getMes() && fechaActual.getDia() < fechaNac.getDia())) {
+                edad--;
+            }
+
+            if (edad == edadBuscada) {
         ///Intercalar colores, solo estetico.
-        if (i % 2 == 0) {
+                if (contador % 2 == 0) {
+                    rlutil::setBackgroundColor(rlutil::GREY);
+                } else {
+                    rlutil::setBackgroundColor(rlutil::WHITE);
+                }
+
+                mostrarSocio(socios[i]);
+                cout << endl;
+                contador++;
+            }
+        }
+    }
+
+    system("pause>nul");
+    rlutil::setBackgroundColor(rlutil::BLACK);
+    rlutil::resetColor();
+    delete[] socios;
+}
+
+void ManagerSocios::listarEliminados()
+{
+    system("cls");
+    int cantidadRegistros = _archivoSocios.getCantidadRegistros();
+    if (cantidadRegistros <= 0)
+    { /// si es 0 no hay socios, pero puede ser -1 que significa error
+        mensajeError("No hay socios registrados.");
+        system("pause>nul");
+        return;
+    }
+
+    Socio *socios = new Socio[cantidadRegistros];
+    _archivoSocios.leerTodos(cantidadRegistros, socios);
+
+    /// Verificar si hay socios eliminados
+    bool hayEliminados = false;
+    for (int i = 0; i < cantidadRegistros; i++)
+    {
+        if (socios[i].getEliminado())
+        {
+            hayEliminados = true;
+            break;
+        }
+    }
+
+    if (!hayEliminados)
+    {
+        mensajeError("No hay socios eliminados.");
+        system("pause>nul");
+        delete[] socios;
+        return;
+    }
+
+    system("cls");
+    /// Encabezado con los nombres de los atributos
+    mostrarEncabezadoTabla();
+
+    /// Listado solo de socios eliminados
+    for (int i = 0; i < cantidadRegistros; i++)
+    {
+        /// Intercalar colores, solo estetico.
+        if (i % 2 == 0)
+        {
             rlutil::setBackgroundColor(rlutil::GREY);
-        } else {
+        }
+        else
+        {
             rlutil::setBackgroundColor(rlutil::WHITE);
         }
 
-        if (!socios[i].getEliminado()){
+        if (socios[i].getEliminado())
+        {
             mostrarSocio(socios[i]);
             cout << endl;
         }
     }
 
     system("pause>nul");
+    rlutil::setBackgroundColor(rlutil::BLACK);
+    rlutil::resetColor();
     delete[] socios;
-
 }
+
 
 void ManagerSocios::darDeAlta()
 {

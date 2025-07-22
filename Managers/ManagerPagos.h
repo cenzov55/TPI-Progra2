@@ -12,6 +12,7 @@ public:
     void listar();
     void exportarCSV();
     void listarPagosSocio();
+    void listarPagosActividad();
     void backup();
     void recaudacion();
     void mostrarEncabezadoRecaudacion();

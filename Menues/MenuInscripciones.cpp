@@ -5,13 +5,17 @@
 using namespace std;
 
 MenuInscripciones::MenuInscripciones(){
-    const int CANT_OPCIONES = 4;
+    const int CANT_OPCIONES = 8;
     setCantidadOpciones(CANT_OPCIONES);
 
     const string opciones[CANT_OPCIONES] = {
         "Inscribir Socio a Actividad",
         "Borrar Inscripcion",
         "Listar",
+        "Listar eliminadas",
+        "Buscar inscripciones de socio",
+        "Socios inscriptos a actividad",
+        "Dar de alta",
         "Volver"
     };
 
@@ -37,11 +41,22 @@ void MenuInscripciones::aparecer(){
                 _managerInscripciones.listar();
                 break;
             case 4:
-            return;
+                _managerInscripciones.listarEliminados();
                 break;
+            case 5:
+                _managerInscripciones.listarActividadesInscriptas();
+                break;
+            case 6:
+                _managerInscripciones.listarSociosInscriptos();
+                break;
+            case 7:
+                _managerInscripciones.darDeAlta();
+                break;
+            case 8:
+                return;
             default:
-                cout << "Opción no válida. Intente nuevamente." << endl;
-                system("pause>nul");
+                cout << "Opcion no valida. Intente nuevamente." << endl;
+                system("pause");
         }
     }
 }
