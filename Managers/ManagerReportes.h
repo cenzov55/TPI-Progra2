@@ -23,5 +23,4 @@ private:
     ArchivoActividades _archivoActividades;
     ArchivoPagos _archivoPagos;
 
-
 };
