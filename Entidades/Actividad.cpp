@@ -2,6 +2,7 @@
 #include <cstring>
 #include <string>
 #include "Actividad.h"
+#include "../funcionesConsola.h"
 using namespace std;
 
 // Constructor por defecto
@@ -91,11 +92,13 @@ bool Actividad::setEliminado(bool eliminado) {
 
 // CSV
 string Actividad::toCSV() {
+
+    string arancel = truncarFloatDosDecimales(_arancel);
     string ss;
     ss = to_string(_idActividad) + ";" +
          _nombre + ";" +
          _responsable + ";" +
          _fechaInicio.toString() + ";" +
-         to_string(_arancel) + ";";
+         arancel + ";";
     return ss;
 }

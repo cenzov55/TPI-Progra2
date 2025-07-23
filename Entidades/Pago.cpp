@@ -1,5 +1,6 @@
 #include <iostream>
 #include "Pago.h"
+#include "../funcionesConsola.h"
 
 using namespace std;
 
@@ -68,8 +69,10 @@ bool Pago::setMetodoDePago(int metodoDePago)
 
 string Pago::toCSV()
 {
+    string importe = truncarFloatDosDecimales(_importe);
+
     return to_string(_idSocio) + ";" +
            to_string(_idActividad) + ";" +
            _fechaDePago.toString() + ";" +
-           to_string(_importe) + ";";
+           importe + ";";
 }

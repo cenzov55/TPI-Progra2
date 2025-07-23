@@ -341,6 +341,7 @@ void ManagerPagos::listarPagosActividad()
         rlutil::setColor(rlutil::BLACK);
 
         mostrarPago(pagos[i]);
+        cout << endl;
         totalRecaudado += pagos[i].getImporte();
     }
 

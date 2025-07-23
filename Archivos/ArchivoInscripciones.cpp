@@ -104,7 +104,7 @@ int ArchivoInscripciones::exportarCSV(){
     Inscripcion *inscripciones = new Inscripcion[cantRegistros];
     leerTodos(cantRegistros, inscripciones);
 
-    fprintf(csv,"ID Actividad;ID Socio;Fecha de Pago");
+    fprintf(csv,"ID Actividad;ID Socio;Fecha de Pago\n");
 
     for (int i=0; i < cantRegistros; i++){
         if (!inscripciones[i].getEliminado()){

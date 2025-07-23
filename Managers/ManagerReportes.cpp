@@ -56,12 +56,14 @@ void ManagerReportes::actividadMayorRecaudacion()
 
     Inscripcion* inscripciones = new Inscripcion[cantidadInscripciones];
     int* inscripcionPorActividad = new int[cantActividades](); // inicializa en 0
+    int* pagosXmes = new int[cantActividades](); // inicializa en 0
     _archivoInscripciones.leerTodos(cantidadInscripciones, inscripciones);
 
     /// Acumular recaudación e inscripciones por actividad
     for (int i = 0; i < cantidadPagos; i++) {
         int idAct = pagos[i].getIdActividad() - 1;
         recaudacionActividades[idAct] += pagos[i].getImporte();
+        pagosXmes[idAct]++;
     }
     
     for (int i = 0; i < cantidadInscripciones; i++) {
@@ -78,6 +80,7 @@ void ManagerReportes::actividadMayorRecaudacion()
     cout << (char)179 << left << setw(20) << "ID Actividad" << (char)179
          << left << setw(30) << "Nombre" << (char)179
          << left << setw(15) << "Inscripciones" << (char)179
+         << left << setw(15) << "Pagos" << (char)179
          << left << setw(15) << "Recaudacion" << (char)179 << endl;
 
     for (int i = 0; i < cantActividades; i++) {
@@ -89,6 +92,7 @@ void ManagerReportes::actividadMayorRecaudacion()
         cout << (char)179 << left << setw(20) << regActividades[i].getIdActividad() << (char)179
              << left << setw(30) << truncar(regActividades[i].getNombre(), 30) << (char)179
              << left << setw(15) << inscripcionPorActividad[i] << (char)179
+             << left << setw(15) << pagosXmes[i] << (char)179
              << left << setw(15) << recaudacionActividades[i] << (char)179;
         
         cout << endl;
@@ -99,7 +103,7 @@ void ManagerReportes::actividadMayorRecaudacion()
     rlutil::setColor(rlutil::BLACK);
     cout << left << setw(20) << " * Actividad con mas recaudacion * " << endl;
 
-    cout << regActividades[posMax].getNombre() << " con " << inscripcionPorActividad[posMax] << " inscripciones y $" << recaudacionActividades[posMax] << " de recaudacion" << endl;
+    cout << regActividades[posMax].getNombre() << " con " << pagosXmes[posMax] << " pagos y $" << recaudacionActividades[posMax] << " de recaudacion" << endl;
     
 
     rlutil::setBackgroundColor(rlutil::BLACK);
@@ -112,24 +116,33 @@ void ManagerReportes::actividadMayorRecaudacion()
     delete[] recaudacionActividades;
     delete[] inscripciones;
     delete[] inscripcionPorActividad;
+    delete[] pagosXmes;
 }
 
 void ManagerReportes::recaudacionPorMes()
 {
     system("cls");
-    rlutil::setBackgroundColor(rlutil::CYAN);
-    rlutil::setColor(rlutil::BLACK);
-    cout << (char)179 << left << setw(20) << " Reporte Mes " << setw(19) << right << (char)179 << endl;
-    rlutil::setBackgroundColor(rlutil::WHITE);
-    rlutil::setColor(rlutil::BLACK);
-    cout << endl;
 
-    float meses[12] = {0}; // recaudación por mes
-    int inscripcionesXmes[12] = {0};
-    float recaudacionAnio = 0; // total anual
-    int inscripcionesAnio = 0;
+    /// Formulario para seleccionar el año
+    int anioSeleccionado;
+    bool anioValido = false;
+    imprimirFormulario("Reporte de recaudacion por mes");
+    
+    do {
+        limpiarError();
+        mensajeFormulario(2, "Ingrese el anio para el reporte: ");
+        cin >> anioSeleccionado;
+        cin.ignore();
+        
+        // Validar año 
+        if (anioSeleccionado >= 1900) {
+            anioValido = true;
+        } else {
+            mensajeError("Anio invalido. Debe ser mayor a 1900.");
+        }
+    } while (!anioValido);
 
-    /// Leer pagos
+    /// Verificar si hay pagos para el año seleccionado
     int cantidadPagos = _archivoPagos.getCantidadRegistros();
     if (cantidadPagos <= 0) {
         mensajeError("No hay pagos registrados.");
@@ -147,21 +160,43 @@ void ManagerReportes::recaudacionPorMes()
         delete[] pagos;
         return;
     }
+
     Inscripcion* inscripciones = new Inscripcion[cantidadInscripciones];
     _archivoInscripciones.leerTodos(cantidadInscripciones, inscripciones);
 
+    rlutil::setBackgroundColor(rlutil::BLACK);
+    rlutil::setColor(rlutil::WHITE);
+    system("cls");
+
+    cout << "Reporte de recaudacion por mes - anio " << anioSeleccionado << endl << endl;
+
+
+    float meses[12] = {0}; // recaudación por mes
+    int inscripcionesXmes[12] = {0};
+    float recaudacionAnio = 0; // total anual
+    int inscripcionesAnio = 0;
+    int pagosXmes[12] = {0};
+
     /// Acumular recaudación e inscripciones por mes
+    
+    /// Recaudacion por mes
     for (int i = 0; i < cantidadPagos; i++) {
-        int mes = pagos[i].getFechaDePago().getMes() - 1;
-        if (mes >= 0 && mes < 12) {
-            meses[mes] += pagos[i].getImporte();
+        int mes = pagos[i].getFechaDePago().getMes();
+        int anio = pagos[i].getFechaDePago().getAnio();
+
+        if (anio == anioSeleccionado) {
+            meses[mes-1] += pagos[i].getImporte();
             recaudacionAnio += pagos[i].getImporte();
+            pagosXmes[mes-1]++;
         }
     }
+    /// Acumular inscripciones por mes
     for (int i = 0; i < cantidadInscripciones; i++) {
-        int mesInscripcion = inscripciones[i].getFechaInscripcion().getMes() - 1;
-        if (mesInscripcion >= 0 && mesInscripcion < 12) {
-            inscripcionesXmes[mesInscripcion]++;
+        int mesInscripcion = inscripciones[i].getFechaInscripcion().getMes();
+        int anioInscripcion = inscripciones[i].getFechaInscripcion().getAnio();
+
+        if (anioInscripcion == anioSeleccionado) {
+            inscripcionesXmes[mesInscripcion-1]++;
             inscripcionesAnio++;
         }
     }
@@ -169,43 +204,41 @@ void ManagerReportes::recaudacionPorMes()
     int mesMasRecaudador = encontrarPosicionMaxima(meses, 12);
     string nombreMeses[12] = {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"};
 
-    /// Mostrar tabla
+    /// Mostrar Encabezado
     rlutil::setBackgroundColor(rlutil::CYAN);
     rlutil::setColor(rlutil::BLACK);
     cout << (char)179 << left << setw(12) << "MES" << (char)179
-         << left << setw(12) << "INSCRIPCION" << (char)179
-         << left << setw(12) << "RECAUDACION" << (char)179 << endl;
+         << left << setw(15) << "INSCRIPCIONES" << (char)179
+         << left << setw(15) << "PAGOS" << (char)179
+         << left << setw(15) << "RECAUDACION" << (char)179 << endl;
 
+    /// Mostrar tabla
     for (int i = 0; i < 12; i++) {
         if (i == mesMasRecaudador) rlutil::setBackgroundColor(rlutil::YELLOW);
         else rlutil::setBackgroundColor(rlutil::WHITE);
         rlutil::setColor(rlutil::BLACK);
         cout << (char)179 << left << setw(12) << nombreMeses[i] << (char)179
-             << left << setw(12) << inscripcionesXmes[i] << (char)179
-             << left << setw(12) << meses[i] << (char)179 << endl;
+             << left << setw(15) << inscripcionesXmes[i] << (char)179
+             << left << setw(15) << pagosXmes[i] << (char)179
+             << left << setw(15) << meses[i] << (char)179 << endl;
     }
 
     /// Totales
     cout << endl;
-    rlutil::setBackgroundColor(rlutil::CYAN);
+    rlutil::setBackgroundColor(rlutil::LIGHTCYAN);
     rlutil::setColor(rlutil::BLACK);
-    cout << (char)179 << left << setw(17) << " Recaudacion del anio" << setw(18) << right << (char)179 << endl;
+    cout << "* Recaudacion del anio " << anioSeleccionado << " *" << endl;
 
-    rlutil::setBackgroundColor(rlutil::WHITE);
+    rlutil::setBackgroundColor(rlutil::LIGHTCYAN);
     rlutil::setColor(rlutil::BLACK);
-    cout << (char)179 << left << setw(12) << "Total Anio " << (char)179
-         << left << setw(12) << inscripcionesAnio << (char)179
-         << left << setw(12) << recaudacionAnio << (char)179 << endl;
+    cout << inscripcionesAnio << " inscripciones y $" << recaudacionAnio << " de recaudacion" << endl;
 
-    rlutil::setBackgroundColor(rlutil::CYAN);
+    rlutil::setBackgroundColor(rlutil::BLACK);
+    cout << endl;
+    
+    rlutil::setBackgroundColor(rlutil::LIGHTCYAN);
     rlutil::setColor(rlutil::BLACK);
-    cout << (char)179 << left << setw(17) << " Mes con mas recaudacion" << setw(15) << right << (char)179 << endl;
-
-    rlutil::setBackgroundColor(rlutil::WHITE);
-    rlutil::setColor(rlutil::BLACK);
-    cout << (char)179 << left << setw(12) << nombreMeses[mesMasRecaudador] << (char)179
-         << left << setw(12) << inscripcionesXmes[mesMasRecaudador] << (char)179
-         << left << setw(12) << meses[mesMasRecaudador] << (char)179 << endl;
+    cout << "Mes con mas recaudacion: " << nombreMeses[mesMasRecaudador] << " con $" << meses[mesMasRecaudador] << endl;
 
     rlutil::setBackgroundColor(rlutil::BLACK);
     rlutil::resetColor();
@@ -255,11 +288,13 @@ void ManagerReportes::recaudacionPorSocio()
     /// Inicializar acumuladores
     float* recaudacionSocios = new float[cantidadSocios]{}; // inicializa en 0
     int* inscripcionPorSocio = new int[cantidadSocios]{};   // inicializa en 0
+    int* pagosXmes = new int[cantidadSocios]{}; // inicializa en 0
 
     /// Acumular recaudación e inscripciones por socio
     for (int i = 0; i < cantidadPagos; i++) {
         int idSocio = pagos[i].getIdSocio();
         recaudacionSocios[idSocio - 1] += pagos[i].getImporte();
+        pagosXmes[idSocio - 1]++;
     }
 
     for (int i = 0; i < cantidadInscripciones; i++) {
@@ -275,8 +310,9 @@ void ManagerReportes::recaudacionPorSocio()
     rlutil::setColor(rlutil::BLACK);
     cout << (char)179 << left << setw(20) << "ID Socio" << (char)179
          << left << setw(20) << "Nombre" << (char)179
-         << left << setw(15) << "Inscripciones" << (char)179
-         << left << setw(15) << "Recaudacion" << (char)179 << endl;
+         << left << setw(20) << "Inscripciones" << (char)179
+         << left << setw(20) << "Pagos" << (char)179
+         << left << setw(20) << "Recaudacion" << (char)179 << endl;
 
     for (int i = 0; i < cantidadSocios; i++) {
         if (i == posMax) rlutil::setBackgroundColor(rlutil::LIGHTCYAN);
@@ -286,8 +322,9 @@ void ManagerReportes::recaudacionPorSocio()
         rlutil::setColor(rlutil::BLACK);
         cout << (char)179 << left << setw(20) << socios[i].getIdSocio() << (char)179
              << left << setw(20) << socios[i].getNombre() + " " + socios[i].getApellido() << (char)179
-             << left << setw(15) << inscripcionPorSocio[i] << (char)179
-             << left << setw(15) << recaudacionSocios[i] << (char)179 << endl;
+             << left << setw(20) << inscripcionPorSocio[i] << (char)179
+             << left << setw(20) << pagosXmes[i] << (char)179
+             << left << setw(20) << recaudacionSocios[i] << (char)179 << endl;
     }
 
     rlutil::setBackgroundColor(rlutil::BLACK);
@@ -310,6 +347,7 @@ void ManagerReportes::recaudacionPorSocio()
     delete[] recaudacionSocios;
     delete[] inscripciones;
     delete[] inscripcionPorSocio;
+    delete[] pagosXmes;
 }
 
 void ManagerReportes::recaudacionPorInscripcion()
